@@ -61,6 +61,7 @@ The token system is white-label ready. Brand switching is achieved by overriding
 
 ## Current Prototypes
 - `prototypes/sme-loan-application/` — Multi-step SME term loan application, desktop-first, relationship manager UI. Covers KVK lookup, loan parameters, document upload, review, and decision screen.
+- `prototypes/sme-origination-flow/` — Full 6-step SME loan origination flow ending at indicative pre-offer. RM desktop UI. Covers loan configurator, KVK lookup, Wwft/UBO compliance, financial inputs, dossier review, and conditional pre-offer decision banner.
 
 ## Current Components
 - button — primary, secondary, tertiary, ghost, destructive, accent; xs/sm/md/lg/xl sizes; pill-shaped; all interactive states
