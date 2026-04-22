@@ -1,0 +1,439 @@
+/* ==========================================================================
+   DECISION BANNER — Lending-specific component
+   
+   The emotional centrepiece of a lending flow. This is the moment that matters.
+   Approved should feel celebratory. Declined should feel respectful.
+   
+   Design philosophy: Premium, not clinical. Confident, not loud.
+   
+   Usage: <div class="decision-banner decision-banner--approved">
+   Variants: --approved, --conditional, --declined, --review
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+/* --------------------------------------------------------------------------
+   BASE BANNER
+   -------------------------------------------------------------------------- */
+
+.decision-banner {
+  position: relative;
+  border-radius: var(--decision-banner-radius);
+  padding: var(--decision-banner-padding);
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   HEADER — Icon + heading group
+   -------------------------------------------------------------------------- */
+
+.decision-banner__header {
+  margin-bottom: var(--space-7);
+}
+
+.decision-banner__heading-group {
+  flex: 1;
+}
+
+.decision-banner__label {
+  display: block;
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+  opacity: 0.55;
+}
+
+.decision-banner__heading {
+  font-family: var(--font-family-display);
+  font-size: var(--text-heading-2-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin-bottom: var(--space-2);
+}
+
+.decision-banner__date {
+  font-size: var(--text-body-sm-size);
+  opacity: 0.65;
+}
+
+/* --------------------------------------------------------------------------
+   LOAN SUMMARY — Hero amount + row of supporting terms
+   No inner panel; the banner surface already carries the emotional tone.
+   -------------------------------------------------------------------------- */
+
+.decision-banner__summary {
+  margin-bottom: var(--space-7);
+}
+
+/* Hero loan amount */
+.decision-banner__amount {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  margin-bottom: var(--space-5);
+  line-height: 0.9;
+}
+
+.decision-banner__amount-currency {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: var(--font-weight-medium);
+  opacity: 0.55;
+  align-self: flex-start;
+  padding-top: 0.2em;
+}
+
+.decision-banner__amount-value {
+  font-family: var(--font-family-display);
+  font-size: clamp(3rem, 8vw, 4.5rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Supporting terms row — quiet, baseline-aligned */
+.decision-banner__terms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6) var(--space-8);
+  padding-top: var(--space-5);
+  border-top: var(--border-width-thin) solid hsl(0 0% 0% / 0.08);
+}
+
+.decision-banner__term {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5);
+}
+
+.decision-banner__term-label {
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  line-height: 1;
+}
+
+.decision-banner__term-value {
+  font-family: var(--font-family-display);
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   CONDITIONS LIST
+   -------------------------------------------------------------------------- */
+
+.decision-banner__section-title {
+  font-size: var(--text-label-base-size);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-4);
+  opacity: 0.8;
+}
+
+.decision-banner__conditions {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.decision-banner__condition {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--text-body-base-size);
+  line-height: var(--line-height-normal);
+  padding: var(--space-4);
+  background: hsl(0 0% 100% / 0.4);
+  border-radius: var(--radius-xl);
+}
+
+.decision-banner__condition-icon {
+  flex-shrink: 0;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  margin-top: var(--space-0-5);
+  opacity: 0.7;
+}
+
+.decision-banner__condition--pending {
+  background: hsl(0 0% 100% / 0.6);
+  font-weight: var(--font-weight-medium);
+}
+
+.decision-banner__condition--pending .decision-banner__condition-icon {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   ACTIONS
+   -------------------------------------------------------------------------- */
+
+.decision-banner__actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* Primary button on banner — high contrast */
+.decision-banner .btn--primary {
+  background: var(--gray-900);
+  color: var(--white);
+  box-shadow: var(--elevation-sm);
+}
+
+.decision-banner .btn--primary:hover {
+  background: var(--gray-800);
+  box-shadow: var(--elevation-md);
+}
+
+/* Secondary button on banner — glass effect */
+.decision-banner .btn--secondary,
+.decision-banner .btn--tertiary {
+  background: hsl(0 0% 100% / 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: var(--border-width-thin) solid hsl(0 0% 100% / 0.5);
+  color: inherit;
+}
+
+.decision-banner .btn--secondary:hover,
+.decision-banner .btn--tertiary:hover {
+  background: hsl(0 0% 100% / 0.8);
+}
+
+/* --------------------------------------------------------------------------
+   REVIEW NOTE — GDPR compliance
+   -------------------------------------------------------------------------- */
+
+.decision-banner__review-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2-5);
+  font-size: var(--text-caption-size);
+  line-height: var(--line-height-normal);
+  opacity: 0.6;
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: var(--border-width-thin) solid hsl(0 0% 0% / 0.08);
+}
+
+.decision-banner__review-note i {
+  flex-shrink: 0;
+  font-size: var(--icon-size-sm);
+  margin-top: 1px;
+  opacity: 0.8;
+}
+
+/* --------------------------------------------------------------------------
+   APPROVED VARIANT
+   Celebratory but professional. Green gradient with depth.
+   -------------------------------------------------------------------------- */
+
+.decision-banner--approved {
+  background: 
+    linear-gradient(160deg, 
+      hsl(162 60% 94%) 0%, 
+      hsl(162 50% 88%) 50%,
+      hsl(162 45% 84%) 100%
+    );
+  color: var(--success-900);
+}
+
+.decision-banner--approved .decision-banner__icon {
+  background: linear-gradient(135deg, var(--success-400) 0%, var(--success-600) 100%);
+  box-shadow: 0 4px 12px hsl(162 60% 32% / 0.3);
+}
+
+.decision-banner--approved .decision-banner__heading {
+  color: var(--success-800);
+}
+
+/* --------------------------------------------------------------------------
+   CONDITIONAL VARIANT
+   Attention without alarm. Warm amber.
+   -------------------------------------------------------------------------- */
+
+.decision-banner--conditional {
+  background: 
+    linear-gradient(160deg, 
+      hsl(44 95% 94%) 0%, 
+      hsl(44 85% 88%) 50%,
+      hsl(42 80% 84%) 100%
+    );
+  color: var(--warning-900);
+}
+
+.decision-banner--conditional .decision-banner__icon {
+  background: linear-gradient(135deg, var(--warning-400) 0%, var(--warning-600) 100%);
+  box-shadow: 0 4px 12px hsl(44 90% 40% / 0.3);
+}
+
+.decision-banner--conditional .decision-banner__heading {
+  color: var(--warning-800);
+}
+
+/* --------------------------------------------------------------------------
+   DECLINED VARIANT
+   Respectful, clear next steps. Neutral gray, not red.
+   -------------------------------------------------------------------------- */
+
+.decision-banner--declined {
+  background: 
+    linear-gradient(160deg, 
+      var(--gray-100) 0%, 
+      var(--gray-150) 50%,
+      var(--gray-200) 100%
+    );
+  color: var(--gray-800);
+}
+
+.decision-banner--declined .decision-banner__icon {
+  background: linear-gradient(135deg, var(--gray-500) 0%, var(--gray-700) 100%);
+  box-shadow: 0 4px 12px hsl(220 14% 22% / 0.25);
+}
+
+.decision-banner--declined .decision-banner__heading {
+  color: var(--gray-900);
+}
+
+/* --------------------------------------------------------------------------
+   REVIEW VARIANT
+   Progress, not limbo. Primary blue.
+   -------------------------------------------------------------------------- */
+
+.decision-banner--review {
+  background: 
+    linear-gradient(160deg, 
+      hsl(230 80% 96%) 0%, 
+      hsl(230 65% 92%) 50%,
+      hsl(230 55% 88%) 100%
+    );
+  color: var(--info-900);
+}
+
+.decision-banner--review .decision-banner__icon {
+  background: linear-gradient(135deg, var(--info-400) 0%, var(--info-600) 100%);
+  box-shadow: 0 4px 12px hsl(210 88% 38% / 0.3);
+}
+
+.decision-banner--review .decision-banner__heading {
+  color: var(--info-800);
+}
+
+/* --------------------------------------------------------------------------
+   TIMELINE — Review progress steps
+   -------------------------------------------------------------------------- */
+
+.decision-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: var(--space-8);
+}
+
+.decision-timeline__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  position: relative;
+  padding-bottom: var(--space-4);
+}
+
+.decision-timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+/* Connector line */
+.decision-timeline__item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 24px;
+  bottom: 0;
+  width: 2px;
+  background: hsl(0 0% 0% / 0.1);
+}
+
+.decision-timeline__item--active:not(:last-child)::before {
+  background: currentColor;
+  opacity: 0.3;
+}
+
+.decision-timeline__step {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  border: 2px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  opacity: 0.4;
+  background: hsl(0 0% 100% / 0.5);
+}
+
+.decision-timeline__item--active .decision-timeline__step {
+  opacity: 1;
+  background: currentColor;
+}
+
+.decision-timeline__item--active .decision-timeline__step span {
+  color: var(--white);
+}
+
+.decision-timeline__text {
+  padding-top: 2px;
+  flex: 1;
+}
+
+.decision-timeline__text strong {
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--font-weight-medium);
+  display: block;
+  line-height: var(--line-height-snug);
+}
+
+.decision-timeline__text small {
+  font-size: var(--text-caption-size);
+  opacity: 0.6;
+  display: block;
+  margin-top: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .decision-banner {
+    padding: var(--space-6);
+  }
+
+  .decision-banner__heading {
+    font-size: var(--text-heading-3-size);
+  }
+
+  .decision-banner__terms {
+    gap: var(--space-4) var(--space-5);
+  }
+
+  .decision-banner__actions {
+    flex-direction: column;
+  }
+
+  .decision-banner__actions .btn {
+    width: 100%;
+  }
+}

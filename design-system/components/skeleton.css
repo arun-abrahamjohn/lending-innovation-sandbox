@@ -1,0 +1,304 @@
+/* ==========================================================================
+   SKELETON / LOADING PLACEHOLDER COMPONENT
+   
+   Placeholder UI shown while content is loading.
+   
+   Usage:
+   <div class="skeleton skeleton--text"></div>
+   <div class="skeleton skeleton--avatar"></div>
+   <div class="skeleton skeleton--button"></div>
+   
+   Types: --text, --title, --avatar, --thumbnail, --button, --card
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+/* --------------------------------------------------------------------------
+   BASE SKELETON
+   -------------------------------------------------------------------------- */
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-background-surface-sunken);
+  border-radius: var(--radius-md);
+  
+  /* Prevent layout shift */
+  min-height: 1rem;
+}
+
+/* Shimmer animation */
+.skeleton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(0 0% 100% / 0.4) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s var(--ease-in-out) infinite;
+}
+
+/* --------------------------------------------------------------------------
+   TEXT SKELETON
+   -------------------------------------------------------------------------- */
+
+.skeleton--text {
+  height: 1rem;
+  width: 100%;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton--text-sm {
+  height: 0.75rem;
+}
+
+.skeleton--text-lg {
+  height: 1.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   TITLE SKELETON
+   -------------------------------------------------------------------------- */
+
+.skeleton--title {
+  height: 1.5rem;
+  width: 60%;
+  border-radius: var(--radius-md);
+}
+
+.skeleton--title-lg {
+  height: 2rem;
+}
+
+/* --------------------------------------------------------------------------
+   PARAGRAPH (multiple lines)
+   -------------------------------------------------------------------------- */
+
+.skeleton-paragraph {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.skeleton-paragraph .skeleton--text:last-child {
+  width: 70%;
+}
+
+/* --------------------------------------------------------------------------
+   AVATAR SKELETON
+   -------------------------------------------------------------------------- */
+
+.skeleton--avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full);
+}
+
+.skeleton--avatar-sm {
+  width: 2rem;
+  height: 2rem;
+}
+
+.skeleton--avatar-lg {
+  width: 3rem;
+  height: 3rem;
+}
+
+.skeleton--avatar-xl {
+  width: 4rem;
+  height: 4rem;
+}
+
+/* --------------------------------------------------------------------------
+   THUMBNAIL / IMAGE SKELETON
+   -------------------------------------------------------------------------- */
+
+.skeleton--thumbnail {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: var(--radius-lg);
+}
+
+.skeleton--thumbnail-square {
+  aspect-ratio: 1;
+}
+
+.skeleton--thumbnail-portrait {
+  aspect-ratio: 3/4;
+}
+
+/* --------------------------------------------------------------------------
+   BUTTON SKELETON
+   -------------------------------------------------------------------------- */
+
+.skeleton--button {
+  height: 2.625rem;
+  width: 7rem;
+  border-radius: var(--radius-button);
+}
+
+.skeleton--button-sm {
+  height: 2.25rem;
+  width: 5rem;
+}
+
+.skeleton--button-lg {
+  height: 3rem;
+  width: 9rem;
+}
+
+.skeleton--button-full {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   INPUT SKELETON
+   -------------------------------------------------------------------------- */
+
+.skeleton--input {
+  height: 2.75rem;
+  width: 100%;
+  border-radius: var(--radius-input);
+}
+
+/* --------------------------------------------------------------------------
+   CARD SKELETON
+   -------------------------------------------------------------------------- */
+
+.skeleton--card {
+  padding: var(--space-5);
+  background: var(--color-background-surface);
+  border: var(--border-width-thin) solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
+}
+
+.skeleton--card::after {
+  display: none;
+}
+
+/* Card content layout */
+.skeleton-card__header {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.skeleton-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.skeleton-card__footer {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+/* --------------------------------------------------------------------------
+   TABLE ROW SKELETON
+   -------------------------------------------------------------------------- */
+
+.skeleton--table-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: var(--border-width-thin) solid var(--color-border-subtle);
+}
+
+.skeleton--table-row::after {
+  display: none;
+}
+
+.skeleton--table-cell {
+  flex: 1;
+  height: 1rem;
+}
+
+.skeleton--table-cell:first-child {
+  flex: 0 0 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full);
+}
+
+/* --------------------------------------------------------------------------
+   LIST ITEM SKELETON
+   -------------------------------------------------------------------------- */
+
+.skeleton--list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+}
+
+.skeleton--list-item::after {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   BADGE SKELETON
+   -------------------------------------------------------------------------- */
+
+.skeleton--badge {
+  height: 1.5rem;
+  width: 4rem;
+  border-radius: var(--radius-full);
+}
+
+/* --------------------------------------------------------------------------
+   CIRCLE SKELETON (icons, etc)
+   -------------------------------------------------------------------------- */
+
+.skeleton--circle {
+  border-radius: var(--radius-full);
+}
+
+.skeleton--circle-sm { width: 1rem; height: 1rem; }
+.skeleton--circle-md { width: 1.5rem; height: 1.5rem; }
+.skeleton--circle-lg { width: 2rem; height: 2rem; }
+
+/* --------------------------------------------------------------------------
+   NO ANIMATION VARIANT
+   -------------------------------------------------------------------------- */
+
+.skeleton--static::after {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   PULSE ANIMATION (alternative to shimmer)
+   -------------------------------------------------------------------------- */
+
+.skeleton--pulse::after {
+  display: none;
+}
+
+.skeleton--pulse {
+  animation: pulse 2s var(--ease-in-out) infinite;
+}
+
+/* --------------------------------------------------------------------------
+   DARK MODE ADJUSTMENTS
+   -------------------------------------------------------------------------- */
+
+[data-theme="dark"] .skeleton {
+  background: var(--gray-800);
+}
+
+[data-theme="dark"] .skeleton::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(0 0% 100% / 0.1) 50%,
+    transparent 100%
+  );
+}

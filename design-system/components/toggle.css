@@ -1,0 +1,213 @@
+/* ==========================================================================
+   TOGGLE / SWITCH COMPONENT
+   
+   Binary on/off control. More visual than a checkbox.
+   
+   Usage: 
+   <label class="toggle">
+     <input type="checkbox" class="toggle__input">
+     <span class="toggle__track"></span>
+     <span class="toggle__label">Enable notifications</span>
+   </label>
+   
+   Sizes: --sm, (default), --lg
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+/* --------------------------------------------------------------------------
+   TOGGLE WRAPPER
+   -------------------------------------------------------------------------- */
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* --------------------------------------------------------------------------
+   HIDDEN INPUT
+   -------------------------------------------------------------------------- */
+
+.toggle__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   TRACK (the pill background)
+   -------------------------------------------------------------------------- */
+
+.toggle__track {
+  position: relative;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 1.5rem;
+  background: var(--color-border-strong);
+  border-radius: var(--radius-full);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+/* The thumb (circle) */
+.toggle__track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(1.5rem - 4px);
+  height: calc(1.5rem - 4px);
+  background: var(--white);
+  border-radius: var(--radius-full);
+  box-shadow: var(--elevation-sm);
+  transition: transform var(--duration-fast) var(--ease-spring);
+}
+
+/* Hover state */
+.toggle:hover .toggle__track {
+  background: var(--color-border-intense);
+}
+
+/* Checked state */
+.toggle__input:checked + .toggle__track {
+  background: var(--brand-primary);
+}
+
+.toggle__input:checked + .toggle__track::after {
+  transform: translateX(1.25rem);
+}
+
+/* Focus state */
+.toggle__input:focus-visible + .toggle__track {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* Disabled state */
+.toggle__input:disabled + .toggle__track {
+  background: var(--color-border-default);
+  cursor: not-allowed;
+}
+
+.toggle__input:disabled + .toggle__track::after {
+  background: var(--gray-200);
+  box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+   LABEL TEXT
+   -------------------------------------------------------------------------- */
+
+.toggle__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-snug);
+}
+
+.toggle__description {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-0-5);
+}
+
+/* --------------------------------------------------------------------------
+   SIZE VARIANTS
+   -------------------------------------------------------------------------- */
+
+/* Small */
+.toggle--sm .toggle__track {
+  width: 2.25rem;
+  height: 1.25rem;
+}
+
+.toggle--sm .toggle__track::after {
+  width: calc(1.25rem - 4px);
+  height: calc(1.25rem - 4px);
+}
+
+.toggle--sm .toggle__input:checked + .toggle__track::after {
+  transform: translateX(1rem);
+}
+
+.toggle--sm .toggle__label {
+  font-size: var(--font-size-xs);
+}
+
+/* Large */
+.toggle--lg .toggle__track {
+  width: 3.25rem;
+  height: 1.75rem;
+}
+
+.toggle--lg .toggle__track::after {
+  width: calc(1.75rem - 4px);
+  height: calc(1.75rem - 4px);
+}
+
+.toggle--lg .toggle__input:checked + .toggle__track::after {
+  transform: translateX(1.5rem);
+}
+
+.toggle--lg .toggle__label {
+  font-size: var(--font-size-base);
+}
+
+/* --------------------------------------------------------------------------
+   WITH ICONS (on/off indicators)
+   -------------------------------------------------------------------------- */
+
+.toggle__track--icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-1-5);
+}
+
+.toggle__track--icons .toggle__icon {
+  font-size: 0.625rem;
+  color: var(--white);
+  opacity: 0.7;
+  z-index: 1;
+}
+
+.toggle__track--icons .toggle__icon--on {
+  opacity: 0;
+}
+
+.toggle__input:checked + .toggle__track--icons .toggle__icon--on {
+  opacity: 0.9;
+}
+
+.toggle__input:checked + .toggle__track--icons .toggle__icon--off {
+  opacity: 0;
+}
+
+/* --------------------------------------------------------------------------
+   TOGGLE GROUP (multiple toggles stacked)
+   -------------------------------------------------------------------------- */
+
+.toggle-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.toggle-group--compact {
+  gap: var(--space-3);
+}

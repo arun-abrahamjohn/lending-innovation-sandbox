@@ -1,0 +1,376 @@
+/* ==========================================================================
+   SEMANTIC TOKENS — Intent-mapped aliases
+   
+   Components reference these. Maps brand tokens to semantic meanings.
+   Supports light/dark mode via data-theme attribute.
+   ========================================================================== */
+
+@import url('./base.css');
+@import url('./brand.css');
+
+:root {
+
+  /* ==========================================================================
+     LIGHT MODE (default)
+     ========================================================================== */
+
+  /* --------------------------------------------------------------------------
+     SURFACE COLOURS
+     -------------------------------------------------------------------------- */
+  
+  --color-background-page:           var(--gray-50);
+  --color-background-surface:        var(--white);
+  --color-background-surface-raised: var(--white);
+  --color-background-surface-sunken: var(--gray-100);
+  --color-background-surface-inset:  var(--gray-150);
+  --color-background-overlay:        hsl(0 0% 0% / 0.60);
+  --color-background-scrim:          hsl(0 0% 0% / 0.30);
+  --color-background-inverse:        var(--gray-900);
+
+  /* --------------------------------------------------------------------------
+     TEXT COLOURS
+     -------------------------------------------------------------------------- */
+  
+  --color-text-primary:     var(--gray-900);
+  --color-text-secondary:   var(--gray-600);
+  --color-text-tertiary:    var(--gray-500);
+  --color-text-disabled:    var(--gray-400);
+  --color-text-placeholder: var(--gray-400);
+  --color-text-inverse:     var(--white);
+  --color-text-brand:       var(--brand-primary);
+  --color-text-link:        var(--info-500);
+  --color-text-link-hover:  var(--info-600);
+
+  /* --------------------------------------------------------------------------
+     BORDER COLOURS
+     -------------------------------------------------------------------------- */
+  
+  --color-border-subtle:    var(--gray-150);
+  --color-border-default:   var(--gray-200);
+  --color-border-strong:    var(--gray-300);
+  --color-border-intense:   var(--gray-400);
+  --color-border-focus:     var(--gray-900);
+  --color-border-brand:     var(--brand-primary);
+
+  /* Focus rings */
+  --color-focus-ring:       hsl(0 0% 0% / 0.15);
+  --color-focus-ring-brand: hsl(var(--brand-primary-h) var(--brand-primary-s) var(--brand-primary-l) / 0.30);
+  --color-focus-ring-error: hsl(0 78% 46% / 0.25);
+
+  /* --------------------------------------------------------------------------
+     ACTION COLOURS — Buttons and interactive elements
+     -------------------------------------------------------------------------- */
+  
+  /* Primary action — uses brand primary */
+  --color-action-primary:         var(--brand-primary);
+  --color-action-primary-hover:   var(--brand-primary-light);
+  --color-action-primary-active:  var(--brand-primary-dark);
+  --color-action-primary-text:    var(--brand-primary-contrast);
+  --color-action-primary-subtle:  var(--brand-primary-50);
+
+  /* Secondary action — uses brand secondary */
+  --color-action-secondary:         var(--brand-secondary);
+  --color-action-secondary-hover:   var(--brand-secondary-light);
+  --color-action-secondary-active:  var(--brand-secondary-dark);
+  --color-action-secondary-text:    var(--brand-secondary-contrast);
+
+  /* Accent action */
+  --color-action-accent:         var(--brand-accent);
+  --color-action-accent-hover:   var(--brand-accent-light);
+  --color-action-accent-active:  var(--brand-accent-dark);
+  --color-action-accent-text:    var(--brand-accent-contrast);
+
+  /* Tertiary / Ghost */
+  --color-action-ghost:        transparent;
+  --color-action-ghost-hover:  var(--gray-100);
+  --color-action-ghost-active: var(--gray-150);
+  --color-action-ghost-text:   var(--gray-700);
+
+  /* Destructive */
+  --color-action-destructive:        var(--error-500);
+  --color-action-destructive-hover:  var(--error-600);
+  --color-action-destructive-active: var(--error-700);
+  --color-action-destructive-text:   var(--white);
+
+  /* --------------------------------------------------------------------------
+     STATUS / FEEDBACK COLOURS
+     -------------------------------------------------------------------------- */
+
+  /* Success */
+  --color-feedback-success-bg:     var(--success-50);
+  --color-feedback-success-border: var(--success-200);
+  --color-feedback-success-icon:   var(--success-500);
+  --color-feedback-success-text:   var(--success-700);
+
+  /* Warning */
+  --color-feedback-warning-bg:     var(--warning-50);
+  --color-feedback-warning-border: var(--warning-200);
+  --color-feedback-warning-icon:   var(--warning-500);
+  --color-feedback-warning-text:   var(--warning-700);
+
+  /* Error */
+  --color-feedback-error-bg:     var(--error-50);
+  --color-feedback-error-border: var(--error-200);
+  --color-feedback-error-icon:   var(--error-500);
+  --color-feedback-error-text:   var(--error-700);
+
+  /* Info */
+  --color-feedback-info-bg:     var(--info-50);
+  --color-feedback-info-border: var(--info-200);
+  --color-feedback-info-icon:   var(--info-500);
+  --color-feedback-info-text:   var(--info-700);
+
+  /* Neutral */
+  --color-feedback-neutral-bg:     var(--gray-100);
+  --color-feedback-neutral-border: var(--gray-200);
+  --color-feedback-neutral-icon:   var(--gray-500);
+  --color-feedback-neutral-text:   var(--gray-700);
+
+  /* --------------------------------------------------------------------------
+     TYPOGRAPHY — Font families
+     -------------------------------------------------------------------------- */
+  
+  --font-family-display: var(--brand-font-display);
+  --font-family-body:    var(--brand-font-body);
+  --font-family-mono:    var(--brand-font-mono);
+
+  /* --------------------------------------------------------------------------
+     TEXT STYLES — Semantic text presets
+     Use these in components instead of raw font-size tokens
+     -------------------------------------------------------------------------- */
+  
+  /* Headings */
+  --text-heading-1-size:    var(--font-size-4xl);
+  --text-heading-1-weight:  var(--font-weight-semibold);
+  --text-heading-1-leading: var(--line-height-tight);
+  --text-heading-1-tracking: var(--letter-spacing-tight);
+  
+  --text-heading-2-size:    var(--font-size-3xl);
+  --text-heading-2-weight:  var(--font-weight-semibold);
+  --text-heading-2-leading: var(--line-height-tight);
+  --text-heading-2-tracking: var(--letter-spacing-snug);
+  
+  --text-heading-3-size:    var(--font-size-2xl);
+  --text-heading-3-weight:  var(--font-weight-semibold);
+  --text-heading-3-leading: var(--line-height-snug);
+  --text-heading-3-tracking: var(--letter-spacing-normal);
+  
+  --text-heading-4-size:    var(--font-size-xl);
+  --text-heading-4-weight:  var(--font-weight-semibold);
+  --text-heading-4-leading: var(--line-height-snug);
+  --text-heading-4-tracking: var(--letter-spacing-normal);
+  
+  /* Body text */
+  --text-body-lg-size:    var(--font-size-lg);
+  --text-body-lg-weight:  var(--font-weight-regular);
+  --text-body-lg-leading: var(--line-height-relaxed);
+  
+  --text-body-base-size:    var(--font-size-base);
+  --text-body-base-weight:  var(--font-weight-regular);
+  --text-body-base-leading: var(--line-height-relaxed);
+  
+  --text-body-sm-size:    var(--font-size-sm);
+  --text-body-sm-weight:  var(--font-weight-regular);
+  --text-body-sm-leading: var(--line-height-normal);
+  
+  /* Labels */
+  --text-label-lg-size:    var(--font-size-base);
+  --text-label-lg-weight:  var(--font-weight-medium);
+  --text-label-lg-leading: var(--line-height-normal);
+  
+  --text-label-base-size:    var(--font-size-sm);
+  --text-label-base-weight:  var(--font-weight-medium);
+  --text-label-base-leading: var(--line-height-normal);
+  
+  --text-label-sm-size:    var(--font-size-xs);
+  --text-label-sm-weight:  var(--font-weight-medium);
+  --text-label-sm-leading: var(--line-height-normal);
+  
+  /* Caption / helper text */
+  --text-caption-size:    var(--font-size-xs);
+  --text-caption-weight:  var(--font-weight-regular);
+  --text-caption-leading: var(--line-height-normal);
+  
+  /* Overline / eyebrow */
+  --text-overline-size:    var(--font-size-2xs);
+  --text-overline-weight:  var(--font-weight-semibold);
+  --text-overline-leading: var(--line-height-normal);
+  --text-overline-tracking: var(--letter-spacing-widest);
+
+  /* --------------------------------------------------------------------------
+     LAYOUT
+     -------------------------------------------------------------------------- */
+  
+  --layout-gutter:           var(--space-6);
+  --layout-gutter-wide:      var(--space-10);
+  --layout-max-width:        1280px;
+  --layout-max-width-narrow: 720px;
+
+  /* --------------------------------------------------------------------------
+     RADIUS — Uses brand shape preferences
+     -------------------------------------------------------------------------- */
+  
+  --radius-button:   var(--brand-button-radius);
+  --radius-input:    var(--brand-input-radius);
+  --radius-card:     var(--brand-card-radius);
+  --radius-badge:    var(--brand-badge-radius);
+  --radius-modal:    var(--radius-3xl);
+  --radius-avatar:   var(--radius-full);
+  --radius-tag:      var(--radius-full);
+  --radius-tooltip:  var(--radius-lg);
+  --radius-dropdown: var(--radius-xl);
+
+  /* --------------------------------------------------------------------------
+     ELEVATION
+     -------------------------------------------------------------------------- */
+  
+  --elevation-card:       var(--elevation-sm);
+  --elevation-card-hover: var(--elevation-md);
+  --elevation-dropdown:   var(--elevation-lg);
+  --elevation-modal:      var(--elevation-2xl);
+  --elevation-sticky:     var(--elevation-md);
+  --elevation-toast:      var(--elevation-lg);
+
+  /* --------------------------------------------------------------------------
+     MOTION / ANIMATION
+     -------------------------------------------------------------------------- */
+  
+  /* Entrance animations */
+  --animation-fade-in: fade-in var(--duration-base) var(--ease-out);
+  --animation-slide-up: slide-up var(--duration-base) var(--ease-out);
+  --animation-slide-down: slide-down var(--duration-base) var(--ease-out);
+  --animation-scale-in: scale-in var(--duration-base) var(--ease-spring);
+  
+  /* Interactive feedback */
+  --animation-pulse: pulse 2s var(--ease-in-out) infinite;
+  --animation-spin: spin 1s var(--ease-linear) infinite;
+  --animation-bounce: bounce 1s var(--ease-bounce) infinite;
+  --animation-shake: shake 0.5s var(--ease-out);
+
+}
+
+/* ==========================================================================
+   DARK MODE
+   ========================================================================== */
+
+[data-theme="dark"] {
+  
+  /* Surfaces */
+  --color-background-page:           var(--gray-950);
+  --color-background-surface:        var(--gray-900);
+  --color-background-surface-raised: var(--gray-800);
+  --color-background-surface-sunken: var(--gray-950);
+  --color-background-surface-inset:  hsl(0 0% 5%);
+  --color-background-inverse:        var(--white);
+
+  /* Text */
+  --color-text-primary:     var(--gray-50);
+  --color-text-secondary:   var(--gray-400);
+  --color-text-tertiary:    var(--gray-500);
+  --color-text-disabled:    var(--gray-600);
+  --color-text-placeholder: var(--gray-600);
+  --color-text-inverse:     var(--gray-900);
+  --color-text-link:        var(--info-400);
+  --color-text-link-hover:  var(--info-300);
+
+  /* Borders */
+  --color-border-subtle:  var(--gray-800);
+  --color-border-default: var(--gray-700);
+  --color-border-strong:  var(--gray-600);
+  --color-border-intense: var(--gray-500);
+  --color-border-focus:   var(--gray-300);
+
+  /* Focus rings */
+  --color-focus-ring: hsl(0 0% 100% / 0.15);
+
+  /* Ghost actions */
+  --color-action-ghost-hover:  var(--gray-800);
+  --color-action-ghost-active: var(--gray-700);
+  --color-action-ghost-text:   var(--gray-300);
+
+  /* Status backgrounds (darker versions) */
+  --color-feedback-success-bg:     hsl(145, 76%, 10%);
+  --color-feedback-success-border: hsl(145, 72%, 20%);
+  --color-feedback-warning-bg:     hsl(35, 90%, 10%);
+  --color-feedback-warning-border: hsl(40, 85%, 20%);
+  --color-feedback-error-bg:       hsl(0, 70%, 12%);
+  --color-feedback-error-border:   hsl(0, 65%, 22%);
+  --color-feedback-info-bg:        hsl(210, 80%, 12%);
+  --color-feedback-info-border:    hsl(210, 75%, 22%);
+  --color-feedback-neutral-bg:     var(--gray-800);
+  --color-feedback-neutral-border: var(--gray-700);
+
+  /* Elevation (lighter shadows don't work in dark mode, use borders/glows) */
+  --elevation-sm: 0 0 0 1px var(--gray-800), 0 2px 4px hsl(0 0% 0% / 0.5);
+  --elevation-md: 0 0 0 1px var(--gray-800), 0 4px 8px hsl(0 0% 0% / 0.5);
+  --elevation-lg: 0 0 0 1px var(--gray-700), 0 8px 16px hsl(0 0% 0% / 0.6);
+
+}
+
+/* ==========================================================================
+   KEYFRAME ANIMATIONS
+   ========================================================================== */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { 
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from { 
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from { 
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}

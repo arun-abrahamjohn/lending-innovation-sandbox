@@ -1,0 +1,282 @@
+/* ==========================================================================
+   INPUT COMPONENT
+   
+   Clean, functional inputs. Content-first design.
+   
+   Usage: wrap in .field, use .input on the <input> element
+   Sizes: .input--sm, .input--md (default), .input--lg
+   States: default, :focus, .field--error, .field--success, [disabled], [readonly]
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+/* --------------------------------------------------------------------------
+   FIELD WRAPPER
+   -------------------------------------------------------------------------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--input-label-gap);
+}
+
+.field__label {
+  font-size: var(--input-label-size);
+  font-weight: var(--input-label-weight);
+  line-height: var(--line-height-snug);
+  color: var(--input-label-color);
+}
+
+.field__label .field__required {
+  color: var(--error-500);
+  margin-left: 2px;
+}
+
+.field__label .field__optional {
+  font-size: var(--text-caption-size);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-tertiary);
+  margin-left: var(--space-1-5);
+}
+
+/* --------------------------------------------------------------------------
+   INPUT GROUP — wraps input + prefix/suffix
+   -------------------------------------------------------------------------- */
+
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  background-color: var(--input-bg);
+  border: var(--input-border-width) solid var(--input-border-color);
+  border-radius: var(--input-radius);
+  transition: var(--input-transition);
+}
+
+.input-group:hover {
+  border-color: var(--input-border-hover);
+}
+
+.input-group:focus-within {
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* --------------------------------------------------------------------------
+   INPUT ELEMENT
+   -------------------------------------------------------------------------- */
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: var(--input-height-md);
+  padding: 0 var(--input-padding-x-md);
+
+  font-family: var(--font-family-body);
+  font-size: var(--input-font-size-md);
+  color: var(--color-text-primary);
+  line-height: var(--input-height-md);
+
+  background-color: transparent;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.input::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+/* Standalone input (without wrapper group) */
+input.input:not(.input-group .input) {
+  background-color: var(--input-bg);
+  border: var(--input-border-width) solid var(--input-border-color);
+  border-radius: var(--input-radius);
+  transition: var(--input-transition);
+}
+
+input.input:not(.input-group .input):hover {
+  border-color: var(--input-border-hover);
+}
+
+input.input:not(.input-group .input):focus {
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* --------------------------------------------------------------------------
+   SIZE VARIANTS
+   -------------------------------------------------------------------------- */
+
+.input--sm {
+  height: var(--input-height-sm);
+  padding: 0 var(--input-padding-x-sm);
+  font-size: var(--input-font-size-sm);
+  line-height: var(--input-height-sm);
+}
+
+.input-group--sm .input {
+  height: var(--input-height-sm);
+  padding: 0 var(--input-padding-x-sm);
+  font-size: var(--input-font-size-sm);
+  line-height: var(--input-height-sm);
+}
+
+.input--lg {
+  height: var(--input-height-lg);
+  padding: 0 var(--input-padding-x-lg);
+  font-size: var(--input-font-size-lg);
+  line-height: var(--input-height-lg);
+}
+
+.input-group--lg .input {
+  height: var(--input-height-lg);
+  padding: 0 var(--input-padding-x-lg);
+  font-size: var(--input-font-size-lg);
+  line-height: var(--input-height-lg);
+}
+
+/* --------------------------------------------------------------------------
+   PREFIX / SUFFIX
+   -------------------------------------------------------------------------- */
+
+.input-prefix,
+.input-suffix {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-3);
+  font-size: var(--input-font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-tertiary);
+  background-color: var(--gray-50);
+  white-space: nowrap;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.input-prefix {
+  border-right: var(--input-border-width) solid var(--color-border-subtle);
+  border-radius: var(--input-radius) 0 0 var(--input-radius);
+}
+
+.input-suffix {
+  border-left: var(--input-border-width) solid var(--color-border-subtle);
+  border-radius: 0 var(--input-radius) var(--input-radius) 0;
+}
+
+.input-prefix i,
+.input-suffix i {
+  font-size: var(--icon-size-md);
+  opacity: 0.6;
+}
+
+/* --------------------------------------------------------------------------
+   STATE: ERROR
+   -------------------------------------------------------------------------- */
+
+.field--error .input-group {
+  border-color: var(--error-400);
+  background-color: var(--error-50);
+}
+
+.field--error .input-group:focus-within {
+  border-color: var(--error-500);
+  box-shadow: 0 0 0 3px var(--color-focus-ring-error);
+}
+
+.field--error input.input:not(.input-group .input) {
+  border-color: var(--error-400);
+  background-color: var(--error-50);
+}
+
+.field--error input.input:not(.input-group .input):focus {
+  border-color: var(--error-500);
+  box-shadow: 0 0 0 3px var(--color-focus-ring-error);
+}
+
+.field--error .input::placeholder {
+  color: var(--error-300);
+}
+
+/* --------------------------------------------------------------------------
+   STATE: SUCCESS
+   -------------------------------------------------------------------------- */
+
+.field--success .input-group {
+  border-color: var(--success-400);
+}
+
+.field--success .input-group:focus-within {
+  border-color: var(--success-500);
+  box-shadow: 0 0 0 3px hsl(154 72% 46% / 0.15);
+}
+
+.field--success input.input:not(.input-group .input) {
+  border-color: var(--success-400);
+}
+
+.field--success input.input:not(.input-group .input):focus {
+  border-color: var(--success-500);
+  box-shadow: 0 0 0 3px hsl(154 72% 46% / 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   STATE: DISABLED
+   -------------------------------------------------------------------------- */
+
+.input:disabled,
+.input[disabled] {
+  color: var(--color-text-disabled);
+  background-color: var(--input-bg-disabled);
+  cursor: not-allowed;
+}
+
+.input-group:has(.input:disabled) {
+  background-color: var(--input-bg-disabled);
+  border-color: var(--color-border-subtle);
+  opacity: 0.6;
+}
+
+/* --------------------------------------------------------------------------
+   STATE: READ-ONLY
+   -------------------------------------------------------------------------- */
+
+.input[readonly] {
+  color: var(--color-text-secondary);
+  background-color: var(--gray-50);
+}
+
+/* --------------------------------------------------------------------------
+   HELPER TEXT / ERROR MESSAGE
+   -------------------------------------------------------------------------- */
+
+.field__helper {
+  font-size: var(--input-helper-size);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-tertiary);
+}
+
+.field__error-message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-1-5);
+  font-size: var(--input-helper-size);
+  line-height: var(--line-height-normal);
+  color: var(--error-600);
+}
+
+.field__error-icon {
+  flex-shrink: 0;
+  font-size: var(--icon-size-sm);
+  margin-top: 1px;
+  line-height: 1;
+}
+
+.field__success-message {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  font-size: var(--input-helper-size);
+  color: var(--success-600);
+}

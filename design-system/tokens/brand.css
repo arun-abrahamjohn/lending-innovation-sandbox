@@ -1,0 +1,139 @@
+/* ==========================================================================
+   BRAND TOKENS — Swap this file to change the entire brand
+   
+   This file defines the brand personality. Everything else references these.
+   To create ABN AMRO or ING theme, duplicate this file and change values.
+   
+   Current brand: Neobank (Cash App / Robinhood inspired)
+   ========================================================================== */
+
+:root {
+  
+  /* ==========================================================================
+     BRAND IDENTITY
+     ========================================================================== */
+  
+  --brand-name: "Neobank";
+  
+  /* --------------------------------------------------------------------------
+     BRAND COLORS — The hero colors that define the brand
+     
+     Primary: Main CTA color (buttons, links, active states)
+     Secondary: Supporting action color  
+     Accent: Promotional/special moments
+     -------------------------------------------------------------------------- */
+  
+  /* Primary — NEON GREEN */
+  --brand-primary-h: 135;
+  --brand-primary-s: 80%;
+  --brand-primary-l: 48%;
+  --brand-primary: hsl(var(--brand-primary-h), var(--brand-primary-s), var(--brand-primary-l));
+  --brand-primary-light: hsl(var(--brand-primary-h), calc(var(--brand-primary-s) + 5%), calc(var(--brand-primary-l) + 7%));
+  --brand-primary-dark: hsl(var(--brand-primary-h), calc(var(--brand-primary-s) - 5%), calc(var(--brand-primary-l) - 8%));
+  --brand-primary-contrast: var(--black); /* Text color on primary */
+  
+  /* Secondary — JET BLACK */
+  --brand-secondary-h: 0;
+  --brand-secondary-s: 0%;
+  --brand-secondary-l: 0%;
+  --brand-secondary: hsl(var(--brand-secondary-h), var(--brand-secondary-s), var(--brand-secondary-l));
+  --brand-secondary-light: hsl(var(--brand-secondary-h), var(--brand-secondary-s), 14%);
+  --brand-secondary-dark: hsl(var(--brand-secondary-h), var(--brand-secondary-s), 0%);
+  --brand-secondary-contrast: var(--white); /* Text color on secondary */
+  
+  /* Accent — ELECTRIC CYAN */
+  --brand-accent-h: 175;
+  --brand-accent-s: 80%;
+  --brand-accent-l: 40%;
+  --brand-accent: hsl(var(--brand-accent-h), var(--brand-accent-s), var(--brand-accent-l));
+  --brand-accent-light: hsl(var(--brand-accent-h), calc(var(--brand-accent-s) + 5%), calc(var(--brand-accent-l) + 8%));
+  --brand-accent-dark: hsl(var(--brand-accent-h), calc(var(--brand-accent-s) - 5%), calc(var(--brand-accent-l) - 8%));
+  --brand-accent-contrast: var(--white);
+  
+  /* --------------------------------------------------------------------------
+     BRAND COLOR SCALES — Generated from brand colors
+     Used for backgrounds, borders, subtle states
+     -------------------------------------------------------------------------- */
+  
+  --brand-primary-50:  hsl(var(--brand-primary-h), 100%, 97%);
+  --brand-primary-100: hsl(var(--brand-primary-h), 95%, 92%);
+  --brand-primary-200: hsl(var(--brand-primary-h), 90%, 82%);
+  --brand-primary-300: hsl(var(--brand-primary-h), 85%, 68%);
+  --brand-primary-400: hsl(var(--brand-primary-h), 82%, 55%);
+  --brand-primary-500: var(--brand-primary);
+  --brand-primary-600: hsl(var(--brand-primary-h), 78%, 40%);
+  --brand-primary-700: hsl(var(--brand-primary-h), 75%, 32%);
+  --brand-primary-800: hsl(var(--brand-primary-h), 72%, 24%);
+  --brand-primary-900: hsl(var(--brand-primary-h), 70%, 18%);
+  
+  --brand-accent-50:  hsl(var(--brand-accent-h), 100%, 97%);
+  --brand-accent-100: hsl(var(--brand-accent-h), 95%, 90%);
+  --brand-accent-200: hsl(var(--brand-accent-h), 90%, 78%);
+  --brand-accent-300: hsl(var(--brand-accent-h), 85%, 62%);
+  --brand-accent-400: hsl(var(--brand-accent-h), 82%, 48%);
+  --brand-accent-500: var(--brand-accent);
+  --brand-accent-600: hsl(var(--brand-accent-h), 78%, 32%);
+  --brand-accent-700: hsl(var(--brand-accent-h), 75%, 26%);
+  
+  /* --------------------------------------------------------------------------
+     BRAND TYPOGRAPHY
+     -------------------------------------------------------------------------- */
+  
+  --brand-font-display: 'Plus Jakarta Sans', 'SF Pro Display', system-ui, sans-serif;
+  --brand-font-body: 'Plus Jakarta Sans', 'SF Pro Text', system-ui, sans-serif;
+  --brand-font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  
+  /* --------------------------------------------------------------------------
+     BRAND SHAPE — Defines the overall feel
+     
+     Options: 
+     - "pill" (fully rounded, modern fintech)
+     - "rounded" (soft corners, friendly)
+     - "sharp" (minimal radius, corporate)
+     -------------------------------------------------------------------------- */
+  
+  --brand-button-radius: var(--radius-full);  /* Pill buttons */
+  --brand-input-radius: var(--radius-lg);     /* Softer inputs */
+  --brand-card-radius: var(--radius-2xl);     /* Rounded cards */
+  --brand-badge-radius: var(--radius-full);   /* Pill badges */
+  
+  /* --------------------------------------------------------------------------
+     BRAND SHADOWS — Colored shadows for primary actions
+     -------------------------------------------------------------------------- */
+  
+  --brand-shadow-primary: 
+    0 4px 14px hsl(var(--brand-primary-h) var(--brand-primary-s) var(--brand-primary-l) / 0.40),
+    0 2px 6px hsl(var(--brand-primary-h) var(--brand-primary-s) var(--brand-primary-l) / 0.25);
+  
+  --brand-shadow-primary-hover:
+    0 8px 24px hsl(var(--brand-primary-h) var(--brand-primary-s) var(--brand-primary-l) / 0.50),
+    0 4px 10px hsl(var(--brand-primary-h) var(--brand-primary-s) var(--brand-primary-l) / 0.30);
+  
+  --brand-shadow-accent:
+    0 4px 14px hsl(var(--brand-accent-h) var(--brand-accent-s) var(--brand-accent-l) / 0.35),
+    0 2px 6px hsl(var(--brand-accent-h) var(--brand-accent-s) var(--brand-accent-l) / 0.20);
+
+  /* --------------------------------------------------------------------------
+     BRAND GRADIENTS
+     -------------------------------------------------------------------------- */
+  
+  --brand-gradient-primary: linear-gradient(
+    135deg, 
+    hsl(var(--brand-primary-h), calc(var(--brand-primary-s) + 2%), calc(var(--brand-primary-l) + 7%)) 0%, 
+    hsl(var(--brand-primary-h), var(--brand-primary-s), calc(var(--brand-primary-l) - 8%)) 100%
+  );
+  
+  --brand-gradient-dark: linear-gradient(135deg, var(--gray-800) 0%, var(--black) 100%);
+  
+}
+
+/* ==========================================================================
+   DARK MODE — Brand adjustments for dark theme
+   ========================================================================== */
+
+[data-theme="dark"] {
+  --brand-primary-contrast: var(--black);
+  --brand-secondary: var(--white);
+  --brand-secondary-light: var(--gray-200);
+  --brand-secondary-contrast: var(--black);
+}

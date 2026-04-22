@@ -1,0 +1,189 @@
+/* ==========================================================================
+   TAG INPUT COMPONENT
+   Usage: .tag-input-wrapper > .tag-list + input.tag-input-field
+   The JS pattern: on Enter or comma, convert input value to a .tag element
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+.tag-input-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1-5);
+  min-height: var(--input-height-md);
+  padding: var(--space-1-5) var(--input-padding-x-md);
+  background-color: var(--color-background-surface-raised);
+  border: var(--input-border-width) solid var(--input-border-color);
+  border-radius: var(--input-radius);
+  cursor: text;
+  transition: var(--input-transition);
+  box-shadow: 0 1px 0 hsl(0 0% 100% / 0.92) inset, 0 2px 8px -7px hsl(228 40% 18% / 0.35);
+}
+
+.tag-input-wrapper:hover {
+  border-color: var(--color-border-strong);
+}
+
+.tag-input-wrapper:focus-within {
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* --------------------------------------------------------------------------
+   TAG PILL
+   -------------------------------------------------------------------------- */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-0-5) var(--space-2);
+  background-color: var(--color-feedback-neutral-bg);
+  border: var(--border-width-thin) solid var(--color-feedback-neutral-border);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+.tag__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tag__remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  padding: 0;
+  flex-shrink: 0;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.tag__remove:hover {
+  background-color: var(--color-border-default);
+  color: var(--color-text-primary);
+}
+
+.tag__remove svg {
+  width: 8px;
+  height: 8px;
+}
+
+/* Tag variants matching badge colours */
+.tag--success {
+  background-color: var(--color-feedback-success-bg);
+  border-color: var(--color-feedback-success-border);
+  color: var(--color-feedback-success-text);
+}
+
+.tag--warning {
+  background-color: var(--color-feedback-warning-bg);
+  border-color: var(--color-feedback-warning-border);
+  color: var(--color-feedback-warning-text);
+}
+
+.tag--error {
+  background-color: var(--color-feedback-error-bg);
+  border-color: var(--color-feedback-error-border);
+  color: var(--color-feedback-error-text);
+}
+
+.tag--brand {
+  background-color: var(--gray-100);
+  border-color: var(--gray-300);
+  color: var(--gray-800);
+}
+
+/* --------------------------------------------------------------------------
+   TEXT INPUT FIELD WITHIN WRAPPER
+   -------------------------------------------------------------------------- */
+
+.tag-input-field {
+  flex: 1;
+  min-width: 6rem;
+  height: 1.625rem;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: var(--input-font-size-md);
+  font-family: var(--font-family-body);
+  color: var(--color-text-primary);
+  padding: 0;
+}
+
+.tag-input-field::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* --------------------------------------------------------------------------
+   STATES
+   -------------------------------------------------------------------------- */
+
+.field--error .tag-input-wrapper {
+  border-color: var(--color-feedback-error-border);
+  background-color: var(--color-feedback-error-bg);
+}
+
+.field--error .tag-input-wrapper:focus-within {
+  border-color: var(--color-feedback-error-icon);
+  box-shadow: 0 0 0 3px hsl(4 76% 54% / 0.2);
+}
+
+.tag-input-wrapper--disabled {
+  background-color: var(--input-bg-disabled);
+  border-color: var(--color-border-subtle);
+  cursor: not-allowed;
+}
+
+.tag-input-wrapper--disabled .tag-input-field {
+  cursor: not-allowed;
+}
+
+.tag-input-wrapper--disabled .tag__remove {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   SUGGESTIONS DROPDOWN
+   -------------------------------------------------------------------------- */
+
+.tag-suggestions {
+  position: absolute;
+  z-index: var(--z-dropdown);
+  background-color: var(--color-background-surface-raised);
+  border: var(--border-width-thin) solid var(--color-border-default);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--elevation-dropdown);
+  padding: var(--space-1);
+  max-height: 12rem;
+  overflow-y: auto;
+  list-style: none;
+  min-width: 10rem;
+}
+
+.tag-suggestion {
+  padding: var(--space-1-5) var(--space-3);
+  font-size: var(--text-body-sm-size);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.tag-suggestion:hover,
+.tag-suggestion--active {
+  background-color: var(--color-background-surface-sunken);
+}

@@ -1,0 +1,233 @@
+/* ==========================================================================
+   PROGRESS STEPS COMPONENT
+   
+   Multi-step flow indicator. Clean, scannable progress.
+   
+   Usage: ol.steps > li.step.step--[state]
+   States: --upcoming, --active, --completed, --error
+   Variants: horizontal (default), .steps--vertical
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+/* --------------------------------------------------------------------------
+   HORIZONTAL STEPPER
+   -------------------------------------------------------------------------- */
+
+.steps {
+  display: flex;
+  align-items: flex-start;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+  text-align: center;
+}
+
+/* Connector line between steps */
+.step::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--stepper-step-size) / 2 - 1px);
+  left: calc(-50% + var(--stepper-step-size) / 2 + var(--stepper-connector-gap));
+  right: calc(50% + var(--stepper-step-size) / 2 + var(--stepper-connector-gap));
+  height: var(--stepper-connector-height);
+  background: var(--stepper-connector-inactive);
+  border-radius: var(--radius-full);
+}
+
+.step:first-child::before {
+  display: none;
+}
+
+/* Active connector */
+.step--completed::before,
+.step--active::before {
+  background: var(--stepper-connector-active);
+}
+
+/* --------------------------------------------------------------------------
+   STEP INDICATOR
+   -------------------------------------------------------------------------- */
+
+.step__indicator {
+  position: relative;
+  z-index: var(--z-raised);
+  width: var(--stepper-step-size);
+  height: var(--stepper-step-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  border: var(--stepper-connector-height) solid var(--stepper-upcoming-border);
+  background: var(--stepper-upcoming-bg);
+  font-size: var(--stepper-font-size);
+  font-weight: var(--font-weight-semibold);
+  color: var(--stepper-upcoming-text);
+  transition: all var(--transition-base);
+  margin-bottom: var(--space-2);
+  flex-shrink: 0;
+}
+
+.step__number {
+  font-size: var(--stepper-font-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   STEP LABEL
+   -------------------------------------------------------------------------- */
+
+.step__label {
+  font-size: var(--stepper-label-size);
+  font-weight: var(--stepper-label-weight);
+  color: var(--color-text-tertiary);
+  line-height: var(--line-height-snug);
+  transition: color var(--transition-fast);
+  max-width: 7rem;
+}
+
+/* --------------------------------------------------------------------------
+   STEP STATES
+   -------------------------------------------------------------------------- */
+
+/* Upcoming (default) */
+.step--upcoming .step__indicator {
+  background: var(--white);
+  border-color: var(--color-border-default);
+  color: var(--color-text-tertiary);
+}
+
+/* Active */
+.step--active .step__indicator {
+  background: var(--stepper-active-bg);
+  border-color: var(--stepper-active-border);
+  color: var(--stepper-active-text);
+  box-shadow: 0 0 0 4px var(--color-focus-ring-brand);
+}
+
+.step--active .step__label {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Completed */
+.step--completed .step__indicator {
+  background: var(--stepper-completed-bg);
+  border-color: var(--stepper-completed-border);
+  color: var(--stepper-completed-text);
+}
+
+.step--completed .step__label {
+  color: var(--color-text-secondary);
+}
+
+/* Checkmark for completed */
+.step--completed .step__indicator::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 6l2.5 2.5 4.5-4.5' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.step--completed .step__number {
+  display: none;
+}
+
+/* Error */
+.step--error .step__indicator {
+  background: var(--stepper-error-bg);
+  border-color: var(--stepper-error-border);
+  color: var(--stepper-error-text);
+}
+
+.step--error .step__label {
+  color: var(--error-600);
+}
+
+.step--error .step__indicator::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 3l6 6M9 3l-6 6' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.step--error .step__number {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   VERTICAL STEPPER
+   -------------------------------------------------------------------------- */
+
+.steps--vertical {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.steps--vertical .step {
+  flex-direction: row;
+  align-items: flex-start;
+  text-align: left;
+  gap: var(--space-3);
+  padding-bottom: var(--space-5);
+  flex: none;
+}
+
+.steps--vertical .step:last-child {
+  padding-bottom: 0;
+}
+
+/* Vertical connector */
+.steps--vertical .step::before {
+  top: calc(var(--stepper-step-size) + var(--space-1));
+  left: calc(var(--stepper-step-size) / 2 - 1px);
+  right: auto;
+  bottom: var(--space-1);
+  width: var(--stepper-connector-height);
+  height: auto;
+}
+
+.steps--vertical .step__indicator {
+  margin-bottom: 0;
+}
+
+.steps--vertical .step__label {
+  max-width: none;
+  padding-top: var(--space-1);
+}
+
+/* --------------------------------------------------------------------------
+   COMPACT VARIANT
+   -------------------------------------------------------------------------- */
+
+.steps--compact .step__indicator {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.steps--compact .step__number {
+  font-size: var(--font-size-2xs);
+}
+
+.steps--compact .step__label {
+  font-size: var(--font-size-2xs);
+}
+
+.steps--compact .step::before {
+  top: calc(0.75rem - 1px);
+}

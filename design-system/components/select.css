@@ -1,0 +1,106 @@
+/* ==========================================================================
+   SELECT COMPONENT
+   Usage: .field > .select-wrapper > select.select
+   Matches input height and border treatment exactly.
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+.select-wrapper {
+  position: relative;
+  display: block;
+}
+
+.select {
+  /* Layout */
+  display: block;
+  width: 100%;
+  height: var(--input-height-md);
+  padding-inline: var(--input-padding-x-md);
+  padding-right: calc(var(--input-padding-x-md) + var(--space-6));
+
+  /* Typography */
+  font-size: var(--input-font-size-md);
+  font-family: var(--font-family-body);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-normal);
+
+  /* Appearance */
+  background-color: var(--color-background-surface-raised);
+  border: var(--input-border-width) solid var(--input-border-color);
+  border-radius: var(--input-radius);
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: var(--input-transition);
+  box-shadow: 0 1px 0 hsl(0 0% 100% / 0.92) inset, 0 2px 8px -7px hsl(228 40% 18% / 0.35);
+}
+
+.select:hover {
+  border-color: var(--color-border-strong);
+}
+
+/* Custom chevron via background SVG */
+.select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23555f7a' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.select:focus {
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* Size variants */
+.select--sm {
+  height: var(--input-height-sm);
+  padding-inline: var(--input-padding-x-sm);
+  padding-right: calc(var(--input-padding-x-sm) + var(--space-6));
+  font-size: var(--input-font-size-sm);
+}
+
+.select--lg {
+  height: var(--input-height-lg);
+  padding-inline: var(--input-padding-x-lg);
+  padding-right: calc(var(--input-padding-x-lg) + var(--space-6));
+  font-size: var(--input-font-size-lg);
+}
+
+/* Placeholder option */
+.select option[value=""] {
+  color: var(--color-text-tertiary);
+}
+
+/* Error state */
+.field--error .select {
+  border-color: var(--color-feedback-error-border);
+  background-color: var(--color-feedback-error-bg);
+  box-shadow: none;
+}
+
+.field--error .select:focus {
+  border-color: var(--color-feedback-error-icon);
+  box-shadow: 0 0 0 3px hsl(4 76% 54% / 0.2);
+}
+
+/* Disabled state */
+.select:disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--input-bg-disabled);
+  border-color: var(--color-border-subtle);
+  cursor: not-allowed;
+}
+
+.field:has(.select:disabled) .select-wrapper::after {
+  opacity: 0.4;
+}

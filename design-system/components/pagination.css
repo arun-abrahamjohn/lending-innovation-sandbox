@@ -1,0 +1,288 @@
+/* ==========================================================================
+   PAGINATION COMPONENT
+   
+   Navigation between pages of content.
+   
+   Usage:
+   <nav class="pagination" aria-label="Pagination">
+     <button class="pagination__item pagination__item--prev">Previous</button>
+     <button class="pagination__item">1</button>
+     <button class="pagination__item pagination__item--active">2</button>
+     <button class="pagination__item">3</button>
+     <span class="pagination__ellipsis">...</span>
+     <button class="pagination__item">10</button>
+     <button class="pagination__item pagination__item--next">Next</button>
+   </nav>
+   
+   Variants: default, --minimal, --compact
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+/* --------------------------------------------------------------------------
+   PAGINATION CONTAINER
+   -------------------------------------------------------------------------- */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-family-body);
+}
+
+/* --------------------------------------------------------------------------
+   PAGINATION ITEM (number/button)
+   -------------------------------------------------------------------------- */
+
+.pagination__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 var(--space-2);
+  
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  
+  background: transparent;
+  border: var(--border-width-thin) solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  
+  transition: 
+    color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.pagination__item:hover:not(:disabled) {
+  color: var(--color-text-primary);
+  background: var(--color-action-ghost-hover);
+}
+
+.pagination__item:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-border-focus);
+}
+
+/* Active state */
+.pagination__item--active {
+  color: var(--brand-primary-contrast);
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+.pagination__item--active:hover:not(:disabled) {
+  background: var(--brand-primary);
+  color: var(--brand-primary-contrast);
+}
+
+/* Disabled state */
+.pagination__item:disabled {
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------------------------------
+   PREV/NEXT BUTTONS
+   -------------------------------------------------------------------------- */
+
+.pagination__item--prev,
+.pagination__item--next {
+  gap: var(--space-1);
+  padding: 0 var(--space-3);
+}
+
+.pagination__item--prev .pagination__icon {
+  margin-right: var(--space-1);
+}
+
+.pagination__item--next .pagination__icon {
+  margin-left: var(--space-1);
+}
+
+/* Icon only variant */
+.pagination__item--icon-only {
+  min-width: 2.25rem;
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   ELLIPSIS
+   -------------------------------------------------------------------------- */
+
+.pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  letter-spacing: var(--letter-spacing-wider);
+}
+
+/* --------------------------------------------------------------------------
+   VARIANT: Bordered
+   -------------------------------------------------------------------------- */
+
+.pagination--bordered .pagination__item {
+  border-color: var(--color-border-default);
+}
+
+.pagination--bordered .pagination__item:hover:not(:disabled):not(.pagination__item--active) {
+  border-color: var(--color-border-strong);
+}
+
+/* --------------------------------------------------------------------------
+   VARIANT: Minimal (no backgrounds)
+   -------------------------------------------------------------------------- */
+
+.pagination--minimal .pagination__item--active {
+  background: transparent;
+  color: var(--brand-primary);
+  border-color: transparent;
+  font-weight: var(--font-weight-bold);
+}
+
+.pagination--minimal .pagination__item:hover:not(:disabled) {
+  background: transparent;
+  color: var(--brand-primary);
+}
+
+/* --------------------------------------------------------------------------
+   VARIANT: Compact (smaller)
+   -------------------------------------------------------------------------- */
+
+.pagination--compact .pagination__item {
+  min-width: 1.75rem;
+  height: 1.75rem;
+  font-size: var(--font-size-xs);
+  border-radius: var(--radius-sm);
+}
+
+.pagination--compact .pagination__ellipsis {
+  min-width: 1.75rem;
+  height: 1.75rem;
+  font-size: var(--font-size-xs);
+}
+
+/* --------------------------------------------------------------------------
+   VARIANT: Large
+   -------------------------------------------------------------------------- */
+
+.pagination--lg .pagination__item {
+  min-width: 2.75rem;
+  height: 2.75rem;
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-lg);
+}
+
+/* --------------------------------------------------------------------------
+   VARIANT: Pill shaped
+   -------------------------------------------------------------------------- */
+
+.pagination--pill .pagination__item {
+  border-radius: var(--radius-full);
+}
+
+/* --------------------------------------------------------------------------
+   PAGE SIZE SELECTOR
+   -------------------------------------------------------------------------- */
+
+.pagination__size {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: var(--space-4);
+  padding-left: var(--space-4);
+  border-left: var(--border-width-thin) solid var(--color-border-default);
+}
+
+.pagination__size-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.pagination__size-select {
+  padding: var(--space-1-5) var(--space-2);
+  font-size: var(--font-size-sm);
+  border: var(--border-width-thin) solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-background-surface);
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   PAGE INFO
+   -------------------------------------------------------------------------- */
+
+.pagination__info {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-left: auto;
+}
+
+.pagination__info-current {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE (mobile-friendly)
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 480px) {
+  .pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2);
+  }
+  
+  .pagination__item--prev span,
+  .pagination__item--next span {
+    display: none;
+  }
+  
+  .pagination__size {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+    justify-content: center;
+    margin-top: var(--space-2);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   JUMP TO PAGE
+   -------------------------------------------------------------------------- */
+
+.pagination__jump {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: var(--space-4);
+}
+
+.pagination__jump-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.pagination__jump-input {
+  width: 4rem;
+  padding: var(--space-1-5) var(--space-2);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  border: var(--border-width-thin) solid var(--color-border-default);
+  border-radius: var(--radius-md);
+}
+
+.pagination__jump-input:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+}

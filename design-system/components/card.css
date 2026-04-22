@@ -1,0 +1,282 @@
+/* ==========================================================================
+   CARD COMPONENT
+
+   Restrained variants — default is "container". Use --elevated when the
+   card must feel lifted off the page, --interactive for clickable, --glass
+   only over imagery or colored surfaces.
+
+   Usage: <div class="card card--elevated">...</div>
+   Variants: (default), --elevated, --interactive, --glass
+   Regions: .card__header, .card__body, .card__footer
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+/* --------------------------------------------------------------------------
+   BASE CARD
+   -------------------------------------------------------------------------- */
+
+.card {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+/* Default — subtle border, no shadow */
+.card {
+  border: var(--card-border);
+}
+
+/* --------------------------------------------------------------------------
+   CARD VARIANTS
+   -------------------------------------------------------------------------- */
+
+/* Elevated — shadow, refined border */
+.card--elevated {
+  border: var(--border-width-thin) solid hsl(0 0% 0% / 0.04);
+  box-shadow: var(--card-shadow);
+}
+
+/* Interactive — for clickable cards */
+.card--interactive {
+  cursor: pointer;
+  transition: 
+    box-shadow var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-base);
+}
+
+.card--interactive:hover {
+  border-color: var(--color-border-strong);
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.card--interactive:active {
+  transform: translateY(0);
+  box-shadow: var(--elevation-xs);
+}
+
+.card--interactive:focus-visible {
+  outline: none;
+  box-shadow: 
+    var(--card-shadow),
+    0 0 0 2px var(--color-background-surface),
+    0 0 0 4px var(--color-border-focus);
+}
+
+/* Glass — only over imagery or colored surfaces */
+.card--glass {
+  background: hsl(0 0% 100% / 0.85);
+  backdrop-filter: blur(var(--blur-lg));
+  -webkit-backdrop-filter: blur(var(--blur-lg));
+  border: var(--border-width-thin) solid hsl(0 0% 100% / 0.5);
+  box-shadow:
+    var(--elevation-md),
+    inset 0 1px 0 hsl(0 0% 100% / 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   PADDING SIZES
+   -------------------------------------------------------------------------- */
+
+.card--sm .card__header,
+.card--sm .card__body,
+.card--sm .card__footer {
+  padding: var(--card-padding-sm);
+}
+
+.card--lg .card__header,
+.card--lg .card__body,
+.card--lg .card__footer {
+  padding: var(--card-padding-lg);
+}
+
+.card--xl .card__header,
+.card--xl .card__body,
+.card--xl .card__footer {
+  padding: var(--card-padding-xl);
+}
+
+/* --------------------------------------------------------------------------
+   CARD REGIONS
+   -------------------------------------------------------------------------- */
+
+.card__header {
+  padding: var(--card-padding-md);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--card-header-gap);
+}
+
+/* Header with bottom border */
+.card__header--bordered {
+  border-bottom: var(--border-width-thin) solid var(--color-border-subtle);
+}
+
+/* Compact header — less padding below */
+.card__header--compact {
+  padding-bottom: var(--space-2);
+}
+
+.card__title {
+  font-size: var(--text-heading-4-size);
+  font-weight: var(--text-heading-4-weight);
+  line-height: var(--text-heading-4-line-height);
+  letter-spacing: var(--letter-spacing-snug);
+  color: var(--color-text-primary);
+}
+
+.card__subtitle {
+  font-size: var(--text-body-sm-size);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-1);
+  line-height: var(--line-height-normal);
+}
+
+.card__header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   CARD BODY
+   -------------------------------------------------------------------------- */
+
+.card__body {
+  padding: var(--card-padding-md);
+}
+
+/* Remove padding */
+.card__body--flush {
+  padding: 0;
+}
+
+/* Only horizontal padding */
+.card__body--flush-y {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* When body follows header with border */
+.card__header--bordered + .card__body {
+  padding-top: var(--card-padding-md);
+}
+
+/* When body follows header without border */
+.card__header:not(.card__header--bordered) + .card__body {
+  padding-top: 0;
+}
+
+/* --------------------------------------------------------------------------
+   CARD FOOTER
+   -------------------------------------------------------------------------- */
+
+.card__footer {
+  padding: var(--card-padding-md);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+
+/* Footer with top border */
+.card__footer--bordered {
+  border-top: var(--border-width-thin) solid var(--color-border-subtle);
+}
+
+/* Space between layout */
+.card__footer--between {
+  justify-content: space-between;
+}
+
+/* Left-aligned */
+.card__footer--start {
+  justify-content: flex-start;
+}
+
+/* --------------------------------------------------------------------------
+   CARD SECTIONS — For multi-section cards
+   -------------------------------------------------------------------------- */
+
+.card__section {
+  padding: var(--card-padding-md);
+}
+
+.card__section + .card__section {
+  border-top: var(--border-width-thin) solid var(--color-border-subtle);
+}
+
+.card__section-title {
+  font-size: var(--text-label-sm-size);
+  font-weight: var(--text-label-sm-weight);
+  letter-spacing: var(--text-label-sm-letter-spacing);
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-3);
+}
+
+/* --------------------------------------------------------------------------
+   CARD MEDIA — For images/videos
+   -------------------------------------------------------------------------- */
+
+.card__media {
+  position: relative;
+  overflow: hidden;
+}
+
+.card__media img,
+.card__media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Media at top — rounded corners */
+.card__media:first-child {
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+}
+
+/* Media overlay */
+.card__media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    hsl(0 0% 0% / 0.6) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--card-padding-md);
+}
+
+/* --------------------------------------------------------------------------
+   CARD UTILITIES
+   -------------------------------------------------------------------------- */
+
+/* Full-bleed card (no border radius) */
+.card--bleed {
+  border-radius: 0;
+}
+
+/* Stack children with consistent gap */
+.card__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-section-gap);
+}
+
+.card__stack--sm {
+  gap: var(--space-3);
+}
+
+.card__stack--lg {
+  gap: var(--space-8);
+}

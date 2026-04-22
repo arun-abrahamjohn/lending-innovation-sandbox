@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lending Design System</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+
+  <link rel="stylesheet" href="../shared/reset.css">
+  <link rel="stylesheet" href="tokens/base.css">
+  <link rel="stylesheet" href="tokens/semantic.css">
+  <link rel="stylesheet" href="tokens/component.css">
+  <link rel="stylesheet" href="../shared/layout.css">
+
+  <link rel="stylesheet" href="components/button.css">
+  <link rel="stylesheet" href="components/input.css">
+  <link rel="stylesheet" href="components/select.css">
+  <link rel="stylesheet" href="components/textarea.css">
+  <link rel="stylesheet" href="components/checkbox.css">
+  <link rel="stylesheet" href="components/radio.css">
+  <link rel="stylesheet" href="components/toggle.css">
+  <link rel="stylesheet" href="components/badge.css">
+  <link rel="stylesheet" href="components/card.css">
+  <link rel="stylesheet" href="components/tabs.css">
+  <link rel="stylesheet" href="components/accordion.css">
+  <link rel="stylesheet" href="components/dropdown.css">
+  <link rel="stylesheet" href="components/avatar.css">
+  <link rel="stylesheet" href="components/data-table.css">
+  <link rel="stylesheet" href="components/pagination.css">
+  <link rel="stylesheet" href="components/progress-steps.css">
+  <link rel="stylesheet" href="components/alert.css">
+  <link rel="stylesheet" href="components/toast.css">
+  <link rel="stylesheet" href="components/modal.css">
+  <link rel="stylesheet" href="components/tooltip.css">
+  <link rel="stylesheet" href="components/tag-input.css">
+  <link rel="stylesheet" href="components/file-upload.css">
+  <link rel="stylesheet" href="components/skeleton.css">
+  <link rel="stylesheet" href="components/decision-banner.css">
+  <link rel="stylesheet" href="components/summary-card.css">
+  <link rel="stylesheet" href="components/loan-configurator.css">
+
+  <style>
+    /* =======================================================================
+       DESIGN SYSTEM PAGE STYLES
+       Premium documentation experience
+       ======================================================================= */
+
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: var(--gray-50);
+      color: var(--color-text-primary);
+      font-family: var(--font-family-body);
+    }
+
+    /* Layout */
+    .ds-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: 100vh;
+    }
+
+    /* -----------------------------------------------------------------------
+       SIDEBAR NAVIGATION
+       ----------------------------------------------------------------------- */
+    .ds-nav {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--white);
+      border-right: var(--border-width-thin) solid var(--color-border-subtle);
+      padding: var(--space-6) 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+
+    .ds-nav__brand {
+      padding: 0 var(--space-5);
+    }
+
+    .ds-nav__logo {
+      font-family: var(--font-family-display);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--letter-spacing-tight);
+      color: var(--color-text-primary);
+    }
+
+    .ds-nav__version {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-tertiary);
+      margin-top: var(--space-1);
+    }
+
+    .ds-nav__section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ds-nav__section-heading {
+      font-size: var(--font-size-2xs);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--letter-spacing-widest);
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      padding: var(--space-2) var(--space-5);
+      margin-bottom: var(--space-1);
+    }
+
+    .ds-nav__link {
+      display: block;
+      padding: var(--space-2) var(--space-5);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .ds-nav__link:hover {
+      color: var(--color-text-primary);
+      background: var(--gray-50);
+    }
+
+    .ds-nav__link.active {
+      color: var(--color-text-primary);
+      background: var(--gray-100);
+      font-weight: var(--font-weight-medium);
+    }
+
+    /* -----------------------------------------------------------------------
+       MAIN CONTENT
+       ----------------------------------------------------------------------- */
+    .ds-main {
+      padding: var(--space-12) var(--space-12);
+      max-width: 920px;
+    }
+
+    /* Page header */
+    .ds-page-header {
+      margin-bottom: var(--space-16);
+    }
+
+    .ds-page-title {
+      font-family: var(--font-family-display);
+      font-size: var(--font-size-5xl);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1;
+      letter-spacing: var(--letter-spacing-tighter);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-4);
+    }
+
+    .ds-page-subtitle {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+      max-width: 540px;
+    }
+
+    /* Section */
+    .ds-section {
+      margin-bottom: var(--space-20);
+      scroll-margin-top: var(--space-8);
+    }
+
+    .ds-section__title {
+      font-family: var(--font-family-display);
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1;
+      letter-spacing: var(--letter-spacing-tight);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-3);
+    }
+
+    .ds-section__intro {
+      font-size: var(--font-size-base);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--space-8);
+      max-width: 560px;
+    }
+
+    /* Component block */
+    .ds-component {
+      margin-bottom: var(--space-16);
+      scroll-margin-top: var(--space-8);
+    }
+
+    .ds-component__heading {
+      font-family: var(--font-family-display);
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1;
+      letter-spacing: var(--letter-spacing-snug);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .ds-component__description {
+      font-size: var(--font-size-base);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--space-6);
+      max-width: 520px;
+    }
+
+    /* Preview box */
+    .ds-preview {
+      background: var(--white);
+      border: var(--border-width-thin) solid var(--color-border-subtle);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-8);
+      margin-bottom: var(--space-4);
+    }
+
+    .ds-preview--flush {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .ds-preview--gray {
+      background: var(--gray-100);
+    }
+
+    .ds-preview__label {
+      font-size: var(--font-size-2xs);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--letter-spacing-widest);
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      margin-bottom: var(--space-4);
+    }
+
+    /* Variant label */
+    .variant-label {
+      font-size: var(--font-size-2xs);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--letter-spacing-widest);
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      margin-bottom: var(--space-3);
+      margin-top: var(--space-8);
+    }
+
+    .variant-label:first-child {
+      margin-top: 0;
+    }
+
+    /* Variant row */
+    .variant-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    /* Divider */
+    .ds-divider {
+      border: none;
+      border-top: var(--border-width-thin) solid var(--color-border-subtle);
+      margin-block: var(--space-12);
+    }
+
+    /* Code block */
+    .code-block {
+      background: var(--gray-900);
+      color: var(--gray-200);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5);
+      font-family: var(--font-family-mono);
+      font-size: var(--font-size-xs);
+      line-height: var(--line-height-relaxed);
+      overflow-x: auto;
+      margin-bottom: var(--space-4);
+    }
+
+    /* Token table */
+    .token-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-6);
+      background: var(--white);
+      border: var(--border-width-thin) solid var(--color-border-subtle);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .token-table th {
+      background: var(--gray-50);
+      padding: var(--space-3) var(--space-4);
+      text-align: left;
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-tertiary);
+      letter-spacing: var(--letter-spacing-wide);
+      border-bottom: var(--border-width-thin) solid var(--color-border-subtle);
+    }
+
+    .token-table td {
+      padding: var(--space-3) var(--space-4);
+      border-bottom: var(--border-width-thin) solid var(--color-border-subtle);
+      vertical-align: middle;
+    }
+
+    .token-table tr:last-child td { 
+      border-bottom: none; 
+    }
+
+    .token-name {
+      font-family: var(--font-family-mono);
+      font-size: var(--font-size-xs);
+      color: var(--primary-600);
+      background: var(--primary-50);
+      padding: 2px var(--space-1-5);
+      border-radius: var(--radius-sm);
+    }
+
+    .token-tier {
+      font-size: var(--font-size-2xs);
+      font-weight: var(--font-weight-medium);
+      padding: 2px var(--space-2);
+      border-radius: var(--radius-sm);
+    }
+
+    .token-tier--semantic {
+      background: var(--primary-100);
+      color: var(--primary-700);
+    }
+
+    .token-tier--component {
+      background: var(--gray-150);
+      color: var(--gray-700);
+    }
+
+    /* Color swatches */
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .swatch__color {
+      height: 48px;
+      border-radius: var(--radius-lg);
+      border: var(--border-width-thin) solid hsl(0 0% 0% / 0.06);
+    }
+
+    .swatch__name {
+      font-size: var(--font-size-2xs);
+      font-family: var(--font-family-mono);
+      color: var(--color-text-tertiary);
+    }
+
+    /* Spacing scale */
+    .spacing-scale {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .spacing-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .spacing-item__label {
+      font-family: var(--font-family-mono);
+      font-size: var(--font-size-xs);
+      color: var(--color-text-tertiary);
+      min-width: 10rem;
+    }
+
+    .spacing-item__bar {
+      background: var(--primary-500);
+      height: 0.75rem;
+      border-radius: var(--radius-xs);
+      opacity: 0.7;
+    }
+
+    /* Radius grid */
+    .radius-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-6);
+    }
+
+    .radius-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .radius-item__box {
+      width: 56px;
+      height: 56px;
+      background: var(--primary-100);
+      border: 2px solid var(--primary-500);
+    }
+
+    .radius-item__label {
+      font-size: var(--font-size-2xs);
+      font-family: var(--font-family-mono);
+      color: var(--color-text-tertiary);
+      text-align: center;
+    }
+
+    /* Elevation grid */
+    .elevation-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-8);
+      padding: var(--space-10);
+      background: var(--gray-100);
+      border-radius: var(--radius-2xl);
+    }
+
+    .elevation-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .elevation-item__card {
+      width: 88px;
+      height: 56px;
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-family-mono);
+      font-size: var(--font-size-2xs);
+      color: var(--color-text-tertiary);
+    }
+
+    .elevation-item__label {
+      font-size: var(--font-size-2xs);
+      font-family: var(--font-family-mono);
+      color: var(--color-text-tertiary);
+    }
+
+    /* Usage list */
+    .usage-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--space-4);
+    }
+
+    .usage-list li::before {
+      content: "→";
+      margin-right: var(--space-2);
+      color: var(--color-text-tertiary);
+    }
+
+    /* Stack utility for component demos */
+    .stack-sm { display: flex; flex-direction: column; gap: var(--space-2); }
+    .stack-md { display: flex; flex-direction: column; gap: var(--space-4); }
+    .stack-lg { display: flex; flex-direction: column; gap: var(--space-6); }
+  </style>
+</head>
+<body>
+
+<div class="ds-layout">
+
+  <!-- ======================================================================
+       NAVIGATION SIDEBAR
+       ====================================================================== -->
+  <nav class="ds-nav" aria-label="Design system navigation">
+    <div class="ds-nav__brand">
+      <div class="ds-nav__logo">Lending DS</div>
+      <div class="ds-nav__version">v2.0</div>
+    </div>
+
+    <div class="ds-nav__section">
+      <div class="ds-nav__section-heading">Overview</div>
+      <a href="#overview" class="ds-nav__link">Introduction</a>
+      <a href="#getting-started" class="ds-nav__link">Getting started</a>
+      <a href="#tokens" class="ds-nav__link">Design tokens</a>
+    </div>
+
+    <div class="ds-nav__section">
+      <div class="ds-nav__section-heading">Foundations</div>
+      <a href="#colour" class="ds-nav__link">Colour</a>
+      <a href="#typography" class="ds-nav__link">Typography</a>
+      <a href="#icons" class="ds-nav__link">Icons</a>
+      <a href="#spacing" class="ds-nav__link">Spacing</a>
+      <a href="#radius" class="ds-nav__link">Border radius</a>
+      <a href="#elevation" class="ds-nav__link">Elevation</a>
+    </div>
+
+    <div class="ds-nav__section">
+      <div class="ds-nav__section-heading">Components</div>
+      <a href="#button" class="ds-nav__link">Button</a>
+      <a href="#input" class="ds-nav__link">Input</a>
+      <a href="#toggle" class="ds-nav__link">Toggle</a>
+      <a href="#tabs" class="ds-nav__link">Tabs</a>
+      <a href="#dropdown" class="ds-nav__link">Dropdown</a>
+      <a href="#accordion" class="ds-nav__link">Accordion</a>
+      <a href="#badge" class="ds-nav__link">Badge</a>
+      <a href="#avatar" class="ds-nav__link">Avatar</a>
+      <a href="#card" class="ds-nav__link">Card</a>
+      <a href="#data-table" class="ds-nav__link">Data table</a>
+      <a href="#pagination" class="ds-nav__link">Pagination</a>
+      <a href="#progress-steps" class="ds-nav__link">Progress steps</a>
+      <a href="#alert" class="ds-nav__link">Alert</a>
+      <a href="#toast" class="ds-nav__link">Toast</a>
+      <a href="#skeleton" class="ds-nav__link">Skeleton</a>
+      <a href="#file-upload" class="ds-nav__link">File upload</a>
+    </div>
+
+    <div class="ds-nav__section">
+      <div class="ds-nav__section-heading">Lending</div>
+      <a href="#loan-configurator" class="ds-nav__link">Loan configurator</a>
+      <a href="#decision-banner" class="ds-nav__link">Decision banner</a>
+      <a href="#summary-card" class="ds-nav__link">Summary card</a>
+    </div>
+  </nav>
+
+  <!-- ======================================================================
+       MAIN CONTENT
+       ====================================================================== -->
+  <main class="ds-main">
+
+    <!-- Page header -->
+    <header class="ds-page-header" id="overview">
+      <h1 class="ds-page-title">Lending Design System</h1>
+    </header>
+
+    <hr class="ds-divider">
+
+    <!-- ================================================================
+         GETTING STARTED
+         ================================================================ -->
+    <section class="ds-section" id="getting-started">
+      <h2 class="ds-section__title">Getting started</h2>
+      <p class="ds-section__intro">Include the stylesheet imports in order. The system uses CSS custom properties for theming.</p>
+
+      <div class="code-block">&lt;!-- Required stylesheets (in order) --&gt;
+&lt;link rel="stylesheet" href="tokens/base.css"&gt;
+&lt;link rel="stylesheet" href="tokens/brand.css"&gt;
+&lt;link rel="stylesheet" href="tokens/semantic.css"&gt;
+&lt;link rel="stylesheet" href="tokens/component.css"&gt;
+
+&lt;!-- Component stylesheets --&gt;
+&lt;link rel="stylesheet" href="components/button.css"&gt;
+&lt;link rel="stylesheet" href="components/input.css"&gt;
+&lt;!-- ... additional components as needed --&gt;</div>
+
+      <div class="variant-label" style="margin-top:var(--space-6)">Theming</div>
+      <p style="font-size:var(--font-size-sm);color:var(--color-text-secondary);margin-bottom:var(--space-3)">
+        To use a different brand theme, replace <code>brand.css</code> with an alternative (e.g. <code>brand-abn.css</code> or <code>brand-ing.css</code>). All semantic tokens will automatically inherit the new brand values.
+      </p>
+
+      <div class="variant-label">Dark mode</div>
+      <p style="font-size:var(--font-size-sm);color:var(--color-text-secondary)">
+        Add <code>data-theme="dark"</code> to the <code>&lt;html&gt;</code> element to enable dark mode. Semantic tokens include dark mode overrides.
+      </p>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ================================================================
+         DESIGN TOKENS
+         ================================================================ -->
+    <section class="ds-section" id="tokens">
+      <h2 class="ds-section__title">Design tokens</h2>
+      <p class="ds-section__intro">Token architecture follows a three-tier system: base, brand, and semantic layers.</p>
+
+      <div class="ds-preview" style="padding:var(--space-6)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--space-4)">
+          <div style="padding:var(--space-4);background:var(--gray-50);border-radius:var(--radius-lg)">
+            <div style="font-weight:var(--font-weight-semibold);margin-bottom:var(--space-1)">base.css</div>
+            <div style="font-size:var(--font-size-sm);color:var(--color-text-secondary)">Primitive scales: spacing, typography sizes, neutral colours, status colours, radii, elevation.</div>
+          </div>
+          <div style="padding:var(--space-4);background:var(--gray-50);border-radius:var(--radius-lg)">
+            <div style="font-weight:var(--font-weight-semibold);margin-bottom:var(--space-1)">brand.css</div>
+            <div style="font-size:var(--font-size-sm);color:var(--color-text-secondary)">Brand identity: primary/secondary/accent colours, font families, shape preferences. Swappable for theming.</div>
+          </div>
+          <div style="padding:var(--space-4);background:var(--gray-50);border-radius:var(--radius-lg)">
+            <div style="font-weight:var(--font-weight-semibold);margin-bottom:var(--space-1)">semantic.css</div>
+            <div style="font-size:var(--font-size-sm);color:var(--color-text-secondary)">Intent-based aliases: --color-text-primary, --color-action-primary, etc. References base and brand tokens.</div>
+          </div>
+          <div style="padding:var(--space-4);background:var(--gray-50);border-radius:var(--radius-lg)">
+            <div style="font-weight:var(--font-weight-semibold);margin-bottom:var(--space-1)">component.css</div>
+            <div style="font-size:var(--font-size-sm);color:var(--color-text-secondary)">Component-scoped tokens: --button-radius, --input-border-color. References semantic layer.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ================================================================
+         FOUNDATIONS — COLOUR
+         ================================================================ -->
+    <section class="ds-section" id="colour">
+      <h2 class="ds-section__title">Colour</h2>
+      <p class="ds-section__intro">Brand and semantic colour tokens. All colours are defined in brand.css for easy theming.</p>
+
+      <div class="variant-label">Brand colours</div>
+      <div class="ds-preview" style="padding:var(--space-6)">
+        <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;align-items:center">
+          <div style="text-align:center">
+            <div style="width:80px;height:80px;border-radius:var(--radius-xl);background:var(--brand-primary);margin-bottom:var(--space-2)"></div>
+            <div style="font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold)">Primary</div>
+            <div style="font-size:var(--font-size-xs);color:var(--color-text-tertiary)">--brand-primary</div>
+          </div>
+          <div style="text-align:center">
+            <div style="width:80px;height:80px;border-radius:var(--radius-xl);background:var(--brand-secondary);margin-bottom:var(--space-2)"></div>
+            <div style="font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold)">Secondary</div>
+            <div style="font-size:var(--font-size-xs);color:var(--color-text-tertiary)">--brand-secondary</div>
+          </div>
+          <div style="text-align:center">
+            <div style="width:80px;height:80px;border-radius:var(--radius-xl);background:var(--brand-accent);margin-bottom:var(--space-2)"></div>
+            <div style="font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold)">Accent</div>
+            <div style="font-size:var(--font-size-xs);color:var(--color-text-tertiary)">--brand-accent</div>
+          </div>
+          <div style="text-align:center">
+            <div style="width:80px;height:80px;border-radius:var(--radius-xl);background:var(--error-500);margin-bottom:var(--space-2)"></div>
+            <div style="font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold)">Destructive</div>
+            <div style="font-size:var(--font-size-xs);color:var(--color-text-tertiary)">--error-500</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="variant-label">Primary scale</div>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-primary-50)"></div><div class="swatch__name">50</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-primary-100)"></div><div class="swatch__name">100</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-primary-200)"></div><div class="swatch__name">200</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-primary-300)"></div><div class="swatch__name">300</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-primary-400)"></div><div class="swatch__name">400</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-primary-500)"></div><div class="swatch__name">500</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-primary-600)"></div><div class="swatch__name">600</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-primary-700)"></div><div class="swatch__name">700</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-primary-800)"></div><div class="swatch__name">800</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-primary-900)"></div><div class="swatch__name">900</div></div>
+      </div>
+
+      <div class="variant-label">Neutral scale</div>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch__color" style="background:var(--white);border:1px solid var(--gray-200)"></div><div class="swatch__name">white</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--gray-50)"></div><div class="swatch__name">50</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--gray-100)"></div><div class="swatch__name">100</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--gray-200)"></div><div class="swatch__name">200</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--gray-400)"></div><div class="swatch__name">400</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--gray-600)"></div><div class="swatch__name">600</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--gray-800)"></div><div class="swatch__name">800</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--gray-900)"></div><div class="swatch__name">900</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--black)"></div><div class="swatch__name">black</div></div>
+      </div>
+
+      <div class="variant-label">Accent scale</div>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-accent-50)"></div><div class="swatch__name">50</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-accent-100)"></div><div class="swatch__name">100</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-accent-200)"></div><div class="swatch__name">200</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-accent-300)"></div><div class="swatch__name">300</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-accent-400)"></div><div class="swatch__name">400</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-accent-500)"></div><div class="swatch__name">500</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-accent-600)"></div><div class="swatch__name">600</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--brand-accent-700)"></div><div class="swatch__name">700</div></div>
+      </div>
+
+      <div class="variant-label">Status colours</div>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch__color" style="background:var(--success-500)"></div><div class="swatch__name">success</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--warning-500)"></div><div class="swatch__name">warning</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--error-500)"></div><div class="swatch__name">error</div></div>
+        <div class="swatch"><div class="swatch__color" style="background:var(--info-500)"></div><div class="swatch__name">info</div></div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ================================================================
+         FOUNDATIONS — TYPOGRAPHY
+         ================================================================ -->
+    <section class="ds-section" id="typography">
+      <h2 class="ds-section__title">Typography</h2>
+      <p class="ds-section__intro">Semantic text styles for headings, body, labels, and captions. Use these tokens instead of raw font-size values.</p>
+
+      <div class="ds-preview">
+        <div style="margin-bottom:var(--space-10)">
+          <p style="font-family:var(--font-family-display);font-size:var(--font-size-6xl);font-weight:var(--font-weight-bold);line-height:1;letter-spacing:var(--letter-spacing-tighter);color:var(--color-text-primary)">€175.000</p>
+          <p style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-2)">Display — hero financial figures</p>
+        </div>
+        
+        <div class="stack-md" style="max-width:560px">
+          <div>
+            <p style="font-family:var(--font-family-display);font-size:var(--text-heading-1-size);font-weight:var(--text-heading-1-weight);line-height:var(--text-heading-1-leading);letter-spacing:var(--text-heading-1-tracking)">Heading 1</p>
+            <p style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-1)">--text-heading-1-*</p>
+          </div>
+          <div>
+            <p style="font-family:var(--font-family-display);font-size:var(--text-heading-2-size);font-weight:var(--text-heading-2-weight);line-height:var(--text-heading-2-leading);letter-spacing:var(--text-heading-2-tracking)">Heading 2</p>
+            <p style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-1)">--text-heading-2-*</p>
+          </div>
+          <div>
+            <p style="font-family:var(--font-family-display);font-size:var(--text-heading-3-size);font-weight:var(--text-heading-3-weight);line-height:var(--text-heading-3-leading)">Heading 3</p>
+            <p style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-1)">--text-heading-3-*</p>
+          </div>
+          <div>
+            <p style="font-family:var(--font-family-display);font-size:var(--text-heading-4-size);font-weight:var(--text-heading-4-weight);line-height:var(--text-heading-4-leading)">Heading 4</p>
+            <p style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-1)">--text-heading-4-*</p>
+          </div>
+          <div>
+            <p style="font-size:var(--text-body-base-size);font-weight:var(--text-body-base-weight);line-height:var(--text-body-base-leading);color:var(--color-text-secondary)">Body — We review your application against our credit policy. This typically takes one to two business days.</p>
+            <p style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-1)">--text-body-base-* / --text-body-sm-* / --text-body-lg-*</p>
+          </div>
+          <div>
+            <p style="font-size:var(--text-label-base-size);font-weight:var(--text-label-base-weight);line-height:var(--text-label-base-leading);color:var(--color-text-primary)">Label text</p>
+            <p style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-1)">--text-label-base-* / --text-label-sm-* / --text-label-lg-*</p>
+          </div>
+          <div>
+            <p style="font-size:var(--text-caption-size);font-weight:var(--text-caption-weight);line-height:var(--text-caption-leading);color:var(--color-text-tertiary)">Caption — helper text, meta info</p>
+            <p style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-1)">--text-caption-*</p>
+          </div>
+          <div>
+            <p style="font-family:var(--font-family-mono);font-size:var(--text-body-base-size);font-weight:var(--font-weight-medium);color:var(--color-text-primary)">NL91 ABNA 0417 1643 00</p>
+            <p style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-1)">--font-family-mono — IBANs, KVK numbers, reference codes only</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ================================================================
+         FOUNDATIONS — ICONS
+         ================================================================ -->
+    <section class="ds-section" id="icons">
+      <h2 class="ds-section__title">Icons</h2>
+      <p class="ds-section__intro">Icon size scale using <a href="https://remixicon.com" target="_blank" style="color:var(--color-text-link)">Remix Icons</a>. Use these tokens for consistent icon sizing across components.</p>
+
+      <div class="ds-preview" style="padding:var(--space-6)">
+        <div style="display:flex;gap:var(--space-6);flex-wrap:wrap;align-items:end">
+          <div style="text-align:center">
+            <div style="display:flex;align-items:center;justify-content:center;height:3rem">
+              <i class="ri-file-text-line" style="font-size:var(--icon-size-xs);color:var(--color-text-secondary)"></i>
+            </div>
+            <div style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-2)">xs · 12px</div>
+          </div>
+          <div style="text-align:center">
+            <div style="display:flex;align-items:center;justify-content:center;height:3rem">
+              <i class="ri-file-text-line" style="font-size:var(--icon-size-sm);color:var(--color-text-secondary)"></i>
+            </div>
+            <div style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-2)">sm · 16px</div>
+          </div>
+          <div style="text-align:center">
+            <div style="display:flex;align-items:center;justify-content:center;height:3rem">
+              <i class="ri-file-text-line" style="font-size:var(--icon-size-md);color:var(--color-text-secondary)"></i>
+            </div>
+            <div style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-2)">md · 20px</div>
+          </div>
+          <div style="text-align:center">
+            <div style="display:flex;align-items:center;justify-content:center;height:3rem">
+              <i class="ri-file-text-line" style="font-size:var(--icon-size-lg);color:var(--color-text-secondary)"></i>
+            </div>
+            <div style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-2)">lg · 24px</div>
+          </div>
+          <div style="text-align:center">
+            <div style="display:flex;align-items:center;justify-content:center;height:3rem">
+              <i class="ri-file-text-line" style="font-size:var(--icon-size-xl);color:var(--color-text-secondary)"></i>
+            </div>
+            <div style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-2)">xl · 32px</div>
+          </div>
+          <div style="text-align:center">
+            <div style="display:flex;align-items:center;justify-content:center;height:3rem">
+              <i class="ri-file-text-line" style="font-size:var(--icon-size-2xl);color:var(--color-text-secondary)"></i>
+            </div>
+            <div style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-2)">2xl · 40px</div>
+          </div>
+          <div style="text-align:center">
+            <div style="display:flex;align-items:center;justify-content:center;height:3rem">
+              <i class="ri-file-text-line" style="font-size:var(--icon-size-3xl);color:var(--color-text-secondary)"></i>
+            </div>
+            <div style="font-size:var(--text-caption-size);color:var(--color-text-tertiary);margin-top:var(--space-2)">3xl · 48px</div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="usage-list">
+        <li><strong>xs/sm</strong> — inline with small text, tight spaces</li>
+        <li><strong>md</strong> — default, inline with body text</li>
+        <li><strong>lg</strong> — buttons, inputs, navigation</li>
+        <li><strong>xl/2xl</strong> — cards, callouts, features</li>
+        <li><strong>3xl</strong> — empty states, hero illustrations</li>
+      </ul>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ================================================================
+         FOUNDATIONS — SPACING
+         ================================================================ -->
+    <section class="ds-section" id="spacing">
+      <h2 class="ds-section__title">Spacing</h2>
+      <p class="ds-section__intro">Spacing scale based on a 4px unit. Use these tokens for margins, padding, and gaps.</p>
+
+      <div class="ds-preview">
+        <div class="spacing-scale">
+          <div class="spacing-item"><div class="spacing-item__label">--space-1 · 4px</div><div class="spacing-item__bar" style="width:4px"></div></div>
+          <div class="spacing-item"><div class="spacing-item__label">--space-2 · 8px</div><div class="spacing-item__bar" style="width:8px"></div></div>
+          <div class="spacing-item"><div class="spacing-item__label">--space-3 · 12px</div><div class="spacing-item__bar" style="width:12px"></div></div>
+          <div class="spacing-item"><div class="spacing-item__label">--space-4 · 16px</div><div class="spacing-item__bar" style="width:16px"></div></div>
+          <div class="spacing-item"><div class="spacing-item__label">--space-6 · 24px</div><div class="spacing-item__bar" style="width:24px"></div></div>
+          <div class="spacing-item"><div class="spacing-item__label">--space-8 · 32px</div><div class="spacing-item__bar" style="width:32px"></div></div>
+          <div class="spacing-item"><div class="spacing-item__label">--space-12 · 48px</div><div class="spacing-item__bar" style="width:48px"></div></div>
+          <div class="spacing-item"><div class="spacing-item__label">--space-16 · 64px</div><div class="spacing-item__bar" style="width:64px"></div></div>
+          <div class="spacing-item"><div class="spacing-item__label">--space-24 · 96px</div><div class="spacing-item__bar" style="width:96px"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ================================================================
+         FOUNDATIONS — RADIUS
+         ================================================================ -->
+    <section class="ds-section" id="radius">
+      <h2 class="ds-section__title">Border radius</h2>
+      
+      <div class="ds-preview">
+        <div class="radius-grid">
+          <div class="radius-item"><div class="radius-item__box" style="border-radius:var(--radius-none)"></div><div class="radius-item__label">none</div></div>
+          <div class="radius-item"><div class="radius-item__box" style="border-radius:var(--radius-sm)"></div><div class="radius-item__label">sm</div></div>
+          <div class="radius-item"><div class="radius-item__box" style="border-radius:var(--radius-md)"></div><div class="radius-item__label">md</div></div>
+          <div class="radius-item"><div class="radius-item__box" style="border-radius:var(--radius-lg)"></div><div class="radius-item__label">lg</div></div>
+          <div class="radius-item"><div class="radius-item__box" style="border-radius:var(--radius-xl)"></div><div class="radius-item__label">xl</div></div>
+          <div class="radius-item"><div class="radius-item__box" style="border-radius:var(--radius-2xl)"></div><div class="radius-item__label">2xl</div></div>
+          <div class="radius-item"><div class="radius-item__box" style="border-radius:var(--radius-3xl)"></div><div class="radius-item__label">3xl</div></div>
+          <div class="radius-item"><div class="radius-item__box" style="border-radius:var(--radius-full)"></div><div class="radius-item__label">full</div></div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ================================================================
+         FOUNDATIONS — ELEVATION
+         ================================================================ -->
+    <section class="ds-section" id="elevation">
+      <h2 class="ds-section__title">Elevation</h2>
+      
+      <div class="ds-preview ds-preview--gray">
+        <div class="elevation-grid">
+          <div class="elevation-item"><div class="elevation-item__card" style="box-shadow:var(--elevation-none)">none</div></div>
+          <div class="elevation-item"><div class="elevation-item__card" style="box-shadow:var(--elevation-xs)">xs</div></div>
+          <div class="elevation-item"><div class="elevation-item__card" style="box-shadow:var(--elevation-sm)">sm</div></div>
+          <div class="elevation-item"><div class="elevation-item__card" style="box-shadow:var(--elevation-md)">md</div></div>
+          <div class="elevation-item"><div class="elevation-item__card" style="box-shadow:var(--elevation-lg)">lg</div></div>
+          <div class="elevation-item"><div class="elevation-item__card" style="box-shadow:var(--elevation-xl)">xl</div></div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ================================================================
+         COMPONENTS — BUTTON
+         ================================================================ -->
+    <section class="ds-component" id="button">
+      <h2 class="ds-component__heading">Button</h2>
+      <p class="ds-component__description">Primary, secondary, accent, and destructive variants with five sizes. Use primary for main CTAs, secondary for supporting actions.</p>
+
+      <div class="ds-preview">
+        <div class="variant-label">Variants</div>
+        <div class="variant-row">
+          <button class="btn btn--primary btn--md">Primary</button>
+          <button class="btn btn--secondary btn--md">Secondary</button>
+          <button class="btn btn--accent btn--md">Accent</button>
+          <button class="btn btn--tertiary btn--md">Tertiary</button>
+          <button class="btn btn--ghost btn--md">Ghost</button>
+          <button class="btn btn--destructive btn--md">Destructive</button>
+        </div>
+
+        <div class="variant-label">Sizes</div>
+        <div class="variant-row">
+          <button class="btn btn--primary btn--xs">Extra small</button>
+          <button class="btn btn--primary btn--sm">Small</button>
+          <button class="btn btn--primary btn--md">Medium</button>
+          <button class="btn btn--primary btn--lg">Large</button>
+          <button class="btn btn--primary btn--xl">Extra large</button>
+        </div>
+
+        <div class="variant-label">States</div>
+        <div class="variant-row">
+          <button class="btn btn--primary btn--md">Default</button>
+          <button class="btn btn--primary btn--md btn--loading"><span class="btn__label">Saving</span></button>
+          <button class="btn btn--primary btn--md" disabled>Disabled</button>
+        </div>
+
+        <div class="variant-label">With icon</div>
+        <div class="variant-row">
+          <button class="btn btn--primary btn--md">
+            <span class="btn__icon"><i class="ri-add-line"></i></span>
+            Add document
+          </button>
+          <button class="btn btn--secondary btn--md">
+            Download
+            <span class="btn__icon"><i class="ri-download-line"></i></span>
+          </button>
+          <button class="btn btn--accent btn--md btn--icon-only">
+            <span class="btn__icon"><i class="ri-heart-fill"></i></span>
+          </button>
+          <button class="btn btn--tertiary btn--md btn--icon-only">
+            <span class="btn__icon"><i class="ri-more-line"></i></span>
+          </button>
+        </div>
+      </div>
+
+      <ul class="usage-list">
+        <li><strong>Primary</strong> — main call-to-action, one per view</li>
+        <li><strong>Secondary</strong> — supporting actions alongside primary</li>
+        <li><strong>Accent</strong> — promotional or highlighted actions</li>
+        <li><strong>Tertiary</strong> — cancel, back, lower priority</li>
+        <li><strong>Ghost</strong> — inline actions within content</li>
+        <li><strong>Destructive</strong> — delete, remove, irreversible actions</li>
+      </ul>
+    </section>
+
+    <!-- ================================================================
+         COMPONENTS — INPUT
+         ================================================================ -->
+    <section class="ds-component" id="input">
+      <h2 class="ds-component__heading">Input</h2>
+      <p class="ds-component__description">Text input with label, helper text, and prefix/suffix support. Includes error and success states.</p>
+
+      <div class="ds-preview">
+        <div style="max-width:360px" class="stack-lg">
+          <div class="field">
+            <label class="field__label" for="ex-default">Annual turnover <span class="field__required">*</span></label>
+            <div class="input-group">
+              <span class="input-prefix">€</span>
+              <input class="input" type="text" id="ex-default" placeholder="0.00" inputmode="decimal">
+            </div>
+            <span class="field__helper">Enter the total revenue for the most recent financial year.</span>
+          </div>
+
+          <div class="field field--error">
+            <label class="field__label" for="ex-error">KVK number <span class="field__required">*</span></label>
+            <input class="input" type="text" id="ex-error" value="1234" aria-invalid="true">
+            <div class="field__error-message">
+              <i class="ri-error-warning-line field__error-icon"></i>
+              KVK number must be exactly 8 digits.
+            </div>
+          </div>
+
+          <div class="field field--success">
+            <label class="field__label" for="ex-success">IBAN</label>
+            <input class="input" type="text" id="ex-success" value="NL91 ABNA 0417 1643 00" readonly>
+            <span class="field__success-message">Verified via open banking</span>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="ex-disabled">Legal name</label>
+            <input class="input" type="text" id="ex-disabled" value="Bakkerij De Gouden Tarwe BV" disabled>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         COMPONENTS — TOGGLE
+         ================================================================ -->
+    <section class="ds-component" id="toggle">
+      <h2 class="ds-component__heading">Toggle</h2>
+      <p class="ds-component__description">Binary on/off switch. More visual than a checkbox for settings.</p>
+
+      <div class="ds-preview">
+        <div class="variant-label">Default</div>
+        <div class="toggle-group">
+          <label class="toggle">
+            <input type="checkbox" class="toggle__input" checked>
+            <span class="toggle__track"></span>
+            <span class="toggle__label">Email notifications</span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" class="toggle__input">
+            <span class="toggle__track"></span>
+            <span class="toggle__label">SMS alerts</span>
+          </label>
+        </div>
+
+        <div class="variant-label">Sizes</div>
+        <div class="toggle-group">
+          <label class="toggle toggle--sm">
+            <input type="checkbox" class="toggle__input" checked>
+            <span class="toggle__track"></span>
+            <span class="toggle__label">Small</span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" class="toggle__input" checked>
+            <span class="toggle__track"></span>
+            <span class="toggle__label">Default</span>
+          </label>
+          <label class="toggle toggle--lg">
+            <input type="checkbox" class="toggle__input" checked>
+            <span class="toggle__track"></span>
+            <span class="toggle__label">Large</span>
+          </label>
+        </div>
+
+        <div class="variant-label">Disabled</div>
+        <label class="toggle toggle--disabled">
+          <input type="checkbox" class="toggle__input" disabled checked>
+          <span class="toggle__track"></span>
+          <span class="toggle__label">Cannot be changed</span>
+        </label>
+      </div>
+
+    </section>
+
+    <!-- ================================================================
+         COMPONENTS — TABS
+         ================================================================ -->
+    <section class="ds-component" id="tabs">
+      <h2 class="ds-component__heading">Tabs</h2>
+      <p class="ds-component__description">Navigation between related content sections.</p>
+
+      <div class="ds-preview">
+        <div class="variant-label">Default (underline)</div>
+        <div class="tabs">
+          <div class="tabs__list" role="tablist">
+            <button class="tabs__tab tabs__tab--active" role="tab">Overview</button>
+            <button class="tabs__tab" role="tab">Documents</button>
+            <button class="tabs__tab" role="tab">Activity</button>
+          </div>
+        </div>
+
+        <div class="variant-label" style="margin-top:var(--space-8)">Pills</div>
+        <div class="tabs tabs--pills">
+          <div class="tabs__list" role="tablist">
+            <button class="tabs__tab tabs__tab--active" role="tab">All</button>
+            <button class="tabs__tab" role="tab">Pending</button>
+            <button class="tabs__tab" role="tab">Approved</button>
+            <button class="tabs__tab" role="tab">Declined</button>
+          </div>
+        </div>
+
+        <div class="variant-label" style="margin-top:var(--space-8)">Contained</div>
+        <div class="tabs tabs--contained" style="max-width:360px">
+          <div class="tabs__list" role="tablist">
+            <button class="tabs__tab tabs__tab--active" role="tab">Monthly</button>
+            <button class="tabs__tab" role="tab">Quarterly</button>
+            <button class="tabs__tab" role="tab">Yearly</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================================================================
+         COMPONENTS — DROPDOWN
+         ================================================================ -->
+    <section class="ds-component" id="dropdown">
+      <h2 class="ds-component__heading">Dropdown</h2>
+      <p class="ds-component__description">Contextual menu for actions or navigation.</p>
+
+      <div class="ds-preview">
+        <div class="variant-label">Example menu items</div>
+        <div style="background:var(--color-background-surface);border:var(--border-width-thin) solid var(--color-border-default);border-radius:var(--radius-dropdown);padding:var(--space-1);max-width:240px;box-shadow:var(--elevation-dropdown)">
+          <button class="dropdown__item">
+            <span class="dropdown__item-icon"><i class="ri-edit-line"></i></span>
+            Edit application
+          </button>
+          <button class="dropdown__item">
+            <span class="dropdown__item-icon"><i class="ri-file-copy-line"></i></span>
+            Duplicate
+          </button>
+          <div class="dropdown__divider"></div>
+          <button class="dropdown__item dropdown__item--destructive">
+            <span class="dropdown__item-icon"><i class="ri-delete-bin-line"></i></span>
+            Delete
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================================================================
+         COMPONENTS — ACCORDION
+         ================================================================ -->
+    <section class="ds-component" id="accordion">
+      <h2 class="ds-component__heading">Accordion</h2>
+      <p class="ds-component__description">Expandable content sections for FAQs and structured information.</p>
+
+      <div class="ds-preview">
+        <div class="accordion accordion--separated" style="max-width:540px">
+          <div class="accordion__item accordion__item--open">
+            <button class="accordion__trigger">
+              <span class="accordion__title">What documents do I need?</span>
+              <span class="accordion__icon"><i class="ri-arrow-down-s-line"></i></span>
+            </button>
+            <div class="accordion__content">
+              <div class="accordion__body">
+                You'll need your KVK registration, recent annual accounts, and bank statements from the last 3 months.
+              </div>
+            </div>
+          </div>
+          <div class="accordion__item">
+            <button class="accordion__trigger">
+              <span class="accordion__title">How long does the process take?</span>
+              <span class="accordion__icon"><i class="ri-arrow-down-s-line"></i></span>
+            </button>
+            <div class="accordion__content">
+              <div class="accordion__body">
+                Most applications are reviewed within 2 business days.
+              </div>
+            </div>
+          </div>
+          <div class="accordion__item">
+            <button class="accordion__trigger">
+              <span class="accordion__title">What are the interest rates?</span>
+              <span class="accordion__icon"><i class="ri-arrow-down-s-line"></i></span>
+            </button>
+            <div class="accordion__content">
+              <div class="accordion__body">
+                Rates start from 4.5% depending on your credit profile.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================================================================
+         COMPONENTS — BADGE
+         ================================================================ -->
+    <section class="ds-component" id="badge">
+      <h2 class="ds-component__heading">Badge</h2>
+      <p class="ds-component__description">Inline status indicators for labelling and categorisation. Supports semantic colours and multiple variants.</p>
+
+      <div class="ds-preview">
+        <div class="variant-label">Status badges</div>
+        <div class="variant-row">
+          <span class="badge badge--success">Approved</span>
+          <span class="badge badge--warning">Pending</span>
+          <span class="badge badge--error">Declined</span>
+          <span class="badge badge--info">In progress</span>
+          <span class="badge badge--neutral">Draft</span>
+          <span class="badge badge--brand">New</span>
+        </div>
+
+        <div class="variant-label">Solid (high contrast)</div>
+        <div class="variant-row">
+          <span class="badge badge--solid badge--success">Approved</span>
+          <span class="badge badge--solid badge--warning">Pending</span>
+          <span class="badge badge--solid badge--error">Declined</span>
+          <span class="badge badge--solid badge--info">In progress</span>
+        </div>
+
+        <div class="variant-label">With live indicator</div>
+        <div class="variant-row">
+          <span class="badge badge--success"><span class="badge__dot"></span>Active</span>
+          <span class="badge badge--warning"><span class="badge__dot badge__dot--pulse"></span>Processing</span>
+          <span class="badge badge--info"><span class="badge__dot badge__dot--pulse"></span>Live</span>
+          <span class="badge badge--neutral"><span class="badge__dot"></span>Offline</span>
+        </div>
+
+        <div class="variant-label">Small</div>
+        <div class="variant-row">
+          <span class="badge badge--sm badge--success">Approved</span>
+          <span class="badge badge--sm badge--warning">Pending</span>
+          <span class="badge badge--sm badge--info">Active</span>
+          <span class="badge badge--sm badge--neutral">Draft</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         COMPONENTS — AVATAR
+         ================================================================ -->
+    <section class="ds-component" id="avatar">
+      <h2 class="ds-component__heading">Avatar</h2>
+      <p class="ds-component__description">User representation with image, initials, or icon fallback.</p>
+
+      <div class="ds-preview">
+        <div class="variant-label">Sizes</div>
+        <div class="variant-row">
+          <div class="avatar avatar--xs avatar--brand"><span class="avatar__initials">XS</span></div>
+          <div class="avatar avatar--sm avatar--brand"><span class="avatar__initials">SM</span></div>
+          <div class="avatar avatar--brand"><span class="avatar__initials">MD</span></div>
+          <div class="avatar avatar--lg avatar--brand"><span class="avatar__initials">LG</span></div>
+          <div class="avatar avatar--xl avatar--brand"><span class="avatar__initials">XL</span></div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================================================================
+         COMPONENTS — CARD
+         ================================================================ -->
+    <section class="ds-component" id="card">
+      <h2 class="ds-component__heading">Card</h2>
+      <p class="ds-component__description">Surface container for grouped content. Multiple variants for different contexts.</p>
+
+      <div class="ds-preview ds-preview--gray">
+        <div class="variant-row" style="align-items:stretch;gap:var(--space-4)">
+          <div class="card" style="width:200px">
+            <div class="card__header card__header--compact">
+              <span class="card__title">Default</span>
+            </div>
+            <div class="card__body">
+              <p style="font-size:var(--font-size-sm);color:var(--color-text-secondary)">Subtle border, clean surface.</p>
+            </div>
+          </div>
+          <div class="card card--elevated" style="width:200px">
+            <div class="card__header card__header--compact">
+              <span class="card__title">Elevated</span>
+            </div>
+            <div class="card__body">
+              <p style="font-size:var(--font-size-sm);color:var(--color-text-secondary)">Shadow for floating panels.</p>
+            </div>
+          </div>
+          <div class="card card--interactive" style="width:200px" tabindex="0">
+            <div class="card__header card__header--compact">
+              <span class="card__title">Interactive</span>
+            </div>
+            <div class="card__body">
+              <p style="font-size:var(--font-size-sm);color:var(--color-text-secondary)">Hover to see elevation shift.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ================================================================
+         COMPONENTS — DATA TABLE
+         ================================================================ -->
+    <section class="ds-component" id="data-table">
+      <h2 class="ds-component__heading">Data table</h2>
+      <p class="ds-component__description">For displaying tabular lending data: application pipelines, loan portfolios, document lists.</p>
+
+      <div class="ds-preview ds-preview--flush">
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th class="cell--numeric">Amount</th>
+                <th>Status</th>
+                <th class="cell--numeric">Rate</th>
+                <th>Submitted</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong style="font-weight:var(--font-weight-medium)">Bakkerij De Gouden Tarwe BV</strong>
+                  <div style="font-size:var(--font-size-xs);color:var(--color-text-tertiary)">KVK 12345678</div>
+                </td>
+                <td class="cell--numeric">€175.000</td>
+                <td><span class="badge badge--sm badge--info">In underwriting</span></td>
+                <td class="cell--numeric-secondary">5.40%</td>
+                <td style="color:var(--color-text-secondary)">18 Apr 2026</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong style="font-weight:var(--font-weight-medium)">Software Studio Noord BV</strong>
+                  <div style="font-size:var(--font-size-xs);color:var(--color-text-tertiary)">KVK 87654321</div>
+                </td>
+                <td class="cell--numeric">€350.000</td>
+                <td><span class="badge badge--sm badge--warning">Awaiting docs</span></td>
+                <td class="cell--numeric-secondary">4.90%</td>
+                <td style="color:var(--color-text-secondary)">14 Apr 2026</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong style="font-weight:var(--font-weight-medium)">Adviesbureau Van den Berg</strong>
+                  <div style="font-size:var(--font-size-xs);color:var(--color-text-tertiary)">KVK 34567890</div>
+                </td>
+                <td class="cell--numeric">€85.000</td>
+                <td><span class="badge badge--sm badge--success">Approved</span></td>
+                <td class="cell--numeric-secondary">6.10%</td>
+                <td style="color:var(--color-text-secondary)">10 Apr 2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         COMPONENTS — PAGINATION
+         ================================================================ -->
+    <section class="ds-component" id="pagination">
+      <h2 class="ds-component__heading">Pagination</h2>
+      <p class="ds-component__description">Navigation between pages of content.</p>
+
+      <div class="ds-preview">
+        <div class="variant-label">Default</div>
+        <nav class="pagination" aria-label="Pagination">
+          <button class="pagination__item pagination__item--prev" disabled>
+            <i class="ri-arrow-left-s-line"></i>
+          </button>
+          <button class="pagination__item pagination__item--active">1</button>
+          <button class="pagination__item">2</button>
+          <button class="pagination__item">3</button>
+          <span class="pagination__ellipsis">...</span>
+          <button class="pagination__item">12</button>
+          <button class="pagination__item pagination__item--next">
+            <i class="ri-arrow-right-s-line"></i>
+          </button>
+        </nav>
+
+        <div class="variant-label" style="margin-top:var(--space-8)">Pill variant</div>
+        <nav class="pagination pagination--pill" aria-label="Pagination">
+          <button class="pagination__item">1</button>
+          <button class="pagination__item pagination__item--active">2</button>
+          <button class="pagination__item">3</button>
+          <button class="pagination__item">4</button>
+          <button class="pagination__item">5</button>
+        </nav>
+
+        <div class="variant-label" style="margin-top:var(--space-8)">With info</div>
+        <div style="display:flex;align-items:center;gap:var(--space-4);flex-wrap:wrap">
+          <nav class="pagination" aria-label="Pagination">
+            <button class="pagination__item pagination__item--prev"><i class="ri-arrow-left-s-line"></i></button>
+            <button class="pagination__item">1</button>
+            <button class="pagination__item pagination__item--active">2</button>
+            <button class="pagination__item">3</button>
+            <button class="pagination__item pagination__item--next"><i class="ri-arrow-right-s-line"></i></button>
+          </nav>
+          <span class="pagination__info">Showing <span class="pagination__info-current">11-20</span> of 120</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================================================================
+         COMPONENTS — PROGRESS STEPS
+         ================================================================ -->
+    <section class="ds-component" id="progress-steps">
+      <h2 class="ds-component__heading">Progress steps</h2>
+      <p class="ds-component__description">Multi-step flow indicator for loan application flows.</p>
+
+      <div class="ds-preview">
+        <ol class="steps" role="list">
+          <li class="step step--completed">
+            <div class="step__indicator"><span class="step__number">1</span></div>
+            <span class="step__label">Business</span>
+          </li>
+          <li class="step step--completed">
+            <div class="step__indicator"><span class="step__number">2</span></div>
+            <span class="step__label">Loan details</span>
+          </li>
+          <li class="step step--active" aria-current="step">
+            <div class="step__indicator"><span class="step__number">3</span></div>
+            <span class="step__label">Financials</span>
+          </li>
+          <li class="step step--upcoming">
+            <div class="step__indicator"><span class="step__number">4</span></div>
+            <span class="step__label">Review</span>
+          </li>
+          <li class="step step--upcoming">
+            <div class="step__indicator"><span class="step__number">5</span></div>
+            <span class="step__label">Decision</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         COMPONENTS — ALERT
+         ================================================================ -->
+    <section class="ds-component" id="alert">
+      <h2 class="ds-component__heading">Alert</h2>
+      <p class="ds-component__description">Page-level notification banner for system messages and validation summaries.</p>
+
+      <div class="ds-preview">
+        <div class="stack-md">
+          <div class="alert alert--info">
+            <i class="alert__icon ri-information-line"></i>
+            <div class="alert__content">
+              <strong class="alert__title">BKR query pending</strong>
+              <div class="alert__body">A credit bureau query will be conducted when you submit your application.</div>
+            </div>
+          </div>
+          <div class="alert alert--success">
+            <i class="alert__icon ri-checkbox-circle-line"></i>
+            <div class="alert__content">
+              <strong class="alert__title">Identity verified</strong>
+              <div class="alert__body">Your identity has been confirmed via iDIN.</div>
+            </div>
+          </div>
+          <div class="alert alert--warning">
+            <i class="alert__icon ri-alert-line"></i>
+            <div class="alert__content">
+              <strong class="alert__title">Annual accounts are outdated</strong>
+              <div class="alert__body">Please provide interim figures to continue.</div>
+            </div>
+          </div>
+          <div class="alert alert--error" role="alert">
+            <i class="alert__icon ri-close-circle-line"></i>
+            <div class="alert__content">
+              <strong class="alert__title">3 errors on this form</strong>
+              <div class="alert__body">Please correct the highlighted fields.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         COMPONENTS — TOAST
+         ================================================================ -->
+    <section class="ds-component" id="toast">
+      <h2 class="ds-component__heading">Toast</h2>
+      <p class="ds-component__description">Brief, non-blocking notifications. Dark-card default with a colored accent stripe — the fintech consensus (Revolut, Wise, Linear). Subtle variant available for embedded contexts.</p>
+
+      <div class="ds-preview ds-preview--gray">
+        <div class="variant-label" style="margin-top:0">Default (dark)</div>
+        <div class="stack-md" style="max-width:380px">
+          <div class="toast toast--success" style="position:relative">
+            <div class="toast__icon"><i class="ri-check-line"></i></div>
+            <div class="toast__content">
+              <p class="toast__title">Transfer complete</p>
+              <p class="toast__message">€3.327 sent to ABN AMRO •••• 4521.</p>
+            </div>
+            <button class="toast__close"><i class="ri-close-line"></i></button>
+          </div>
+
+          <div class="toast toast--error" style="position:relative">
+            <div class="toast__icon"><i class="ri-error-warning-line"></i></div>
+            <div class="toast__content">
+              <p class="toast__title">Upload failed</p>
+              <p class="toast__message">Couldn't read your 2025 accounts PDF. Try a different file.</p>
+            </div>
+            <button class="toast__close"><i class="ri-close-line"></i></button>
+          </div>
+
+          <div class="toast toast--info" style="position:relative">
+            <div class="toast__icon"><i class="ri-information-line"></i></div>
+            <div class="toast__content">
+              <p class="toast__title">Decision in progress</p>
+              <p class="toast__message">We'll email you within 2 minutes.</p>
+            </div>
+            <button class="toast__close"><i class="ri-close-line"></i></button>
+          </div>
+
+          <div class="toast toast--brand" style="position:relative">
+            <div class="toast__icon"><i class="ri-sparkling-line"></i></div>
+            <div class="toast__content">
+              <p class="toast__title">Pre-qualified for €250.000</p>
+              <p class="toast__message">Based on your trading history. Check your offer.</p>
+              <div class="toast__actions">
+                <button class="toast__action toast__action--primary">View offer</button>
+                <button class="toast__action">Dismiss</button>
+              </div>
+            </div>
+            <button class="toast__close"><i class="ri-close-line"></i></button>
+          </div>
+        </div>
+
+        <div class="variant-label">Subtle (light — for inline/embedded use)</div>
+        <div class="stack-md" style="max-width:380px">
+          <div class="toast toast--subtle toast--success" style="position:relative">
+            <div class="toast__icon"><i class="ri-check-line"></i></div>
+            <div class="toast__content">
+              <p class="toast__title">Document verified</p>
+              <p class="toast__message">KYC complete. You can proceed.</p>
+            </div>
+            <button class="toast__close"><i class="ri-close-line"></i></button>
+          </div>
+
+          <div class="toast toast--subtle toast--warning toast--compact" style="position:relative">
+            <div class="toast__icon"><i class="ri-alert-line"></i></div>
+            <div class="toast__content">
+              <p class="toast__title">Session expires in 2 minutes</p>
+            </div>
+            <button class="toast__close"><i class="ri-close-line"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <ul class="usage-list">
+        <li>Use the dark default for most app-level toasts — it feels like its own material and never gets lost on white UI</li>
+        <li>Only the accent stripe and icon change per variant; the card stays dark so all toasts feel like one family</li>
+        <li>Use <code>--subtle</code> only when the toast lives inside another surface (modal, settings panel)</li>
+        <li>Financial figures in messages use tabular figures via <code>font-variant-numeric: tabular-nums</code></li>
+      </ul>
+
+    </section>
+
+    <!-- ================================================================
+         COMPONENTS — SKELETON
+         ================================================================ -->
+    <section class="ds-component" id="skeleton">
+      <h2 class="ds-component__heading">Skeleton</h2>
+      <p class="ds-component__description">Loading placeholders that preview content layout.</p>
+
+      <div class="ds-preview">
+        <div class="variant-label">Text and title</div>
+        <div style="max-width:400px" class="stack-md">
+          <div class="skeleton skeleton--title"></div>
+          <div class="skeleton-paragraph">
+            <div class="skeleton skeleton--text"></div>
+            <div class="skeleton skeleton--text"></div>
+            <div class="skeleton skeleton--text"></div>
+          </div>
+        </div>
+
+        <div class="variant-label" style="margin-top:var(--space-8)">Card skeleton</div>
+        <div class="skeleton--card" style="max-width:300px">
+          <div class="skeleton-card__header">
+            <div class="skeleton skeleton--avatar"></div>
+            <div style="flex:1" class="stack-sm">
+              <div class="skeleton skeleton--text" style="width:60%"></div>
+              <div class="skeleton skeleton--text-sm" style="width:40%"></div>
+            </div>
+          </div>
+          <div class="skeleton-card__body">
+            <div class="skeleton skeleton--text"></div>
+            <div class="skeleton skeleton--text"></div>
+            <div class="skeleton skeleton--text" style="width:80%"></div>
+          </div>
+          <div class="skeleton-card__footer">
+            <div class="skeleton skeleton--button"></div>
+            <div class="skeleton skeleton--button-sm"></div>
+          </div>
+        </div>
+
+        <div class="variant-label" style="margin-top:var(--space-8)">Elements</div>
+        <div class="variant-row">
+          <div class="skeleton skeleton--avatar"></div>
+          <div class="skeleton skeleton--button"></div>
+          <div class="skeleton skeleton--badge"></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================================================================
+         COMPONENTS — FILE UPLOAD
+         ================================================================ -->
+    <section class="ds-component" id="file-upload">
+      <h2 class="ds-component__heading">File upload</h2>
+      <p class="ds-component__description">Drop zone with file list for document collection.</p>
+
+      <div class="ds-preview">
+        <div class="file-dropzone" tabindex="0">
+          <i class="file-dropzone__icon ri-upload-cloud-2-line"></i>
+          <div class="file-dropzone__heading"><strong>Click to upload</strong> or drag and drop</div>
+          <div class="file-dropzone__meta">PDF, XLSX, DOCX · Max 25 MB · Up to 10 files</div>
+        </div>
+        <ul class="file-list">
+          <li class="file-item file-item--complete">
+            <div class="file-item__icon"><i class="ri-file-text-line"></i></div>
+            <div class="file-item__info">
+              <div class="file-item__name">Jaarrekening-2024.pdf</div>
+              <div class="file-item__meta">2.4 MB · Uploaded</div>
+            </div>
+            <span class="badge badge--sm badge--success">Verified</span>
+          </li>
+          <li class="file-item file-item--uploading">
+            <div class="file-item__icon"><i class="ri-file-upload-line"></i></div>
+            <div class="file-item__info">
+              <div class="file-item__name">Bankafschriften-Q1.pdf</div>
+              <div class="file-item__meta">Uploading... 68%</div>
+              <div class="file-item__progress"><div class="file-item__progress-bar" style="width:68%"></div></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ================================================================
+         LENDING — LOAN CONFIGURATOR
+         ================================================================ -->
+    <section class="ds-component" id="loan-configurator">
+      <h2 class="ds-component__heading">Loan configurator</h2>
+      <p class="ds-component__description">First-step loan configuration widget. Informed by iwoca, Revolut, and Klarna patterns: hero amount, slider with quick-select chips, segmented term, dark result panel with trust copy.</p>
+
+      <div class="ds-preview ds-preview--gray">
+        <div class="loan-configurator" data-loan-configurator>
+          <div class="loan-configurator__body">
+            <div class="loan-configurator__hero">
+              <span class="loan-configurator__caption">You want to borrow</span>
+              <span class="loan-configurator__amount">
+                <span class="loan-configurator__currency">€</span>
+                <span class="loan-configurator__value" data-amount>125.000</span>
+              </span>
+            </div>
+
+            <div class="loan-configurator__slider-wrap">
+              <input type="range" class="loan-configurator__slider" data-slider 
+                     min="10000" max="500000" value="125000" step="5000" 
+                     style="--fill: 23.5%"
+                     aria-label="Loan amount">
+              <div class="loan-configurator__range">
+                <span>€10.000</span>
+                <span>€500.000</span>
+              </div>
+            </div>
+
+            <div class="loan-configurator__quick">
+              <button class="loan-configurator__chip" type="button" data-quick="50000">€50k</button>
+              <button class="loan-configurator__chip loan-configurator__chip--active" type="button" data-quick="125000">€125k</button>
+              <button class="loan-configurator__chip" type="button" data-quick="200000">€200k</button>
+              <button class="loan-configurator__chip" type="button" data-quick="300000">€300k</button>
+              <button class="loan-configurator__chip" type="button" data-quick="500000">€500k</button>
+            </div>
+
+            <div class="loan-configurator__section">
+              <span class="loan-configurator__label">Repayment term</span>
+              <div class="loan-configurator__terms" role="radiogroup" aria-label="Repayment term">
+                <button class="loan-configurator__term" type="button" data-term="12">
+                  <span class="loan-configurator__term-months">12</span>
+                  <span class="loan-configurator__term-unit">months</span>
+                </button>
+                <button class="loan-configurator__term" type="button" data-term="24">
+                  <span class="loan-configurator__term-months">24</span>
+                  <span class="loan-configurator__term-unit">months</span>
+                </button>
+                <button class="loan-configurator__term loan-configurator__term--active" type="button" data-term="36">
+                  <span class="loan-configurator__term-months">36</span>
+                  <span class="loan-configurator__term-unit">months</span>
+                </button>
+                <button class="loan-configurator__term" type="button" data-term="48">
+                  <span class="loan-configurator__term-months">48</span>
+                  <span class="loan-configurator__term-unit">months</span>
+                </button>
+                <button class="loan-configurator__term" type="button" data-term="60">
+                  <span class="loan-configurator__term-months">60</span>
+                  <span class="loan-configurator__term-unit">months</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="loan-configurator__section">
+              <span class="loan-configurator__label">What's it for?</span>
+              <div class="loan-configurator__purposes">
+                <button class="loan-configurator__purpose loan-configurator__purpose--active" type="button">
+                  <i class="ri-truck-line"></i>Equipment
+                </button>
+                <button class="loan-configurator__purpose" type="button">
+                  <i class="ri-building-2-line"></i>Property
+                </button>
+                <button class="loan-configurator__purpose" type="button">
+                  <i class="ri-line-chart-line"></i>Cash flow
+                </button>
+                <button class="loan-configurator__purpose" type="button">
+                  <i class="ri-rocket-line"></i>Growth
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="loan-configurator__result">
+            <div class="loan-configurator__result-hero">
+              <span class="loan-configurator__result-label">Estimated monthly payment</span>
+              <span class="loan-configurator__result-value">
+                <span class="loan-configurator__result-value-currency">€</span><span data-monthly>3.798</span><span class="loan-configurator__result-unit">/mo</span>
+              </span>
+            </div>
+            <div class="loan-configurator__details">
+              <div class="loan-configurator__detail">
+                <span class="loan-configurator__detail-label">Rate</span>
+                <span class="loan-configurator__detail-value">5.9%</span>
+              </div>
+              <div class="loan-configurator__detail">
+                <span class="loan-configurator__detail-label">Total interest</span>
+                <span class="loan-configurator__detail-value">€11.728</span>
+              </div>
+              <div class="loan-configurator__detail">
+                <span class="loan-configurator__detail-label">Total repayment</span>
+                <span class="loan-configurator__detail-value">€136.728</span>
+              </div>
+            </div>
+            <div class="loan-configurator__cta">
+              <button class="btn btn--primary btn--lg">Check eligibility</button>
+              <span class="loan-configurator__trust">
+                <i class="ri-shield-check-line"></i>
+                No impact on your credit score · Decision in 2 minutes
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      (function() {
+        const widgets = document.querySelectorAll('[data-loan-configurator]');
+        const fmt = (n) => new Intl.NumberFormat('nl-NL').format(Math.round(n));
+        
+        widgets.forEach(widget => {
+          const slider = widget.querySelector('[data-slider]');
+          const amountEl = widget.querySelector('[data-amount]');
+          const monthlyEl = widget.querySelector('[data-monthly]');
+          const chips = widget.querySelectorAll('[data-quick]');
+          const terms = widget.querySelectorAll('[data-term]');
+          
+          const state = {
+            amount: parseInt(slider.value),
+            term: parseInt(widget.querySelector('.loan-configurator__term--active').dataset.term),
+            rate: 0.059
+          };
+          
+          function updateSliderFill() {
+            const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+            slider.style.setProperty('--fill', pct + '%');
+          }
+          
+          function calculateMonthly(P, annualRate, months) {
+            const r = annualRate / 12;
+            return (P * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+          }
+          
+          function render() {
+            amountEl.textContent = fmt(state.amount);
+            const monthly = calculateMonthly(state.amount, state.rate, state.term);
+            monthlyEl.textContent = fmt(monthly);
+            
+            const totalRepay = monthly * state.term;
+            const totalInterest = totalRepay - state.amount;
+            const details = widget.querySelectorAll('.loan-configurator__detail-value');
+            if (details[1]) details[1].textContent = '€' + fmt(totalInterest);
+            if (details[2]) details[2].textContent = '€' + fmt(totalRepay);
+            
+            chips.forEach(c => {
+              c.classList.toggle('loan-configurator__chip--active', parseInt(c.dataset.quick) === state.amount);
+            });
+          }
+          
+          slider.addEventListener('input', () => {
+            state.amount = parseInt(slider.value);
+            updateSliderFill();
+            render();
+          });
+          
+          chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+              state.amount = parseInt(chip.dataset.quick);
+              slider.value = state.amount;
+              updateSliderFill();
+              render();
+            });
+          });
+          
+          terms.forEach(term => {
+            term.addEventListener('click', () => {
+              state.term = parseInt(term.dataset.term);
+              terms.forEach(t => t.classList.remove('loan-configurator__term--active'));
+              term.classList.add('loan-configurator__term--active');
+              render();
+            });
+          });
+          
+          const purposes = widget.querySelectorAll('.loan-configurator__purpose');
+          purposes.forEach(p => {
+            p.addEventListener('click', () => {
+              purposes.forEach(x => x.classList.remove('loan-configurator__purpose--active'));
+              p.classList.add('loan-configurator__purpose--active');
+            });
+          });
+          
+          updateSliderFill();
+          render();
+        });
+      })();
+    </script>
+
+    <hr class="ds-divider">
+
+    <!-- ================================================================
+         LENDING — DECISION BANNER
+         ================================================================ -->
+    <section class="ds-component" id="decision-banner">
+      <h2 class="ds-component__heading">Decision banner</h2>
+      <p class="ds-component__description">Full-width banner for displaying credit decisions. Variants for approved, conditional, declined, and under review states.</p>
+
+      <div class="ds-preview ds-preview--gray" style="padding:var(--space-6)">
+        <div class="variant-label" style="margin-top:0">Approved</div>
+        <div class="decision-banner decision-banner--approved">
+          <div class="decision-banner__header">
+            <div class="decision-banner__heading-group">
+              <div class="decision-banner__label">Credit decision</div>
+              <h2 class="decision-banner__heading">Your application has been approved</h2>
+              <div class="decision-banner__date">Decision issued 22 April 2026 · Offer valid until 6 May 2026</div>
+            </div>
+          </div>
+          <div class="decision-banner__summary">
+            <span class="decision-banner__amount">
+              <span class="decision-banner__amount-currency">€</span>
+              <span class="decision-banner__amount-value">175.000</span>
+            </span>
+            <div class="decision-banner__terms">
+              <div class="decision-banner__term">
+                <span class="decision-banner__term-label">Rate</span>
+                <span class="decision-banner__term-value">5.40%</span>
+              </div>
+              <div class="decision-banner__term">
+                <span class="decision-banner__term-label">Term</span>
+                <span class="decision-banner__term-value">60 months</span>
+              </div>
+              <div class="decision-banner__term">
+                <span class="decision-banner__term-label">Monthly</span>
+                <span class="decision-banner__term-value">€3.327</span>
+              </div>
+              <div class="decision-banner__term">
+                <span class="decision-banner__term-label">Valid until</span>
+                <span class="decision-banner__term-value">6 May 2026</span>
+              </div>
+            </div>
+          </div>
+          <div class="decision-banner__actions">
+            <button class="btn btn--primary btn--md">Accept offer</button>
+            <button class="btn btn--secondary btn--md">Download PDF</button>
+          </div>
+        </div>
+
+        <div class="variant-label">Conditional</div>
+        <div class="decision-banner decision-banner--conditional">
+          <div class="decision-banner__header">
+            <div class="decision-banner__heading-group">
+              <div class="decision-banner__label">Credit decision</div>
+              <h2 class="decision-banner__heading">Approved, subject to conditions</h2>
+              <div class="decision-banner__date">2 conditions must be fulfilled before disbursement</div>
+            </div>
+          </div>
+          <p class="decision-banner__section-title">Outstanding conditions</p>
+          <ul class="decision-banner__conditions">
+            <li class="decision-banner__condition decision-banner__condition--pending">
+              <i class="decision-banner__condition-icon ri-checkbox-blank-circle-fill"></i>
+              Signed personal guarantee from director
+            </li>
+            <li class="decision-banner__condition decision-banner__condition--pending">
+              <i class="decision-banner__condition-icon ri-checkbox-blank-circle-fill"></i>
+              Upload 2025 interim management accounts
+            </li>
+          </ul>
+          <div class="decision-banner__actions">
+            <button class="btn btn--primary btn--md">Upload conditions</button>
+            <button class="btn btn--secondary btn--md">Contact RM</button>
+          </div>
+        </div>
+
+        <div class="variant-label">Declined</div>
+        <div class="decision-banner decision-banner--declined">
+          <div class="decision-banner__header">
+            <div class="decision-banner__heading-group">
+              <div class="decision-banner__label">Credit decision</div>
+              <h2 class="decision-banner__heading">We are unable to approve this application</h2>
+              <div class="decision-banner__date">Decision issued 22 April 2026 · Reference LN-2026-04712</div>
+            </div>
+          </div>
+          <p class="decision-banner__section-title">Principal reason</p>
+          <ul class="decision-banner__conditions">
+            <li class="decision-banner__condition">
+              <i class="decision-banner__condition-icon ri-information-line"></i>
+              Insufficient debt service coverage: projected free cashflow does not adequately cover the requested repayment schedule.
+            </li>
+          </ul>
+          <div class="decision-banner__actions">
+            <button class="btn btn--primary btn--md">Request human review</button>
+            <button class="btn btn--secondary btn--md">Explore alternatives</button>
+          </div>
+        </div>
+
+        <div class="variant-label">Under review</div>
+        <div class="decision-banner decision-banner--review">
+          <div class="decision-banner__header">
+            <div class="decision-banner__heading-group">
+              <div class="decision-banner__label">Application status</div>
+              <h2 class="decision-banner__heading">Your application is under review</h2>
+              <div class="decision-banner__date">Submitted 20 April 2026 · Expected decision by 25 April</div>
+            </div>
+          </div>
+          <div class="decision-timeline">
+            <div class="decision-timeline__item decision-timeline__item--active">
+              <div class="decision-timeline__step"><span>✓</span></div>
+              <div class="decision-timeline__text"><strong>Application received</strong><small>20 April 2026, 14:32</small></div>
+            </div>
+            <div class="decision-timeline__item decision-timeline__item--active">
+              <div class="decision-timeline__step"><span>2</span></div>
+              <div class="decision-timeline__text"><strong>Credit analysis in progress</strong><small>Assigned to T. Vermeer</small></div>
+            </div>
+            <div class="decision-timeline__item">
+              <div class="decision-timeline__step"><span>3</span></div>
+              <div class="decision-timeline__text"><strong>Decision communicated</strong><small>Expected by 25 April</small></div>
+            </div>
+          </div>
+          <div class="decision-banner__actions">
+            <button class="btn btn--primary btn--md">Contact relationship manager</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         LENDING — SUMMARY CARD
+         ================================================================ -->
+    <section class="ds-component" id="summary-card">
+      <h2 class="ds-component__heading">Summary card</h2>
+      <p class="ds-component__description">The "you're borrowing X" moment. Hero amount dominates; supporting terms sit quietly beneath. Revolut/Wise confirmation-screen pattern.</p>
+
+      <div class="ds-preview ds-preview--gray">
+        <div class="summary-card" style="max-width:480px">
+          <div class="summary-card__header">
+            <span class="summary-card__title">Loan summary</span>
+            <span class="badge badge--sm badge--neutral">Term loan</span>
+          </div>
+          <div class="summary-card__hero">
+            <span class="summary-card__hero-label">Loan amount</span>
+            <span class="summary-card__hero-amount">
+              <span class="summary-card__hero-currency">€</span>
+              <span class="summary-card__hero-value">175.000</span>
+            </span>
+          </div>
+          <div class="summary-card__grid">
+            <div class="summary-card__item">
+              <span class="summary-card__label">Rate</span>
+              <span class="summary-card__value">5.40%</span>
+              <span class="summary-card__value-note">EURIBOR 3M + 1.40%</span>
+            </div>
+            <div class="summary-card__item">
+              <span class="summary-card__label">Term</span>
+              <span class="summary-card__value">60 mo</span>
+              <span class="summary-card__value-note">5 years</span>
+            </div>
+            <div class="summary-card__item">
+              <span class="summary-card__label">Monthly</span>
+              <span class="summary-card__value">€3.327</span>
+              <span class="summary-card__value-note">annuity</span>
+            </div>
+            <div class="summary-card__item">
+              <span class="summary-card__label">Start</span>
+              <span class="summary-card__value">1 Jun 2026</span>
+            </div>
+          </div>
+          <div class="summary-card__footer">
+            <div class="summary-card__footer-item">
+              <span class="summary-card__footer-label">Arrangement fee (1.0%)</span>
+              <span class="summary-card__footer-value">€1.750</span>
+            </div>
+            <div class="summary-card__footer-item">
+              <span class="summary-card__footer-label">Total interest</span>
+              <span class="summary-card__footer-value">€24.620</span>
+            </div>
+            <div class="summary-card__footer-item summary-card__footer-item--total">
+              <span class="summary-card__footer-label">Total cost of credit</span>
+              <span class="summary-card__footer-value">€26.370</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="variant-label">Dark variant</div>
+        <div class="summary-card summary-card--dark" style="max-width:480px">
+          <div class="summary-card__header">
+            <span class="summary-card__title">Loan summary</span>
+            <span class="badge badge--sm badge--neutral">Term loan</span>
+          </div>
+          <div class="summary-card__hero">
+            <span class="summary-card__hero-label">Loan amount</span>
+            <span class="summary-card__hero-amount">
+              <span class="summary-card__hero-currency">€</span>
+              <span class="summary-card__hero-value">175.000</span>
+            </span>
+          </div>
+          <div class="summary-card__grid">
+            <div class="summary-card__item">
+              <span class="summary-card__label">Rate</span>
+              <span class="summary-card__value">5.40%</span>
+            </div>
+            <div class="summary-card__item">
+              <span class="summary-card__label">Term</span>
+              <span class="summary-card__value">60 mo</span>
+            </div>
+            <div class="summary-card__item">
+              <span class="summary-card__label">Monthly</span>
+              <span class="summary-card__value">€3.327</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="usage-list">
+        <li>Always show total cost of credit — required under AFM conduct rules</li>
+        <li>One hero amount per card. Everything else is support.</li>
+        <li>Currency glyph (<code>€</code>) is scaled to ~30% of the amount and muted — never same size as the figure</li>
+        <li>Numbers use <code>font-variant-numeric: tabular-nums</code> and Dutch separators</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.ds-nav__link');
+
+  function updateNav() {
+    let current = '';
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= 100) current = section.id;
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+    });
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+</script>
+
+</body>
+</html>

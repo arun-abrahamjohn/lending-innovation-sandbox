@@ -1,0 +1,356 @@
+/* ==========================================================================
+   BUTTON COMPONENT
+   
+   Uses brand tokens for theming. Swap brand.css to change appearance.
+   
+   Usage: <button class="btn btn--primary btn--md">Label</button>
+   Variants: --primary, --secondary, --tertiary, --ghost, --destructive, --accent
+   Sizes: --xs, --sm, --md (default), --lg, --xl
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+/* --------------------------------------------------------------------------
+   BASE BUTTON
+   -------------------------------------------------------------------------- */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+
+  height: var(--button-height-md);
+  padding-inline: var(--button-padding-x-md);
+  
+  font-family: var(--font-family-body);
+  font-size: var(--button-font-size-md);
+  font-weight: var(--button-font-weight);
+  letter-spacing: var(--letter-spacing-snug);
+  line-height: 1;
+
+  border-radius: var(--radius-button);
+  border: none;
+
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+
+  transition: var(--transition-all);
+}
+
+/* --------------------------------------------------------------------------
+   SIZE VARIANTS
+   -------------------------------------------------------------------------- */
+
+.btn--xs {
+  height: var(--button-height-xs);
+  padding-inline: var(--button-padding-x-xs);
+  font-size: var(--button-font-size-xs);
+}
+
+.btn--sm {
+  height: var(--button-height-sm);
+  padding-inline: var(--button-padding-x-sm);
+  font-size: var(--button-font-size-sm);
+}
+
+.btn--lg {
+  height: var(--button-height-lg);
+  padding-inline: var(--button-padding-x-lg);
+  font-size: var(--button-font-size-lg);
+}
+
+.btn--xl {
+  height: var(--button-height-xl);
+  padding-inline: var(--button-padding-x-xl);
+  font-size: var(--button-font-size-xl);
+}
+
+/* --------------------------------------------------------------------------
+   PRIMARY — Uses brand primary color
+   -------------------------------------------------------------------------- */
+
+.btn--primary {
+  background: var(--color-action-primary);
+  color: var(--color-action-primary-text);
+  box-shadow: var(--brand-shadow-primary);
+}
+
+.btn--primary:hover {
+  background: var(--color-action-primary-hover);
+  box-shadow: var(--brand-shadow-primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn--primary:active {
+  background: var(--color-action-primary-active);
+  box-shadow: var(--elevation-sm);
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   SECONDARY — Uses brand secondary color
+   -------------------------------------------------------------------------- */
+
+.btn--secondary {
+  background: var(--color-action-secondary);
+  color: var(--color-action-secondary-text);
+  box-shadow: var(--elevation-sm);
+}
+
+.btn--secondary:hover {
+  background: var(--color-action-secondary-hover);
+  box-shadow: var(--elevation-md);
+  transform: translateY(-1px);
+}
+
+.btn--secondary:active {
+  background: var(--color-action-secondary-active);
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   TERTIARY — Outlined
+   -------------------------------------------------------------------------- */
+
+.btn--tertiary {
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
+  border: var(--border-width-base) solid var(--color-border-strong);
+  box-shadow: none;
+}
+
+.btn--tertiary:hover {
+  background: var(--color-background-surface-sunken);
+  border-color: var(--color-border-intense);
+}
+
+.btn--tertiary:active {
+  background: var(--color-background-surface-inset);
+}
+
+/* --------------------------------------------------------------------------
+   GHOST — Transparent
+   -------------------------------------------------------------------------- */
+
+.btn--ghost {
+  background: var(--color-action-ghost);
+  color: var(--color-action-ghost-text);
+}
+
+.btn--ghost:hover {
+  background: var(--color-action-ghost-hover);
+  color: var(--color-text-primary);
+}
+
+.btn--ghost:active {
+  background: var(--color-action-ghost-active);
+}
+
+/* --------------------------------------------------------------------------
+   DESTRUCTIVE — Error/danger actions
+   -------------------------------------------------------------------------- */
+
+.btn--destructive {
+  background: var(--color-action-destructive);
+  color: var(--color-action-destructive-text);
+  box-shadow: 
+    0 4px 14px hsl(0 78% 46% / 0.35),
+    0 2px 6px hsl(0 78% 46% / 0.20);
+}
+
+.btn--destructive:hover {
+  background: var(--color-action-destructive-hover);
+  box-shadow: 
+    0 6px 18px hsl(0 78% 46% / 0.40),
+    0 3px 8px hsl(0 78% 46% / 0.25);
+  transform: translateY(-1px);
+}
+
+.btn--destructive:active {
+  background: var(--color-action-destructive-active);
+  box-shadow: var(--elevation-sm);
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   ACCENT — Uses brand accent color
+   -------------------------------------------------------------------------- */
+
+.btn--accent {
+  background: var(--color-action-accent);
+  color: var(--color-action-accent-text);
+  box-shadow: var(--brand-shadow-accent);
+}
+
+.btn--accent:hover {
+  background: var(--color-action-accent-hover);
+  box-shadow: 
+    0 6px 18px hsl(var(--brand-accent-h) var(--brand-accent-s) var(--brand-accent-l) / 0.40),
+    0 3px 8px hsl(var(--brand-accent-h) var(--brand-accent-s) var(--brand-accent-l) / 0.25);
+  transform: translateY(-1px);
+}
+
+.btn--accent:active {
+  background: var(--color-action-accent-active);
+  box-shadow: var(--elevation-sm);
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   FOCUS STATE
+   -------------------------------------------------------------------------- */
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 
+    0 0 0 2px var(--color-background-surface),
+    0 0 0 4px var(--color-border-focus);
+}
+
+.btn--primary:focus-visible {
+  box-shadow:
+    var(--brand-shadow-primary),
+    0 0 0 2px var(--color-background-surface),
+    0 0 0 4px var(--brand-primary);
+}
+
+.btn--secondary:focus-visible {
+  box-shadow:
+    var(--elevation-sm),
+    0 0 0 2px var(--color-background-surface),
+    0 0 0 4px var(--color-border-focus);
+}
+
+.btn--destructive:focus-visible {
+  box-shadow:
+    0 4px 14px hsl(0 78% 46% / 0.35),
+    0 0 0 2px var(--color-background-surface),
+    0 0 0 4px var(--error-500);
+}
+
+.btn--accent:focus-visible {
+  box-shadow:
+    var(--brand-shadow-accent),
+    0 0 0 2px var(--color-background-surface),
+    0 0 0 4px var(--brand-accent);
+}
+
+/* --------------------------------------------------------------------------
+   DISABLED STATE
+   -------------------------------------------------------------------------- */
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   LOADING STATE
+   -------------------------------------------------------------------------- */
+
+.btn--loading {
+  cursor: wait;
+  pointer-events: none;
+}
+
+.btn--loading .btn__label {
+  opacity: 0;
+}
+
+.btn--loading::after {
+  content: '';
+  position: absolute;
+  width: 1.125em;
+  height: 1.125em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: var(--radius-full);
+  animation: spin var(--duration-slower) var(--ease-linear) infinite;
+}
+
+/* --------------------------------------------------------------------------
+   ICON SUPPORT
+   -------------------------------------------------------------------------- */
+
+.btn__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.125em;
+  height: 1.125em;
+}
+
+.btn__icon i,
+.btn__icon svg {
+  font-size: 1.125em;
+  width: 1em;
+  height: 1em;
+}
+
+/* Icon-only button — circular */
+.btn--icon-only {
+  padding-inline: 0;
+  width: var(--button-height-md);
+  border-radius: var(--radius-full);
+}
+
+.btn--icon-only.btn--xs { width: var(--button-height-xs); }
+.btn--icon-only.btn--sm { width: var(--button-height-sm); }
+.btn--icon-only.btn--lg { width: var(--button-height-lg); }
+.btn--icon-only.btn--xl { width: var(--button-height-xl); }
+
+/* --------------------------------------------------------------------------
+   FULL-WIDTH
+   -------------------------------------------------------------------------- */
+
+.btn--full {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   BUTTON GROUP
+   -------------------------------------------------------------------------- */
+
+.btn-group {
+  display: inline-flex;
+  gap: var(--space-3);
+}
+
+.btn-group--attached {
+  gap: 0;
+}
+
+.btn-group--attached .btn {
+  border-radius: 0;
+}
+
+.btn-group--attached .btn:first-child {
+  border-radius: var(--radius-button) 0 0 var(--radius-button);
+}
+
+.btn-group--attached .btn:last-child {
+  border-radius: 0 var(--radius-button) var(--radius-button) 0;
+}
+
+@media (max-width: 480px) {
+  .btn-group--responsive {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .btn-group--responsive .btn {
+    width: 100%;
+  }
+}

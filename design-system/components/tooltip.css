@@ -1,0 +1,192 @@
+/* ==========================================================================
+   TOOLTIP COMPONENT — CSS-only, triggered on hover/focus
+   Usage: <span class="tooltip-trigger" data-tooltip="Text" data-tooltip-position="top">
+   Positions: top (default), bottom, left, right
+   No JS required — pure CSS using :hover and :focus-within
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+.tooltip-trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: default;
+}
+
+/* The tooltip bubble — generated from data-tooltip attribute */
+.tooltip-trigger::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  z-index: var(--z-dropdown);
+
+  /* Layout */
+  white-space: nowrap;
+  max-width: 16rem;
+  white-space: normal;
+  text-align: center;
+
+  /* Appearance */
+  background-color: hsl(229 27% 18%);
+  color: var(--white);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  font-family: var(--font-family-body);
+  line-height: var(--line-height-snug);
+  padding: var(--space-1-5) var(--space-2-5);
+  border-radius: var(--radius-tooltip);
+  box-shadow: var(--elevation-md);
+
+  /* Hidden by default */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+/* Arrow */
+.tooltip-trigger::before {
+  content: '';
+  position: absolute;
+  z-index: var(--z-dropdown);
+  border: 5px solid transparent;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+}
+
+/* Show on hover and focus */
+.tooltip-trigger:hover::after,
+.tooltip-trigger:hover::before,
+.tooltip-trigger:focus-visible::after,
+.tooltip-trigger:focus-visible::before,
+.tooltip-trigger:focus-within::after,
+.tooltip-trigger:focus-within::before {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   POSITION: TOP (default)
+   -------------------------------------------------------------------------- */
+
+.tooltip-trigger:not([data-tooltip-position])::after,
+.tooltip-trigger[data-tooltip-position="top"]::after {
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+}
+
+.tooltip-trigger:not([data-tooltip-position]):hover::after,
+.tooltip-trigger[data-tooltip-position="top"]:hover::after,
+.tooltip-trigger:not([data-tooltip-position]):focus-visible::after,
+.tooltip-trigger[data-tooltip-position="top"]:focus-visible::after {
+  transform: translateX(-50%) translateY(0);
+}
+
+.tooltip-trigger:not([data-tooltip-position])::before,
+.tooltip-trigger[data-tooltip-position="top"]::before {
+  bottom: calc(100% + 0px);
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: hsl(229 27% 18%);
+  border-bottom: none;
+}
+
+/* --------------------------------------------------------------------------
+   POSITION: BOTTOM
+   -------------------------------------------------------------------------- */
+
+.tooltip-trigger[data-tooltip-position="bottom"]::after {
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.tooltip-trigger[data-tooltip-position="bottom"]:hover::after,
+.tooltip-trigger[data-tooltip-position="bottom"]:focus-visible::after {
+  transform: translateX(-50%) translateY(0);
+}
+
+.tooltip-trigger[data-tooltip-position="bottom"]::before {
+  top: calc(100% + 0px);
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-color: hsl(229 27% 18%);
+  border-top: none;
+}
+
+/* --------------------------------------------------------------------------
+   POSITION: LEFT
+   -------------------------------------------------------------------------- */
+
+.tooltip-trigger[data-tooltip-position="left"]::after {
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%) translateX(4px);
+}
+
+.tooltip-trigger[data-tooltip-position="left"]:hover::after,
+.tooltip-trigger[data-tooltip-position="left"]:focus-visible::after {
+  transform: translateY(-50%) translateX(0);
+}
+
+.tooltip-trigger[data-tooltip-position="left"]::before {
+  right: calc(100% + 0px);
+  top: 50%;
+  transform: translateY(-50%);
+  border-left-color: hsl(229 27% 18%);
+  border-right: none;
+}
+
+/* --------------------------------------------------------------------------
+   POSITION: RIGHT
+   -------------------------------------------------------------------------- */
+
+.tooltip-trigger[data-tooltip-position="right"]::after {
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+}
+
+.tooltip-trigger[data-tooltip-position="right"]:hover::after,
+.tooltip-trigger[data-tooltip-position="right"]:focus-visible::after {
+  transform: translateY(-50%) translateX(0);
+}
+
+.tooltip-trigger[data-tooltip-position="right"]::before {
+  left: calc(100% + 0px);
+  top: 50%;
+  transform: translateY(-50%);
+  border-right-color: hsl(229 27% 18%);
+  border-left: none;
+}
+
+/* --------------------------------------------------------------------------
+   INFO ICON BUTTON — common tooltip trigger pattern
+   -------------------------------------------------------------------------- */
+
+.tooltip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-border-default);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-bold);
+  cursor: help;
+  border: none;
+  transition: background-color var(--transition-fast);
+}
+
+.tooltip-icon:hover {
+  background-color: var(--color-border-strong);
+  color: var(--color-text-primary);
+}
+
+.tooltip-icon:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}

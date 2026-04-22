@@ -1,0 +1,116 @@
+/* ==========================================================================
+   TEXTAREA COMPONENT
+   Usage: .field > .textarea-wrapper > textarea.textarea
+   Includes character count pattern.
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+.textarea {
+  /* Layout */
+  display: block;
+  width: 100%;
+  min-height: 6rem;
+  padding: var(--component-padding-y-md) var(--input-padding-x-md);
+
+  /* Typography */
+  font-size: var(--input-font-size-md);
+  font-family: var(--font-family-body);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-relaxed);
+
+  /* Appearance */
+  background-color: var(--color-background-surface-raised);
+  border: var(--input-border-width) solid var(--input-border-color);
+  border-radius: var(--input-radius);
+  resize: vertical;
+  outline: none;
+  transition: var(--input-transition);
+  box-shadow: 0 1px 0 hsl(0 0% 100% / 0.92) inset, 0 2px 8px -7px hsl(228 40% 18% / 0.35);
+}
+
+.textarea:hover {
+  border-color: var(--color-border-strong);
+}
+
+.textarea::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.textarea:focus {
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* Size variants */
+.textarea--sm {
+  min-height: 4.5rem;
+  padding: var(--component-padding-y-sm) var(--input-padding-x-sm);
+  font-size: var(--input-font-size-sm);
+}
+
+.textarea--lg {
+  min-height: 8rem;
+  padding: var(--component-padding-y-lg) var(--input-padding-x-lg);
+  font-size: var(--input-font-size-lg);
+}
+
+/* Error state */
+.field--error .textarea {
+  border-color: var(--color-feedback-error-border);
+  background-color: var(--color-feedback-error-bg);
+}
+
+.field--error .textarea:focus {
+  border-color: var(--color-feedback-error-icon);
+  box-shadow: 0 0 0 3px hsl(4 76% 54% / 0.2);
+}
+
+/* Disabled state */
+.textarea:disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--input-bg-disabled);
+  border-color: var(--color-border-subtle);
+  cursor: not-allowed;
+  resize: none;
+}
+
+/* Readonly state */
+.textarea[readonly] {
+  color: var(--color-text-secondary);
+  background-color: var(--color-background-surface-sunken);
+  cursor: default;
+  resize: none;
+}
+
+/* --------------------------------------------------------------------------
+   CHARACTER COUNT
+   -------------------------------------------------------------------------- */
+
+.textarea-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.textarea-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.textarea-char-count {
+  font-size: var(--text-caption-size);
+  line-height: var(--text-caption-line-height);
+  color: var(--color-text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.textarea-char-count--near-limit {
+  color: var(--color-feedback-warning-text);
+}
+
+.textarea-char-count--at-limit {
+  color: var(--color-feedback-error-text);
+  font-weight: var(--font-weight-medium);
+}

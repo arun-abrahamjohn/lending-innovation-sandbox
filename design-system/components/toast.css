@@ -1,0 +1,309 @@
+/* ==========================================================================
+   TOAST / NOTIFICATION COMPONENT
+
+   Dark-card default. Variant state is communicated via the icon color only —
+   no edge stripes (shadcn anti-pattern), no colored backgrounds, no borders.
+   Fintech consensus: Revolut, Wise, Linear, Cash App all use a quiet dark
+   card with a tinted icon. The card feels like its own material.
+
+   Usage:
+   <div class="toast toast--success">
+     <div class="toast__icon"><i class="ri-check-line"></i></div>
+     <div class="toast__content">
+       <p class="toast__title">Transfer complete</p>
+       <p class="toast__message">€3.327 sent to ABN AMRO •••• 4521.</p>
+     </div>
+     <button class="toast__close"><i class="ri-close-line"></i></button>
+   </div>
+
+   Variants: --success, --error, --warning, --info, --neutral (default)
+   Modifiers: --subtle (light colored), --compact
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+/* --------------------------------------------------------------------------
+   TOAST CONTAINER (holds multiple toasts)
+   -------------------------------------------------------------------------- */
+
+.toast-container {
+  position: fixed;
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  pointer-events: none;
+  max-width: 100%;
+  width: 24rem;
+}
+
+.toast-container--top-right    { top: 0; right: 0; }
+.toast-container--top-left     { top: 0; left: 0; }
+.toast-container--top-center   { top: 0; left: 50%; transform: translateX(-50%); }
+.toast-container--bottom-right { bottom: 0; right: 0; }
+.toast-container--bottom-left  { bottom: 0; left: 0; }
+.toast-container--bottom-center{ bottom: 0; left: 50%; transform: translateX(-50%); }
+
+/* --------------------------------------------------------------------------
+   BASE TOAST — Dark card with accent stripe
+   -------------------------------------------------------------------------- */
+
+.toast {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+
+  background: linear-gradient(160deg, var(--gray-900) 0%, hsl(220 8% 10%) 100%);
+  color: var(--white);
+  border-radius: var(--radius-2xl);
+  box-shadow:
+    0 0 0 1px hsl(0 0% 0% / 0.04),
+    0 12px 32px hsl(0 0% 0% / 0.22),
+    0 4px 8px hsl(0 0% 0% / 0.12);
+  overflow: hidden;
+  pointer-events: auto;
+
+  animation: toast-enter var(--duration-base) var(--ease-spring);
+}
+
+/* Entry/exit animations */
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.toast--exiting {
+  animation: toast-exit var(--duration-fast) var(--ease-in) forwards;
+}
+
+@keyframes toast-exit {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(-8px) scale(0.96); }
+}
+
+/* --------------------------------------------------------------------------
+   TOAST ICON
+   -------------------------------------------------------------------------- */
+
+.toast__icon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+/* --------------------------------------------------------------------------
+   TOAST CONTENT
+   -------------------------------------------------------------------------- */
+
+.toast__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.toast__title {
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--white);
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+}
+
+.toast__message {
+  font-size: 13px;
+  color: hsl(0 0% 100% / 0.65);
+  line-height: 1.45;
+  margin-top: var(--space-1);
+}
+
+/* Tabular numerics for financial content in messages */
+.toast__message .num,
+.toast__title .num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   CLOSE BUTTON
+   -------------------------------------------------------------------------- */
+
+.toast__close {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  color: hsl(0 0% 100% / 0.55);
+
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+
+  transition: background var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+
+.toast__close:hover {
+  background: hsl(0 0% 100% / 0.1);
+  color: var(--white);
+}
+
+.toast__close:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(0 0% 100% / 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   STATUS VARIANTS — Icon color only. Card stays dark.
+   No edge stripes, no colored fills. All toasts feel like one family.
+   -------------------------------------------------------------------------- */
+
+.toast--success .toast__icon { color: var(--success-400); }
+.toast--error   .toast__icon { color: var(--error-400); }
+.toast--warning .toast__icon { color: var(--warning-400); }
+.toast--info    .toast__icon { color: var(--info-400); }
+.toast--neutral .toast__icon { color: hsl(0 0% 100% / 0.8); }
+
+/* Brand-accent toast — for product/marketing moments */
+.toast--brand   .toast__icon { color: var(--brand-primary); }
+
+/* --------------------------------------------------------------------------
+   SUBTLE VARIANT — Light background for inline/embedded contexts
+   (e.g. within a modal or card). Use sparingly.
+   -------------------------------------------------------------------------- */
+
+.toast--subtle {
+  background: var(--white);
+  color: var(--color-text-primary);
+  box-shadow:
+    0 0 0 1px var(--color-border-subtle),
+    0 4px 12px hsl(0 0% 0% / 0.06);
+}
+
+.toast--subtle .toast__title    { color: var(--color-text-primary); }
+.toast--subtle .toast__message  { color: var(--color-text-secondary); }
+.toast--subtle .toast__close    { color: var(--color-text-tertiary); }
+.toast--subtle .toast__close:hover {
+  background: var(--gray-100);
+  color: var(--color-text-primary);
+}
+
+.toast--subtle.toast--success .toast__icon { color: var(--success-500); }
+.toast--subtle.toast--error   .toast__icon { color: var(--error-500); }
+.toast--subtle.toast--warning .toast__icon { color: var(--warning-500); }
+.toast--subtle.toast--info    .toast__icon { color: var(--info-500); }
+
+/* --------------------------------------------------------------------------
+   TOAST WITH ACTION
+   -------------------------------------------------------------------------- */
+
+.toast__actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.toast__action {
+  padding: var(--space-1-5) var(--space-3);
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--white);
+  background: hsl(0 0% 100% / 0.1);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.toast__action:hover {
+  background: hsl(0 0% 100% / 0.18);
+}
+
+.toast__action--primary {
+  background: var(--white);
+  color: var(--gray-900);
+}
+
+.toast__action--primary:hover {
+  background: hsl(0 0% 100% / 0.9);
+}
+
+.toast--subtle .toast__action {
+  color: var(--color-text-primary);
+  background: var(--gray-100);
+}
+
+.toast--subtle .toast__action:hover { background: var(--gray-150); }
+
+.toast--subtle .toast__action--primary {
+  background: var(--gray-900);
+  color: var(--white);
+}
+
+/* --------------------------------------------------------------------------
+   PROGRESS BAR (auto-dismiss indicator)
+   -------------------------------------------------------------------------- */
+
+.toast__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: hsl(0 0% 100% / 0.08);
+  overflow: hidden;
+}
+
+.toast__progress-bar {
+  height: 100%;
+  background: hsl(0 0% 100% / 0.5);
+  animation: toast-progress 5s linear forwards;
+}
+
+@keyframes toast-progress {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+.toast--success .toast__progress-bar { background: var(--success-400); }
+.toast--error   .toast__progress-bar { background: var(--error-400); }
+.toast--warning .toast__progress-bar { background: var(--warning-400); }
+.toast--info    .toast__progress-bar { background: var(--info-400); }
+
+.toast--subtle .toast__progress     { background: var(--gray-100); }
+.toast--subtle .toast__progress-bar { background: var(--gray-400); }
+
+/* --------------------------------------------------------------------------
+   COMPACT VARIANT
+   -------------------------------------------------------------------------- */
+
+.toast--compact {
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+  gap: var(--space-2-5);
+}
+
+.toast--compact .toast__icon {
+  width: 1rem;
+  height: 1rem;
+  font-size: 1rem;
+}
+
+.toast--compact .toast__title   { font-size: 13px; }
+.toast--compact .toast__message { font-size: 12px; }

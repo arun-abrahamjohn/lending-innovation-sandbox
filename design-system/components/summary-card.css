@@ -1,0 +1,284 @@
+/* ==========================================================================
+   SUMMARY CARD — Lending-specific component
+
+   The "You're borrowing X" moment. Hero amount dominates; supporting terms
+   sit in a quiet row below. Pattern inspired by Revolut/Wise confirmation
+   screens: one big number, small labels, tabular figures throughout.
+
+   Structure:
+   - Optional title row (small uppercase label + badge slot)
+   - Hero amount (massive, display font, tabular-nums, scaled currency glyph)
+   - Supporting value row (label over value, no background, subtle borders)
+   - Footer with totals
+
+   Usage: <div class="summary-card">
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+/* --------------------------------------------------------------------------
+   CARD SHELL
+   -------------------------------------------------------------------------- */
+
+.summary-card {
+  background: var(--summary-card-bg);
+  border: var(--summary-card-border);
+  border-radius: var(--summary-card-radius);
+  padding: var(--summary-card-padding);
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   HEADER — Small uppercase label + optional badge/action
+   -------------------------------------------------------------------------- */
+
+.summary-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.summary-card__title {
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   HERO AMOUNT — The single focal point
+   -------------------------------------------------------------------------- */
+
+.summary-card__hero {
+  padding-bottom: var(--space-6);
+  margin-bottom: var(--space-6);
+  border-bottom: var(--border-width-thin) solid var(--color-border-subtle);
+}
+
+.summary-card__hero-label {
+  display: block;
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-2);
+  line-height: 1;
+}
+
+.summary-card__hero-amount {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  color: var(--color-text-primary);
+  line-height: 0.9;
+}
+
+.summary-card__hero-currency {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-tertiary);
+  align-self: flex-start;
+  padding-top: 0.2em;
+}
+
+.summary-card__hero-value {
+  font-family: var(--font-family-display);
+  font-size: clamp(2.75rem, 8vw, 4.25rem);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.summary-card__hero-unit {
+  font-family: var(--font-family-display);
+  font-size: 0.32em;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-tertiary);
+  margin-left: 4px;
+  letter-spacing: 0;
+  align-self: center;
+}
+
+/* --------------------------------------------------------------------------
+   SUPPORTING VALUES GRID — Subordinate terms
+   -------------------------------------------------------------------------- */
+
+.summary-card__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-5) var(--space-6);
+}
+
+.summary-card__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5);
+}
+
+.summary-card__label {
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  line-height: 1;
+}
+
+.summary-card__value {
+  font-family: var(--font-family-display);
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.summary-card__value-note {
+  font-size: 12px;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-tertiary);
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.2;
+}
+
+/* --------------------------------------------------------------------------
+   FOOTER — Total cost breakdown
+   -------------------------------------------------------------------------- */
+
+.summary-card__footer {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: var(--border-width-thin) solid var(--color-border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2-5);
+}
+
+.summary-card__footer-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.summary-card__footer-label {
+  color: var(--color-text-secondary);
+}
+
+.summary-card__footer-value {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Total row — emphasised */
+.summary-card__footer-item--total {
+  margin-top: var(--space-1);
+  padding-top: var(--space-3);
+  border-top: var(--border-width-thin) solid var(--color-border-subtle);
+}
+
+.summary-card__footer-item--total .summary-card__footer-label {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.summary-card__footer-item--total .summary-card__footer-value {
+  font-family: var(--font-family-display);
+  font-size: var(--text-body-base-size);
+  font-weight: var(--font-weight-bold);
+}
+
+/* --------------------------------------------------------------------------
+   VARIANT: Compact — sidebar usage, no hero
+   -------------------------------------------------------------------------- */
+
+.summary-card--compact {
+  padding: var(--space-5);
+}
+
+.summary-card--compact .summary-card__header {
+  margin-bottom: var(--space-4);
+}
+
+.summary-card--compact .summary-card__hero {
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.summary-card--compact .summary-card__hero-value {
+  font-size: clamp(2rem, 6vw, 2.75rem);
+}
+
+.summary-card--compact .summary-card__value {
+  font-size: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   VARIANT: Dark — the earned moment of contrast
+   -------------------------------------------------------------------------- */
+
+.summary-card--dark {
+  background: linear-gradient(160deg, var(--gray-900) 0%, hsl(220 8% 8%) 100%);
+  border-color: transparent;
+  color: var(--white);
+}
+
+.summary-card--dark .summary-card__title,
+.summary-card--dark .summary-card__label,
+.summary-card--dark .summary-card__hero-label {
+  color: hsl(0 0% 100% / 0.5);
+}
+
+.summary-card--dark .summary-card__hero-amount,
+.summary-card--dark .summary-card__value {
+  color: var(--white);
+}
+
+.summary-card--dark .summary-card__hero-currency,
+.summary-card--dark .summary-card__hero-unit,
+.summary-card--dark .summary-card__value-note {
+  color: hsl(0 0% 100% / 0.45);
+}
+
+.summary-card--dark .summary-card__hero,
+.summary-card--dark .summary-card__footer,
+.summary-card--dark .summary-card__footer-item--total {
+  border-color: hsl(0 0% 100% / 0.08);
+}
+
+.summary-card--dark .summary-card__footer-label {
+  color: hsl(0 0% 100% / 0.55);
+}
+
+.summary-card--dark .summary-card__footer-value {
+  color: var(--white);
+}
+
+/* In dark variant, hero value glows in brand color */
+.summary-card--dark .summary-card__hero-value {
+  color: var(--brand-primary);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 480px) {
+  .summary-card {
+    padding: var(--space-5);
+  }
+
+  .summary-card__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+}

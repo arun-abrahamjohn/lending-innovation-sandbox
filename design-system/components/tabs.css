@@ -1,0 +1,278 @@
+/* ==========================================================================
+   TABS COMPONENT
+   
+   Navigation between related content panels.
+   
+   Usage:
+   <div class="tabs">
+     <div class="tabs__list" role="tablist">
+       <button class="tabs__tab tabs__tab--active" role="tab">Tab 1</button>
+       <button class="tabs__tab" role="tab">Tab 2</button>
+     </div>
+     <div class="tabs__panel tabs__panel--active" role="tabpanel">Content 1</div>
+     <div class="tabs__panel" role="tabpanel">Content 2</div>
+   </div>
+   
+   Variants: default, --pills, --underline, --contained
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+/* --------------------------------------------------------------------------
+   TABS CONTAINER
+   -------------------------------------------------------------------------- */
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   TAB LIST
+   -------------------------------------------------------------------------- */
+
+.tabs__list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  border-bottom: var(--border-width-thin) solid var(--color-border-default);
+  padding-bottom: var(--space-px);
+}
+
+/* --------------------------------------------------------------------------
+   TAB BUTTON
+   -------------------------------------------------------------------------- */
+
+.tabs__tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2-5) var(--space-4);
+  
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-snug);
+  
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  cursor: pointer;
+  
+  transition: color var(--duration-fast) var(--ease-out),
+              background var(--duration-fast) var(--ease-out);
+}
+
+.tabs__tab:hover {
+  color: var(--color-text-primary);
+  background: var(--color-action-ghost-hover);
+}
+
+/* Active indicator line */
+.tabs__tab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  border-radius: var(--radius-full) var(--radius-full) 0 0;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+/* Active state */
+.tabs__tab--active {
+  color: var(--color-text-primary);
+}
+
+.tabs__tab--active::after {
+  background: var(--brand-primary);
+}
+
+/* Focus state */
+.tabs__tab:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--color-border-focus);
+}
+
+/* Disabled */
+.tabs__tab:disabled {
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}
+
+/* Tab icon */
+.tabs__tab-icon {
+  font-size: var(--icon-size-sm);
+}
+
+/* Tab badge/count */
+.tabs__tab-badge {
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-0-5) var(--space-1-5);
+  background: var(--color-background-surface-sunken);
+  border-radius: var(--radius-full);
+  min-width: 1.25rem;
+  text-align: center;
+}
+
+.tabs__tab--active .tabs__tab-badge {
+  background: var(--brand-primary-100);
+  color: var(--brand-primary-700);
+}
+
+/* --------------------------------------------------------------------------
+   TAB PANEL
+   -------------------------------------------------------------------------- */
+
+.tabs__panel {
+  display: none;
+  padding: var(--space-6) 0;
+  animation: var(--animation-fade-in);
+}
+
+.tabs__panel--active {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   VARIANT: Pills
+   -------------------------------------------------------------------------- */
+
+.tabs--pills .tabs__list {
+  gap: var(--space-2);
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.tabs--pills .tabs__tab {
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+}
+
+.tabs--pills .tabs__tab::after {
+  display: none;
+}
+
+.tabs--pills .tabs__tab--active {
+  background: var(--brand-primary);
+  color: var(--brand-primary-contrast);
+}
+
+.tabs--pills .tabs__tab--active:hover {
+  background: var(--brand-primary);
+}
+
+/* --------------------------------------------------------------------------
+   VARIANT: Underline (minimal)
+   -------------------------------------------------------------------------- */
+
+.tabs--underline .tabs__list {
+  gap: var(--space-6);
+}
+
+.tabs--underline .tabs__tab {
+  padding: var(--space-3) 0;
+  border-radius: 0;
+}
+
+.tabs--underline .tabs__tab:hover {
+  background: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   VARIANT: Contained (boxed)
+   -------------------------------------------------------------------------- */
+
+.tabs--contained .tabs__list {
+  background: var(--color-background-surface-sunken);
+  border: var(--border-width-thin) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-1);
+  gap: var(--space-1);
+}
+
+.tabs--contained .tabs__tab {
+  border-radius: var(--radius-md);
+  flex: 1;
+  justify-content: center;
+}
+
+.tabs--contained .tabs__tab::after {
+  display: none;
+}
+
+.tabs--contained .tabs__tab--active {
+  background: var(--color-background-surface);
+  box-shadow: var(--elevation-sm);
+}
+
+/* --------------------------------------------------------------------------
+   SIZE VARIANTS
+   -------------------------------------------------------------------------- */
+
+/* Small */
+.tabs--sm .tabs__tab {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-xs);
+}
+
+/* Large */
+.tabs--lg .tabs__tab {
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--font-size-base);
+}
+
+/* --------------------------------------------------------------------------
+   VERTICAL TABS
+   -------------------------------------------------------------------------- */
+
+.tabs--vertical {
+  flex-direction: row;
+}
+
+.tabs--vertical .tabs__list {
+  flex-direction: column;
+  border-bottom: none;
+  border-right: var(--border-width-thin) solid var(--color-border-default);
+  padding-bottom: 0;
+  padding-right: var(--space-px);
+}
+
+.tabs--vertical .tabs__tab {
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.tabs--vertical .tabs__tab::after {
+  top: 0;
+  bottom: 0;
+  left: auto;
+  right: -1px;
+  width: 2px;
+  height: auto;
+  border-radius: 0 var(--radius-full) var(--radius-full) 0;
+}
+
+.tabs--vertical .tabs__panel {
+  padding: 0 var(--space-6);
+  flex: 1;
+}
+
+/* --------------------------------------------------------------------------
+   FULL WIDTH
+   -------------------------------------------------------------------------- */
+
+.tabs--full .tabs__list {
+  width: 100%;
+}
+
+.tabs--full .tabs__tab {
+  flex: 1;
+  justify-content: center;
+}

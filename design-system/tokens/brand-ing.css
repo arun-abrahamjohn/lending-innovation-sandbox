@@ -1,0 +1,125 @@
+/* ==========================================================================
+   BRAND TOKENS — ING
+   
+   Swap this file for brand.css to apply ING styling.
+   
+   ING Brand Guidelines:
+   - Primary: Orange (#FF6200)
+   - Secondary: Dark Blue (#1A1446)
+   - Typography: ING Me (fallback to system sans-serif)
+   - Shape: Rounded, friendly
+   ========================================================================== */
+
+:root {
+  
+  /* ==========================================================================
+     BRAND IDENTITY
+     ========================================================================== */
+  
+  --brand-name: "ING";
+  
+  /* --------------------------------------------------------------------------
+     BRAND COLORS
+     -------------------------------------------------------------------------- */
+  
+  /* Primary — ING Orange */
+  --brand-primary-h: 23;
+  --brand-primary-s: 100%;
+  --brand-primary-l: 50%;
+  --brand-primary: hsl(var(--brand-primary-h), var(--brand-primary-s), var(--brand-primary-l));
+  --brand-primary-light: hsl(var(--brand-primary-h), 100%, 58%);
+  --brand-primary-dark: hsl(var(--brand-primary-h), 100%, 42%);
+  --brand-primary-contrast: var(--white); /* White text on orange */
+  
+  /* Secondary — ING Navy */
+  --brand-secondary-h: 250;
+  --brand-secondary-s: 55%;
+  --brand-secondary-l: 18%;
+  --brand-secondary: hsl(var(--brand-secondary-h), var(--brand-secondary-s), var(--brand-secondary-l));
+  --brand-secondary-light: hsl(var(--brand-secondary-h), 45%, 28%);
+  --brand-secondary-dark: hsl(var(--brand-secondary-h), 60%, 12%);
+  --brand-secondary-contrast: var(--white);
+  
+  /* Accent — Warm coral */
+  --brand-accent-h: 12;
+  --brand-accent-s: 85%;
+  --brand-accent-l: 55%;
+  --brand-accent: hsl(var(--brand-accent-h), var(--brand-accent-s), var(--brand-accent-l));
+  --brand-accent-light: hsl(var(--brand-accent-h), 80%, 62%);
+  --brand-accent-dark: hsl(var(--brand-accent-h), 88%, 45%);
+  --brand-accent-contrast: var(--white);
+  
+  /* --------------------------------------------------------------------------
+     BRAND COLOR SCALES
+     -------------------------------------------------------------------------- */
+  
+  --brand-primary-50:  hsl(var(--brand-primary-h), 100%, 97%);
+  --brand-primary-100: hsl(var(--brand-primary-h), 95%, 92%);
+  --brand-primary-200: hsl(var(--brand-primary-h), 92%, 82%);
+  --brand-primary-300: hsl(var(--brand-primary-h), 95%, 68%);
+  --brand-primary-400: hsl(var(--brand-primary-h), 98%, 58%);
+  --brand-primary-500: var(--brand-primary);
+  --brand-primary-600: hsl(var(--brand-primary-h), 100%, 42%);
+  --brand-primary-700: hsl(var(--brand-primary-h), 95%, 34%);
+  --brand-primary-800: hsl(var(--brand-primary-h), 90%, 26%);
+  --brand-primary-900: hsl(var(--brand-primary-h), 85%, 18%);
+  
+  --brand-accent-50:  hsl(var(--brand-accent-h), 100%, 97%);
+  --brand-accent-100: hsl(var(--brand-accent-h), 90%, 92%);
+  --brand-accent-200: hsl(var(--brand-accent-h), 85%, 82%);
+  --brand-accent-300: hsl(var(--brand-accent-h), 82%, 68%);
+  --brand-accent-400: hsl(var(--brand-accent-h), 85%, 60%);
+  --brand-accent-500: var(--brand-accent);
+  --brand-accent-600: hsl(var(--brand-accent-h), 88%, 45%);
+  --brand-accent-700: hsl(var(--brand-accent-h), 90%, 38%);
+  
+  /* --------------------------------------------------------------------------
+     BRAND TYPOGRAPHY
+     -------------------------------------------------------------------------- */
+  
+  --brand-font-display: 'ING Me', 'Inter', system-ui, sans-serif;
+  --brand-font-body: 'ING Me', 'Inter', system-ui, sans-serif;
+  --brand-font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  
+  /* --------------------------------------------------------------------------
+     BRAND SHAPE — Friendly, rounded
+     -------------------------------------------------------------------------- */
+  
+  --brand-button-radius: var(--radius-lg);     /* Rounded corners */
+  --brand-input-radius: var(--radius-lg);
+  --brand-card-radius: var(--radius-2xl);
+  --brand-badge-radius: var(--radius-full);    /* Pill badges */
+  
+  /* --------------------------------------------------------------------------
+     BRAND SHADOWS
+     -------------------------------------------------------------------------- */
+  
+  --brand-shadow-primary: 
+    0 4px 14px hsl(var(--brand-primary-h) var(--brand-primary-s) var(--brand-primary-l) / 0.40),
+    0 2px 6px hsl(var(--brand-primary-h) var(--brand-primary-s) var(--brand-primary-l) / 0.25);
+  
+  --brand-shadow-primary-hover:
+    0 8px 24px hsl(var(--brand-primary-h) var(--brand-primary-s) var(--brand-primary-l) / 0.50),
+    0 4px 10px hsl(var(--brand-primary-h) var(--brand-primary-s) var(--brand-primary-l) / 0.30);
+  
+  --brand-shadow-accent:
+    0 4px 14px hsl(var(--brand-accent-h) var(--brand-accent-s) var(--brand-accent-l) / 0.35),
+    0 2px 6px hsl(var(--brand-accent-h) var(--brand-accent-s) var(--brand-accent-l) / 0.20);
+
+  /* --------------------------------------------------------------------------
+     BRAND GRADIENTS
+     -------------------------------------------------------------------------- */
+  
+  --brand-gradient-primary: linear-gradient(
+    135deg, 
+    hsl(var(--brand-primary-h), 100%, 58%) 0%, 
+    hsl(var(--brand-primary-h), 100%, 42%) 100%
+  );
+  
+  --brand-gradient-dark: linear-gradient(
+    135deg, 
+    hsl(var(--brand-secondary-h), 50%, 24%) 0%, 
+    hsl(var(--brand-secondary-h), 60%, 12%) 100%
+  );
+  
+}

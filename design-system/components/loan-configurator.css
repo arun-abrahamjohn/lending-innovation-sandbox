@@ -1,0 +1,520 @@
+/* ==========================================================================
+   LOAN CONFIGURATOR — iwoca/Revolut-inspired lending widget
+   
+   Research references: iwoca business loan calculator, Revolut personal loans,
+   Funding Circle, Klarna. Pattern consensus: two parameters max (amount + term),
+   result panel dominates visually, trust copy near CTA, restrained color.
+   
+   Structure:
+   - Hero amount (centered, massive, 4-10x supporting content)
+   - Slider with quick-select amount chips
+   - Term segmented selector
+   - Result panel (dark, brand-colored monthly payment as hero)
+   - CTA + trust copy
+   
+   Usage: <div class="loan-configurator">
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+/* --------------------------------------------------------------------------
+   CONTAINER
+   -------------------------------------------------------------------------- */
+
+.loan-configurator {
+  --configurator-max: 520px;
+  
+  background: var(--white);
+  border-radius: 32px;
+  box-shadow: 
+    0 0 0 1px hsl(0 0% 0% / 0.04),
+    0 2px 4px hsl(0 0% 0% / 0.03),
+    0 12px 32px hsl(0 0% 0% / 0.04);
+  overflow: hidden;
+  max-width: var(--configurator-max);
+  margin-inline: auto;
+}
+
+.loan-configurator__body {
+  padding: 40px 32px 32px;
+}
+
+/* --------------------------------------------------------------------------
+   HERO AMOUNT — The unambiguous focal point
+   -------------------------------------------------------------------------- */
+
+.loan-configurator__hero {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.loan-configurator__caption {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.loan-configurator__amount {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  color: var(--gray-900);
+  line-height: 0.9;
+}
+
+.loan-configurator__currency {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 500;
+  color: var(--gray-400);
+  align-self: flex-start;
+  padding-top: 0.15em;
+}
+
+.loan-configurator__value {
+  font-family: var(--font-family-display);
+  font-size: clamp(3.5rem, 13vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   SLIDER — Single native input with gradient fill via CSS variable
+   -------------------------------------------------------------------------- */
+
+.loan-configurator__slider-wrap {
+  padding: 8px 0 16px;
+  margin-bottom: 8px;
+}
+
+.loan-configurator__slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--brand-primary) 0,
+    var(--brand-primary) var(--fill, 25%),
+    var(--gray-200) var(--fill, 25%),
+    var(--gray-200) 100%
+  );
+  outline: none;
+  cursor: grab;
+  transition: background 0.1s ease;
+}
+
+.loan-configurator__slider:active {
+  cursor: grabbing;
+}
+
+.loan-configurator__slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  background: var(--white);
+  border: 3px solid var(--brand-primary);
+  border-radius: 50%;
+  cursor: grab;
+  box-shadow: 
+    0 2px 4px hsl(0 0% 0% / 0.1),
+    0 4px 16px hsl(var(--brand-primary-h) var(--brand-primary-s) 40% / 0.35);
+  transition: transform 0.15s ease;
+}
+
+.loan-configurator__slider::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  background: var(--white);
+  border: 3px solid var(--brand-primary);
+  border-radius: 50%;
+  cursor: grab;
+  box-shadow: 
+    0 2px 4px hsl(0 0% 0% / 0.1),
+    0 4px 16px hsl(var(--brand-primary-h) var(--brand-primary-s) 40% / 0.35);
+  transition: transform 0.15s ease;
+}
+
+.loan-configurator__slider:hover::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+
+.loan-configurator__slider:hover::-moz-range-thumb {
+  transform: scale(1.15);
+}
+
+.loan-configurator__slider:active::-webkit-slider-thumb {
+  transform: scale(1.1);
+  cursor: grabbing;
+}
+
+.loan-configurator__slider:active::-moz-range-thumb {
+  transform: scale(1.1);
+  cursor: grabbing;
+}
+
+.loan-configurator__slider:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 8px;
+  border-radius: 999px;
+}
+
+.loan-configurator__range {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-400);
+  font-variant-numeric: tabular-nums;
+  margin-top: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   QUICK AMOUNTS — Horizontal chip row (Revolut pattern)
+   -------------------------------------------------------------------------- */
+
+.loan-configurator__quick {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 40px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+
+.loan-configurator__quick::-webkit-scrollbar {
+  display: none;
+}
+
+.loan-configurator__chip {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  background: var(--gray-100);
+  color: var(--gray-700);
+  border: none;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.loan-configurator__chip:hover {
+  background: var(--gray-150);
+}
+
+.loan-configurator__chip:focus-visible {
+  outline: 2px solid var(--gray-900);
+  outline-offset: 2px;
+}
+
+.loan-configurator__chip--active {
+  background: var(--gray-900);
+  color: var(--white);
+}
+
+.loan-configurator__chip--active:hover {
+  background: var(--gray-900);
+}
+
+/* --------------------------------------------------------------------------
+   TERM SECTION
+   -------------------------------------------------------------------------- */
+
+.loan-configurator__section {
+  margin-bottom: 32px;
+}
+
+.loan-configurator__section:last-child {
+  margin-bottom: 0;
+}
+
+.loan-configurator__label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+/* TERM — iOS-style segmented control */
+.loan-configurator__terms {
+  display: flex;
+  background: var(--gray-100);
+  padding: 4px;
+  border-radius: 14px;
+  gap: 2px;
+}
+
+.loan-configurator__term {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 4px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.loan-configurator__term:hover:not(.loan-configurator__term--active) {
+  color: var(--gray-900);
+}
+
+.loan-configurator__term:focus-visible {
+  outline: 2px solid var(--gray-900);
+  outline-offset: -2px;
+}
+
+.loan-configurator__term--active {
+  background: var(--white);
+  box-shadow: 
+    0 1px 2px hsl(0 0% 0% / 0.1),
+    0 2px 4px hsl(0 0% 0% / 0.04);
+}
+
+.loan-configurator__term-months {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gray-500);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.2s ease;
+}
+
+.loan-configurator__term--active .loan-configurator__term-months {
+  color: var(--gray-900);
+}
+
+.loan-configurator__term-unit {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* --------------------------------------------------------------------------
+   PURPOSE — Small pill row (de-emphasized, secondary)
+   -------------------------------------------------------------------------- */
+
+.loan-configurator__purposes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.loan-configurator__purpose {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: var(--gray-100);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.loan-configurator__purpose:hover {
+  background: var(--gray-150);
+}
+
+.loan-configurator__purpose:focus-visible {
+  outline: 2px solid var(--gray-900);
+  outline-offset: 2px;
+}
+
+.loan-configurator__purpose i {
+  font-size: 14px;
+  color: var(--gray-500);
+  transition: color 0.15s ease;
+}
+
+.loan-configurator__purpose--active {
+  background: var(--gray-900);
+  color: var(--white);
+}
+
+.loan-configurator__purpose--active i {
+  color: var(--brand-primary);
+}
+
+.loan-configurator__purpose--active:hover {
+  background: var(--gray-900);
+}
+
+/* --------------------------------------------------------------------------
+   RESULT PANEL — The earned moment of contrast
+   Dark block with brand-colored hero payment figure
+   -------------------------------------------------------------------------- */
+
+.loan-configurator__result {
+  background: linear-gradient(160deg, 
+    var(--gray-900) 0%, 
+    hsl(220 8% 8%) 100%);
+  padding: 32px;
+  color: var(--white);
+}
+
+.loan-configurator__result-hero {
+  text-align: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid hsl(0 0% 100% / 0.08);
+  margin-bottom: 20px;
+}
+
+.loan-configurator__result-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: hsl(0 0% 100% / 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 6px;
+}
+
+.loan-configurator__result-value {
+  font-family: var(--font-family-display);
+  font-size: clamp(2.5rem, 10vw, 3.5rem);
+  font-weight: 700;
+  color: var(--brand-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.loan-configurator__result-value-currency {
+  font-size: 0.5em;
+  font-weight: 500;
+  color: hsl(var(--brand-primary-h) var(--brand-primary-s) 70%);
+  align-self: flex-start;
+  padding-top: 0.15em;
+}
+
+.loan-configurator__result-unit {
+  font-size: 0.32em;
+  font-weight: 500;
+  color: hsl(0 0% 100% / 0.4);
+  margin-left: 4px;
+  letter-spacing: 0;
+}
+
+/* Details grid — three secondary metrics */
+.loan-configurator__details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+.loan-configurator__detail {
+  text-align: center;
+  padding: 0 8px;
+}
+
+.loan-configurator__detail + .loan-configurator__detail {
+  border-left: 1px solid hsl(0 0% 100% / 0.08);
+}
+
+.loan-configurator__detail-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  color: hsl(0 0% 100% / 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.loan-configurator__detail-value {
+  display: block;
+  font-family: var(--font-family-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+  font-variant-numeric: tabular-nums;
+}
+
+/* CTA block */
+.loan-configurator__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.loan-configurator__cta .btn {
+  width: 100%;
+}
+
+.loan-configurator__trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 11px;
+  color: hsl(0 0% 100% / 0.5);
+}
+
+.loan-configurator__trust i {
+  font-size: 13px;
+  color: var(--brand-primary);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 480px) {
+  .loan-configurator__body {
+    padding: 32px 20px 24px;
+  }
+  
+  .loan-configurator__result {
+    padding: 24px 20px;
+  }
+  
+  .loan-configurator__details {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .loan-configurator__detail + .loan-configurator__detail {
+    border-left: none;
+    border-top: 1px solid hsl(0 0% 100% / 0.08);
+    padding-top: 12px;
+  }
+  
+  .loan-configurator__detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    text-align: left;
+  }
+  
+  .loan-configurator__detail-label {
+    margin-bottom: 0;
+  }
+}

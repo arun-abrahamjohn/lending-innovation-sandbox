@@ -1,0 +1,242 @@
+/* ==========================================================================
+   LAYOUT — Grid, container, and composition utilities
+   ========================================================================== */
+
+/* Breakpoints (used in comments and media queries throughout):
+   sm:  640px  — tablet portrait
+   md:  768px  — tablet landscape
+   lg:  1024px — small desktop
+   xl:  1280px — standard desktop (primary target)
+   2xl: 1440px — wide desktop
+*/
+
+/* --------------------------------------------------------------------------
+   CONTAINERS
+   -------------------------------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+
+.container--narrow {
+  max-width: 768px;
+}
+
+.container--wide {
+  max-width: 1440px;
+}
+
+.container--full {
+  max-width: none;
+}
+
+/* --------------------------------------------------------------------------
+   12-COLUMN GRID
+   -------------------------------------------------------------------------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+.grid--no-gap   { gap: 0; }
+.grid--gap-sm   { gap: var(--space-3); }
+.grid--gap-md   { gap: var(--space-6); }
+.grid--gap-lg   { gap: var(--space-10); }
+
+/* Column spans */
+.col-1  { grid-column: span 1; }
+.col-2  { grid-column: span 2; }
+.col-3  { grid-column: span 3; }
+.col-4  { grid-column: span 4; }
+.col-5  { grid-column: span 5; }
+.col-6  { grid-column: span 6; }
+.col-7  { grid-column: span 7; }
+.col-8  { grid-column: span 8; }
+.col-9  { grid-column: span 9; }
+.col-10 { grid-column: span 10; }
+.col-11 { grid-column: span 11; }
+.col-12 { grid-column: span 12; }
+
+/* Column start positions */
+.col-start-1  { grid-column-start: 1; }
+.col-start-2  { grid-column-start: 2; }
+.col-start-3  { grid-column-start: 3; }
+.col-start-4  { grid-column-start: 4; }
+.col-start-5  { grid-column-start: 5; }
+.col-start-6  { grid-column-start: 6; }
+.col-start-7  { grid-column-start: 7; }
+
+/* sm: 640px — tablet portrait */
+@media (max-width: 639px) {
+  .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+  .col-1, .col-2, .col-3, .col-4    { grid-column: span 2; }
+  .col-5, .col-6, .col-7, .col-8    { grid-column: span 4; }
+  .col-9, .col-10, .col-11, .col-12 { grid-column: span 4; }
+
+  [class^="col-start-"] { grid-column-start: auto; }
+}
+
+/* md: 640px–1023px — tablet */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .grid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+
+  .col-1, .col-2  { grid-column: span 2; }
+  .col-3, .col-4  { grid-column: span 4; }
+  .col-5, .col-6  { grid-column: span 4; }
+  .col-7, .col-8  { grid-column: span 8; }
+  .col-9, .col-10 { grid-column: span 8; }
+  .col-11, .col-12 { grid-column: span 8; }
+}
+
+/* --------------------------------------------------------------------------
+   STACK — Vertical spacing between children
+   -------------------------------------------------------------------------- */
+
+.stack > * + * { margin-top: var(--stack-md); }
+
+.stack-xs > * + * { margin-top: var(--stack-xs); }
+.stack-sm > * + * { margin-top: var(--stack-sm); }
+.stack-md > * + * { margin-top: var(--stack-md); }
+.stack-lg > * + * { margin-top: var(--stack-lg); }
+.stack-xl > * + * { margin-top: var(--stack-xl); }
+.stack-2xl > * + * { margin-top: var(--stack-2xl); }
+
+/* --------------------------------------------------------------------------
+   CLUSTER — Inline wrapping layout with consistent gaps
+   -------------------------------------------------------------------------- */
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.cluster--xs { gap: var(--space-1); }
+.cluster--sm { gap: var(--space-2); }
+.cluster--md { gap: var(--space-4); }
+.cluster--lg { gap: var(--space-6); }
+
+.cluster--start   { justify-content: flex-start; }
+.cluster--center  { justify-content: center; }
+.cluster--end     { justify-content: flex-end; }
+.cluster--between { justify-content: space-between; }
+
+/* --------------------------------------------------------------------------
+   SIDEBAR — Main content + fixed-width aside
+   -------------------------------------------------------------------------- */
+
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: var(--space-8);
+  min-height: 100vh;
+}
+
+.sidebar-layout--right {
+  grid-template-columns: 1fr 320px;
+}
+
+.sidebar-layout--wide-sidebar {
+  grid-template-columns: 320px 1fr;
+}
+
+@media (max-width: 1023px) {
+  .sidebar-layout,
+  .sidebar-layout--right,
+  .sidebar-layout--wide-sidebar {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   FLEX UTILITIES
+   -------------------------------------------------------------------------- */
+
+.flex         { display: flex; }
+.flex-col     { flex-direction: column; }
+.flex-wrap    { flex-wrap: wrap; }
+.items-start  { align-items: flex-start; }
+.items-center { align-items: center; }
+.items-end    { align-items: flex-end; }
+.justify-start   { justify-content: flex-start; }
+.justify-center  { justify-content: center; }
+.justify-end     { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+.gap-xs { gap: var(--space-1); }
+.gap-sm { gap: var(--space-2); }
+.gap-md { gap: var(--space-4); }
+.gap-lg { gap: var(--space-6); }
+.gap-xl { gap: var(--space-10); }
+.flex-1   { flex: 1; }
+.flex-none { flex: none; }
+.grow     { flex-grow: 1; }
+.shrink-0 { flex-shrink: 0; }
+
+/* --------------------------------------------------------------------------
+   DISPLAY UTILITIES
+   -------------------------------------------------------------------------- */
+
+.block         { display: block; }
+.inline-block  { display: inline-block; }
+.inline        { display: inline; }
+.hidden        { display: none; }
+
+@media (max-width: 1023px) {
+  .hide-tablet { display: none; }
+}
+
+@media (max-width: 639px) {
+  .hide-mobile { display: none; }
+}
+
+/* --------------------------------------------------------------------------
+   SPACING UTILITIES
+   -------------------------------------------------------------------------- */
+
+.p-0  { padding: var(--space-0); }
+.p-2  { padding: var(--space-2); }
+.p-4  { padding: var(--space-4); }
+.p-6  { padding: var(--space-6); }
+.p-8  { padding: var(--space-8); }
+
+.px-4 { padding-inline: var(--space-4); }
+.px-6 { padding-inline: var(--space-6); }
+.py-4 { padding-block: var(--space-4); }
+.py-6 { padding-block: var(--space-6); }
+
+.mt-auto { margin-top: auto; }
+.ml-auto { margin-left: auto; }
+.mr-auto { margin-right: auto; }
+
+/* --------------------------------------------------------------------------
+   DIVIDER
+   -------------------------------------------------------------------------- */
+
+.divider {
+  border: none;
+  border-top: var(--border-width-thin) solid var(--color-border-subtle);
+  margin-block: var(--stack-md);
+}
+
+/* --------------------------------------------------------------------------
+   VISUALLY HIDDEN (alias — defined in reset, aliased here)
+   -------------------------------------------------------------------------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

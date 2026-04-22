@@ -1,0 +1,259 @@
+/* ==========================================================================
+   ACCORDION COMPONENT
+   
+   Expandable/collapsible content sections.
+   
+   Usage:
+   <div class="accordion accordion--separated">
+     <div class="accordion__item accordion__item--open">
+       <button class="accordion__trigger">
+         <span class="accordion__title">Section title</span>
+         <span class="accordion__icon"><i class="ri-arrow-down-s-line"></i></span>
+       </button>
+       <div class="accordion__content">
+         <div class="accordion__body">Content here...</div>
+       </div>
+     </div>
+   </div>
+   
+   Variants: default, --bordered, --separated, --flush
+   Sizes: --sm, --lg
+   ========================================================================== */
+
+@import url('../tokens/component.css');
+
+/* --------------------------------------------------------------------------
+   ACCORDION CONTAINER
+   -------------------------------------------------------------------------- */
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   ACCORDION ITEM
+   -------------------------------------------------------------------------- */
+
+.accordion__item {
+  border-bottom: var(--border-width-thin) solid var(--color-border-default);
+}
+
+.accordion__item:last-child {
+  border-bottom: none;
+}
+
+/* --------------------------------------------------------------------------
+   TRIGGER BUTTON
+   -------------------------------------------------------------------------- */
+
+.accordion__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-4) 0;
+  
+  font-family: var(--font-family-body);
+  text-align: left;
+  
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.accordion__trigger:hover {
+  color: var(--color-text-primary);
+}
+
+.accordion__trigger:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--color-border-focus);
+  border-radius: var(--radius-sm);
+}
+
+/* Title */
+.accordion__title {
+  font-size: var(--text-body-base-size);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-snug);
+}
+
+/* Subtitle */
+.accordion__subtitle {
+  display: block;
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-1);
+}
+
+/* Icon — expects a Remix Icon (ri-arrow-down-s-line) inside */
+.accordion__icon {
+  flex-shrink: 0;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--icon-size-md);
+  color: var(--color-text-tertiary);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+/* Icon rotation when open */
+.accordion__item--open .accordion__icon {
+  transform: rotate(180deg);
+}
+
+/* --------------------------------------------------------------------------
+   CONTENT PANEL
+   -------------------------------------------------------------------------- */
+
+.accordion__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--duration-base) var(--ease-out),
+              padding var(--duration-base) var(--ease-out);
+}
+
+.accordion__item--open .accordion__content {
+  max-height: 500px;
+}
+
+.accordion__body {
+  font-size: var(--text-body-sm-size);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  padding-bottom: var(--space-4);
+}
+
+/* --------------------------------------------------------------------------
+   VARIANT: Bordered
+   -------------------------------------------------------------------------- */
+
+.accordion--bordered .accordion__item {
+  border: var(--border-width-thin) solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-2);
+  padding: 0 var(--space-4);
+}
+
+.accordion--bordered .accordion__item:last-child {
+  margin-bottom: 0;
+  border-bottom: var(--border-width-thin) solid var(--color-border-default);
+}
+
+/* --------------------------------------------------------------------------
+   VARIANT: Separated (cards)
+   -------------------------------------------------------------------------- */
+
+.accordion--separated .accordion__item {
+  background: var(--color-background-surface);
+  border: var(--border-width-thin) solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  margin-bottom: var(--space-3);
+  padding: 0 var(--space-5);
+  box-shadow: var(--elevation-xs);
+}
+
+.accordion--separated .accordion__item:last-child {
+  margin-bottom: 0;
+  border-bottom: var(--border-width-thin) solid var(--color-border-subtle);
+}
+
+.accordion--separated .accordion__trigger {
+  padding: var(--space-5) 0;
+}
+
+/* --------------------------------------------------------------------------
+   VARIANT: Flush (no padding)
+   -------------------------------------------------------------------------- */
+
+.accordion--flush .accordion__trigger {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.accordion--flush .accordion__body {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* --------------------------------------------------------------------------
+   SIZE VARIANTS
+   -------------------------------------------------------------------------- */
+
+/* Small */
+.accordion--sm .accordion__trigger {
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+}
+
+.accordion--sm .accordion__title {
+  font-size: var(--text-body-sm-size);
+}
+
+.accordion--sm .accordion__icon {
+  font-size: var(--icon-size-sm);
+}
+
+.accordion--sm .accordion__body {
+  font-size: var(--text-caption-size);
+  padding-bottom: var(--space-3);
+}
+
+/* Large */
+.accordion--lg .accordion__trigger {
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-5);
+}
+
+.accordion--lg .accordion__title {
+  font-size: var(--text-body-lg-size);
+}
+
+.accordion--lg .accordion__icon {
+  font-size: var(--icon-size-lg);
+}
+
+.accordion--lg .accordion__body {
+  padding-bottom: var(--space-5);
+}
+
+/* --------------------------------------------------------------------------
+   WITH LEFT ICON
+   -------------------------------------------------------------------------- */
+
+.accordion__trigger-icon {
+  flex-shrink: 0;
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--icon-size-md);
+  color: var(--color-text-tertiary);
+}
+
+.accordion__trigger-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* --------------------------------------------------------------------------
+   DISABLED STATE
+   -------------------------------------------------------------------------- */
+
+.accordion__item--disabled .accordion__trigger {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.accordion__item--disabled .accordion__trigger:hover {
+  color: inherit;
+}

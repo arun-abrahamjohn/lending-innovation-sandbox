@@ -1,0 +1,125 @@
+/* ==========================================================================
+   BRAND TOKENS — ABN AMRO
+   
+   Swap this file for brand.css to apply ABN AMRO styling.
+   
+   ABN AMRO Brand Guidelines:
+   - Primary: Yellow/Gold (#FFD200)
+   - Secondary: Dark Green (#007E6E)
+   - Typography: ABN AMRO fonts (fallback to system sans-serif)
+   - Shape: Slightly rounded, professional
+   ========================================================================== */
+
+:root {
+  
+  /* ==========================================================================
+     BRAND IDENTITY
+     ========================================================================== */
+  
+  --brand-name: "ABN AMRO";
+  
+  /* --------------------------------------------------------------------------
+     BRAND COLORS
+     -------------------------------------------------------------------------- */
+  
+  /* Primary — ABN AMRO Yellow */
+  --brand-primary-h: 48;
+  --brand-primary-s: 100%;
+  --brand-primary-l: 50%;
+  --brand-primary: hsl(var(--brand-primary-h), var(--brand-primary-s), var(--brand-primary-l));
+  --brand-primary-light: hsl(var(--brand-primary-h), 100%, 58%);
+  --brand-primary-dark: hsl(var(--brand-primary-h), 100%, 42%);
+  --brand-primary-contrast: var(--black); /* Black text on yellow */
+  
+  /* Secondary — ABN AMRO Green */
+  --brand-secondary-h: 172;
+  --brand-secondary-s: 100%;
+  --brand-secondary-l: 25%;
+  --brand-secondary: hsl(var(--brand-secondary-h), var(--brand-secondary-s), var(--brand-secondary-l));
+  --brand-secondary-light: hsl(var(--brand-secondary-h), 85%, 32%);
+  --brand-secondary-dark: hsl(var(--brand-secondary-h), 100%, 18%);
+  --brand-secondary-contrast: var(--white);
+  
+  /* Accent — Teal */
+  --brand-accent-h: 180;
+  --brand-accent-s: 70%;
+  --brand-accent-l: 35%;
+  --brand-accent: hsl(var(--brand-accent-h), var(--brand-accent-s), var(--brand-accent-l));
+  --brand-accent-light: hsl(var(--brand-accent-h), 65%, 42%);
+  --brand-accent-dark: hsl(var(--brand-accent-h), 75%, 28%);
+  --brand-accent-contrast: var(--white);
+  
+  /* --------------------------------------------------------------------------
+     BRAND COLOR SCALES
+     -------------------------------------------------------------------------- */
+  
+  --brand-primary-50:  hsl(var(--brand-primary-h), 100%, 97%);
+  --brand-primary-100: hsl(var(--brand-primary-h), 95%, 90%);
+  --brand-primary-200: hsl(var(--brand-primary-h), 92%, 78%);
+  --brand-primary-300: hsl(var(--brand-primary-h), 90%, 65%);
+  --brand-primary-400: hsl(var(--brand-primary-h), 95%, 55%);
+  --brand-primary-500: var(--brand-primary);
+  --brand-primary-600: hsl(var(--brand-primary-h), 100%, 42%);
+  --brand-primary-700: hsl(var(--brand-primary-h), 95%, 35%);
+  --brand-primary-800: hsl(var(--brand-primary-h), 90%, 28%);
+  --brand-primary-900: hsl(var(--brand-primary-h), 85%, 20%);
+  
+  --brand-accent-50:  hsl(var(--brand-accent-h), 80%, 96%);
+  --brand-accent-100: hsl(var(--brand-accent-h), 75%, 88%);
+  --brand-accent-200: hsl(var(--brand-accent-h), 70%, 75%);
+  --brand-accent-300: hsl(var(--brand-accent-h), 68%, 58%);
+  --brand-accent-400: hsl(var(--brand-accent-h), 70%, 45%);
+  --brand-accent-500: var(--brand-accent);
+  --brand-accent-600: hsl(var(--brand-accent-h), 72%, 28%);
+  --brand-accent-700: hsl(var(--brand-accent-h), 75%, 22%);
+  
+  /* --------------------------------------------------------------------------
+     BRAND TYPOGRAPHY
+     -------------------------------------------------------------------------- */
+  
+  --brand-font-display: 'ABN AMRO', 'Inter', system-ui, sans-serif;
+  --brand-font-body: 'ABN AMRO', 'Inter', system-ui, sans-serif;
+  --brand-font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  
+  /* --------------------------------------------------------------------------
+     BRAND SHAPE — More corporate, less playful
+     -------------------------------------------------------------------------- */
+  
+  --brand-button-radius: var(--radius-md);     /* Rounded, not pill */
+  --brand-input-radius: var(--radius-md);
+  --brand-card-radius: var(--radius-xl);
+  --brand-badge-radius: var(--radius-sm);      /* Subtle rounding */
+  
+  /* --------------------------------------------------------------------------
+     BRAND SHADOWS
+     -------------------------------------------------------------------------- */
+  
+  --brand-shadow-primary: 
+    0 4px 14px hsl(var(--brand-primary-h) var(--brand-primary-s) var(--brand-primary-l) / 0.35),
+    0 2px 6px hsl(var(--brand-primary-h) var(--brand-primary-s) var(--brand-primary-l) / 0.20);
+  
+  --brand-shadow-primary-hover:
+    0 6px 20px hsl(var(--brand-primary-h) var(--brand-primary-s) var(--brand-primary-l) / 0.45),
+    0 4px 10px hsl(var(--brand-primary-h) var(--brand-primary-s) var(--brand-primary-l) / 0.25);
+  
+  --brand-shadow-accent:
+    0 4px 14px hsl(var(--brand-accent-h) var(--brand-accent-s) var(--brand-accent-l) / 0.30),
+    0 2px 6px hsl(var(--brand-accent-h) var(--brand-accent-s) var(--brand-accent-l) / 0.18);
+
+  /* --------------------------------------------------------------------------
+     BRAND GRADIENTS
+     -------------------------------------------------------------------------- */
+  
+  --brand-gradient-primary: linear-gradient(
+    135deg, 
+    hsl(var(--brand-primary-h), 100%, 55%) 0%, 
+    hsl(var(--brand-primary-h), 100%, 45%) 100%
+  );
+  
+  --brand-gradient-dark: linear-gradient(
+    135deg, 
+    hsl(var(--brand-secondary-h), 90%, 28%) 0%, 
+    hsl(var(--brand-secondary-h), 100%, 18%) 100%
+  );
+  
+}
