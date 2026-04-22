@@ -8,6 +8,10 @@ A frontend-only workspace for rapidly prototyping lending experiences and buildi
 - `shared/` — shared reset, layout, and utility scripts
 - `.claude/skills/` — design, UX, regulation, and business guidance files used during AI-assisted building
 
+## Live preview
+
+Design system (GitHub Pages): [https://arun-abrahamjohn.github.io/lending-innovation-sandbox/design-system/](https://arun-abrahamjohn.github.io/lending-innovation-sandbox/design-system/)
+
 
 ## Design system notes
 
