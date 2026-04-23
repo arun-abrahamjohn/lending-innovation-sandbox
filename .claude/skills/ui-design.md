@@ -25,6 +25,70 @@ The quality bar is modern fintech craft at the level of **Revolut, Wise, Monzo, 
 
 ---
 
+## Gradient design — rules and failure modes
+
+Gradients are a high-skill operation. A bad gradient is worse than no gradient. Before reaching for one, understand the physics.
+
+### The gray dead zone — why most gradients fail
+
+Default browser/CSS gradient interpolation works in sRGB space. sRGB interpolates each RGB channel independently. When two hues sit on opposite sides of the color wheel (green→red, blue→orange, green→pink/magenta), the midpoint has moderate R + moderate G + moderate B — which produces **gray or brown mud.** This is the single most common cause of gradients that look "dirty" or "washed out."
+
+**The rule:** a gradient between two hues will pass through gray/mud if the two hues are more than ~120° apart on the color wheel. The wider the hue angle, the worse the dead zone.
+
+**How to fix it:**
+1. **Add a mid-stop** of a saturated bridging color. Going green→violet? Add a cyan stop at 50%. Going green→red? Add a yellow stop at 50%. This forces the interpolation to pass through a vibrant hue instead of through gray.
+2. **Use oklch interpolation** (`in oklch` in modern CSS `linear-gradient(in oklch, ...)` — browser support: Chrome 111+, Firefox 127+, Safari 16.4+). OKLCH interpolates along the perceptual color wheel so gradients stay saturated the entire way. This is the correct long-term fix for any gradient spanning large hue angles.
+3. **Stay within ~90° hue rotation.** The safest gradients pick two hues that are analogous (adjacent on the color wheel). These never produce a dead zone because they don't cross the sRGB "midpoint trap."
+
+### Good gradient pairs vs. bad gradient pairs
+
+**Good (≤90° hue rotation, analogous — always clean):**
+- Neon green → cyan (`hsl(135,…)` → `hsl(185,…)`) — 50° shift, fresh and electric
+- Neon green → lime (`hsl(135,…)` → `hsl(85,…)`) — 50° shift, warm and energetic
+- Violet → hot pink (`hsl(265,…)` → `hsl(320,…)`) — 55° shift, stays vivid purple-pink
+- Amber → warm yellow (`hsl(38,…)` → `hsl(52,…)`) — 14° shift, rich gold
+- Cyan → blue (`hsl(190,…)` → `hsl(220,…)`) — 30° shift, cool depth
+
+**Risky (90–130° hue rotation — use a mid-stop or oklch):**
+- Violet → cyan (`hsl(265,…)` → `hsl(185,…)`) — 80° shift, may dull slightly without a mid-stop
+- Green → amber (`hsl(135,…)` → `hsl(48,…)`) — 87° shift, add a lime/yellow mid-stop
+
+**Bad (>130° hue rotation — always produces dead zone in sRGB):**
+- Green → hot pink/magenta (`hsl(135,…)` → `hsl(330,…)`) — 195° shift, **passes through muddy brown**
+- Green → red (`hsl(135,…)` → `hsl(0,…)`) — 135° shift, goes through yellow-brown mud
+- Blue → orange (`hsl(220,…)` → `hsl(30,…)`) — 190° shift, gray mud
+- Green → violet (`hsl(135,…)` → `hsl(265,…)`) — 130° shift, dull cyan-gray midpoint
+
+### Gradient types and when to use each
+
+**Monochromatic (single hue, vary lightness/saturation):** safest, always clean. Ideal for data viz fills, area chart fills, sequential data scales. Example: `hsl(265, 85%, 62%)` → `hsl(265, 70%, 25%)` — deep violet to near-black violet.
+
+**Analogous (two adjacent hues, ≤90° apart):** creates life and depth without mud. Best for hero buttons, gauge fills, interactive highlights, glows. Example: green → cyan for a DSCR gauge arc.
+
+**Diverging (two hues, neutral center):** for data scales that have a meaningful midpoint (positive/negative, above/below threshold). The center color must be a true neutral (white, light gray, dark gray) — not another hue, which creates confusion.
+
+**Complementary (opposite hues):** only with a mid-stop or oklch. Never in sRGB without a bridge color. Use for dramatic editorial moments (hero banners, landing surfaces) — not for chart fills or functional UI elements.
+
+### Gradient usage in data visualization
+
+Charts have specific rules that differ from general UI:
+
+- **Area chart fills:** use a monochromatic gradient (solid color at top → same hue near-transparent at bottom). Never gradient between two different hues in an area fill — it reads as a different data category.
+- **Gauge/radial fills:** an arc should feel like a single metric filling up. Use an analogous gradient (e.g. green outer → cyan inner) or monochromatic. Never a complementary pair — it makes the arc look like it represents two different things.
+- **Bar chart fills:** solid color is almost always correct. A monochromatic gradient (slightly lighter top → solid bottom) adds subtle depth without confusion. Multi-hue gradients on bars make individual bars hard to read.
+- **Line charts:** solid stroke, no gradient. If you want to encode change (e.g. a line that transitions from negative to positive), use solid color segments, not a gradient stroke.
+
+### Gradient application checklist
+
+Before applying any gradient, answer:
+- [ ] What is the hue rotation angle between my two endpoint colors? If >120°, add a mid-stop or use oklch.
+- [ ] Am I using a gradient to communicate information, or just for decoration? If decoration, remove it.
+- [ ] Does this gradient pass a "gray dead zone" test — if I imagine the midpoint color, is it still saturated?
+- [ ] For charts: does the gradient stay within a single perceived "color family" so it reads as one series?
+- [ ] Would a monochromatic version (same hue, lighter→darker) do the job just as well? If yes, prefer it.
+
+---
+
 ## The three-tier token system
 
 This project uses a strict three-tier CSS custom property hierarchy. Violating the tier boundary is the most common source of inconsistency.
@@ -36,6 +100,10 @@ This project uses a strict three-tier CSS custom property hierarchy. Violating t
 **Tier 3 — Component (`tokens/component.css`):** Per-component custom properties, namespace-prefixed. `--button-height-md`, `--input-border-width`, `--card-padding`. These reference semantic tokens and exist so individual components have a single place to tune their geometry without hunting through component CSS. Reference these only within the relevant component's CSS file.
 
 **White-label:** Brand theme files override semantic tokens at `:root`. They never touch base tokens (those are the raw scale; changing them would shift the entire system) and never touch component tokens directly (those are downstream of semantic tokens and will update automatically).
+
+**Tokens are a floor, not a ceiling.** The semantic token system covers the standard functional palette. It does not cover everything a well-crafted design might need. When a prototype or component genuinely calls for a colour, gradient, or surface treatment that the token system doesn't contain — and that would improve the design — use it. Do not force a compromise that makes the design worse just to stay within the existing token set.
+
+**When introducing new colours or gradients:** use whatever looks best in the prototype — do not hold back for approval. After the prototype is complete, list every new colour introduced (name, hsl/hex value, where it's used, why it was chosen) so the user can decide which ones to register in the **Expressive palette**. Do not add them to the design system yourself — that is the user's decision. The expressive palette is for editorial gradients, hero surface treatments, data visualisation colour series, and other intentional departures from the functional palette.
 
 ---
 
@@ -198,6 +266,93 @@ If you look at your component and see roughly equal amounts of green, blue, red,
 - Never mix surface levels arbitrarily — maintain a consistent visual stack.
 
 **Interactive colour states must be visibly distinct.** The difference between default and hover, and between hover and active, must be perceptible without relying on cursor change. Typically: default → hover is a one-step darken; hover → active is another one-step darken. Disabled is a significant lightening, not just a slight opacity change.
+
+---
+
+## Choosing colors — how to work from the existing palette
+
+This is where most color mistakes happen. Bad colors come from ignoring what the system already has and inventing things from scratch.
+
+### Step 1 — audit before you invent
+
+Before introducing any new color, enumerate what already exists in the palette:
+
+**This brand's palette (current state):**
+- **Brand primary — Neon Green:** `hsl(135, 80%, 48%)`. The hero accent. One use per screen at most.
+- **Brand accent — Electric Cyan:** `hsl(175, 80%, 40%)`. The designated second brand color — the *first* thing to reach for when green can't serve double duty. For dark-background use, bump lightness to ~55%: `hsl(175, 80%, 55%)`.
+- **Brand secondary — Jet Black:** `hsl(0, 0%, 0%)` / near-black surfaces.
+- **Warning Amber:** `hsl(35–45, 95–100%, 44–58%)` scale. Ready-made for cost, caution, or obligation data.
+- **Error Red:** `hsl(0, 80%, 56%)` scale. Use only for genuine error states — not for decoration.
+- **Info Blue:** `hsl(210, 92%, 56%)` scale. Available for informational series if needed.
+
+**The frequent mistake:** reaching for a completely new hue (violet, magenta, teal) without first asking whether the brand accent, the warning amber, or a lightness/saturation shift of an existing color would do the job. The brand already has two distinct brand colors (green + cyan) and a full warning amber — those three alone cover most data visualization needs.
+
+### Step 2 — lightness shifting before new hue introduction
+
+Before introducing a new hue, try shifting lightness and saturation of an existing one:
+- Dark backgrounds need lightness ~48–62% for full-saturation colors to read well. The brand accent at 40% is too dark for dark-bg chart use — shift it to 55%.
+- For a "secondary shade" of a series (e.g., the deep fill under an area chart), drop lightness dramatically and drop saturation slightly: `hsl(135, 65%, 22%)` reads as "dark green" without being a new color.
+- Multiple series in the same color family? Step saturation: 80% → 55% → 35% with the same hue. Keeps it cohesive.
+
+### Step 3 — deriving new hues harmonically from brand colors
+
+When the existing palette genuinely can't cover a use case, derive new hues using color harmony from the brand primaries. Do not invent hues at arbitrary angles.
+
+**Analogous (±30–60° from brand primary):**
+Best for: gradients, area fills, closely related series.
+- Green is at 135°. Analogous neighbors: lime (~90°), teal-cyan (~175°, which is the brand accent — already there).
+- Cyan accent is at 175°. Analogous: teal (~155°), blue (~195°).
+
+**Triadic (±120° from brand primary):**
+Best for: a third independent data series that must be visually distinct.
+- Green at 135° → triadic 1 at **255–265°** (blue-violet) and triadic 2 at **15°** (red-orange, already covered by the error/warning scale).
+- This is why blue-violet/purple is a harmonically valid third series color for this brand — it sits at the exact triadic complement of the brand green.
+
+**Split-complementary (±150–170° from brand primary):**
+Best for: a high-contrast accent that reads differently from green without clashing.
+- Green at 135° → split complement at **285–305°** (violet-magenta) and **−15° to −35°** (yellow-amber, already covered by warning).
+
+### Step 4 — saturation consistency
+
+When introducing a new hue, match the saturation level of the brand's existing colors. The brand runs at ~80% saturation. New colors should land in the 75–85% range so they feel like they belong to the same family. A new hue at 100% saturation will pop out aggressively; at 50% it will look washed-out and timid next to the neon green.
+
+**Consistent saturation test:** if you put your new color next to `hsl(135, 80%, 48%)`, do they feel like siblings? If one looks electric and the other looks muted, adjust saturation until they match in perceived intensity.
+
+### Step 5 — the data viz color order for this brand
+
+When assigning colors to chart series, follow this priority order. Do not skip ahead to a later tier if an earlier one is available.
+
+1. **Brand primary green** — the most important metric, the positive indicator, the "headline number." Used once.
+2. **Brand accent cyan** (at ~55% lightness for dark bg) — the second most important series or the contrast series. Use this before inventing anything.
+3. **Warning amber** (`hsl(42, 98%, 55%)` at display weight) — for cost, obligation, interest, or cautionary data. Already in the system.
+4. **Triadic violet** (`hsl(260, 80%, 62%)`) — for a fourth independent series. Only introduce when three series are already in use and a fourth is genuinely needed. This is the harmonically correct third-brand-complement.
+5. **Info blue** (`hsl(210, 88%, 62%)`) — available if a fifth distinct series is needed and the context calls for an informational tone.
+
+Never jump straight to an invented color (magenta, orange, pink) without checking whether this order has been exhausted.
+
+### Red flags — signs a color choice is wrong
+
+- **You invented a color without checking what the brand already provides.** The brand accent cyan exists. Use it.
+- **The new color has a very different saturation from the rest of the palette.** A 100% saturation color next to an 80% saturation color feels like it came from a different brand.
+- **You chose a color that clashes with a status color.** A data series in red (`hsl(0, …)`) will be read as "error" by users. Avoid hues within ~20° of the error red (0°) or success green (145°) unless you *intend* that semantic reading.
+- **You introduced a third and fourth hue before using the brand accent and warning amber.** Those are already there. Use them first.
+- **The color works on a white background but looks wrong on the dark surface.** Colors at 40% lightness disappear on dark — always test against the actual background. Bump lightness to ~55% for dark-bg chart colors.
+
+---
+
+## Component creation during prototyping
+
+When building a prototype, if an interaction pattern or UI surface doesn't map cleanly to an existing component, **build a new component — don't contort an existing one to fit.** A force-fitted component carries the wrong semantic intent, produces awkward visual compromises, and creates tech debt that is harder to undo than a clean new component would have been.
+
+The bar for creating a new component is: "does this pattern have a distinct enough purpose and structure that it warrants its own name?" If yes, build it, add it to `design-system/index.html` with its variants and token references, and add it to the component list in `CLAUDE.md`. A growing component library is a sign of a maturing system, not scope creep.
+
+The bar for reusing an existing component is: "does it fit the intent, not just the shape?" A card component can carry many things — but if you're reaching for a card just to get a bordered box, you're using the wrong abstraction.
+
+**Default posture:** when in doubt, new component. A well-named, purpose-built component is always better than a patched one.
+
+**After completing a prototype:** always ask the user whether they want any new components or patterns from that prototype extracted and added to the design system page. Do not add them automatically — wait for confirmation. The user may also ask to extract components at any point after a prototype is built, not only immediately after completion.
+
+**If a component uses an external library** (ApexCharts, D3, Lucide, etc.): when it is added to the design system page, clearly note the library name, version/CDN URL, and which aspects of the component depend on it. This prevents someone from trying to use the component without knowing the dependency exists.
 
 ---
 
