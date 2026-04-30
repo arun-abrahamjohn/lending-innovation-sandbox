@@ -2,6 +2,9 @@
 
 A frontend-only workspace for rapidly prototyping lending experiences and building reusable fintech UI primitives.
 
+<img width="1162" height="830" alt="image" src="https://github.com/user-attachments/assets/784f1552-1842-4ff8-bac0-d96afcef6b09" />
+
+
 ## What this repo contains
 
 - `design-system/` — tokens, component CSS files, and the living component gallery in `index.html`
